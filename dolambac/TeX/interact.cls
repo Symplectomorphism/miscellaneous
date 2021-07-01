@@ -267,7 +267,7 @@
 \def\received#1{\gdef\@received{#1}}
 \def\history#1{\gdef\@received{#1}}
 \gdef\@history{\bfseries{ARTICLE HISTORY\\}\par}
-\gdef\@received{Compiled \today}
+\gdef\@received{D\"{u}zenlenme \today}
 %
 \long\def\name#1{#1\\\vspace{6pt}}%
 \long\def\affil#1{\affilfont{#1}\\}
@@ -294,7 +294,7 @@
   \null
   \bgroup
     \parindent0pt
-    \vspace*{36pt}
+    \vspace*{0pt}
     {\articletypefont{\@articletype}\par}%
     \vskip13pt
     {\titlefont{\@title}\par}%
@@ -302,7 +302,7 @@
     {\authorfont\@author\par}%
     \ifsuppldata\else
     \vskip17pt
-    % {\receivedfont{\bfseries ARTICLE HISTORY\\}\@received\par}%
+    {\receivedfont{\bfseries MAKALE GE\c{C}M\.I\c{S}\.I\\}\@received\par}%
     \fi
     \vskip13pt
   \egroup}
