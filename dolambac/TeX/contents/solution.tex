@@ -75,10 +75,11 @@ ayn{\i} sonucu verece\u{g}i barizdir. Kule kural{\i}n{\i} kullanarak
 hesaplamalar{\i}m{\i}za devam edelim. \"{O}nce~\eqref{eq:tower1} denkleminin
 sa\u{g} taraf{\i}ndaki ilk beklenen de\u{g}er terimini ele alaca\u{g}{\i}z.
 
+\vspace{-4mm}
 \begin{align}
     \begin{split}
-    \mathbb{E}\left[ C_0 \mid s_1 = C4 \right] = &\underbrace{r_1 + r_2}_{=2} \\ 
-    &+ \underbrace{\mathbb{E}[C_2 \mid s_1 = C4, s_3 = D5]}_{=2} \underbrace{\mathbb{P}(s_3 = D5 \mid s_1 = C4)}_{=\frac{1}{3}} \\
+    \mathbb{E}\left[ C_0 \mid s_1 = C4 \right] = &\underbrace{r_1 + r_2}_{=2} 
+    + \underbrace{\mathbb{E}[C_2 \mid s_1 = C4, s_3 = D5]}_{=2} \underbrace{\mathbb{P}(s_3 = D5 \mid s_1 = C4)}_{=\frac{1}{3}} \\
     &+ \mathbb{E}[C_2 \mid s_1 = s_3 = C4] \underbrace{\mathbb{P}(s_3 = C4 \mid s_1 = C4)}_{=\frac{1}{3}} \\
     &+ \mathbb{E}[C_2 \mid s_1 = C4, s_3 = B5] \underbrace{\mathbb{P}(s_3 = B5 \mid s_1 = C4)}_{=\frac{1}{3}}.
     \end{split}
@@ -96,9 +97,10 @@ beklenen de\u{g}erleri inceleyelim. \.Ilk beklenen de\u{g}erin $2$ oldu\u{g}unu
 zaten denklemin \"{u}zerinde belirttik. Bunun nedeni, e\u{g}er
 \"u\c{c}\"{u}nc\"{u} hamlede kendimizi $s_3 = D5$ karesinde buluyorsak, demek ki
 yukar{\i} ve sa\u{g}a giden tu\c{s}lar{\i} biliyoruz. Sa\u{g}a gitmeye devam
-ederek amac{\i}m{\i}za ula\c{s}abiliriz. Sa\u{g}a gitmek i\c{c}in de $2$ kere
-daha bu tu\c{s}a basmam{\i}z gerekir. Geri kalan iki beklenen de\u{g}eri bulmak
-icin kule kural{\i}n{\i} bir kere daha g\"{o}reve \c{c}a\u{g}{\i}raca\u{g}{\i}z.
+ederek amac{\i}m{\i}za ula\c{s}abiliriz. Sa\u{g}a gitmek i\c{c}in de $2$'inci
+hamleden itibaren $2$ kere daha bu tu\c{s}a basmam{\i}z gerekir. Geri kalan iki
+beklenen de\u{g}eri bulmak icin kule kural{\i}n{\i} bir kere daha g\"{o}reve
+\c{c}a\u{g}{\i}raca\u{g}{\i}z.
 %
 \begin{align*}
     \begin{split}
@@ -115,11 +117,12 @@ demektir. \"{O}nce yukar{\i} giderek hatam{\i}z{\i} d\"{u}zeltiyoruz: $r_3 + r_4
 = 2$. Bir sonraki hamlede sa\u{g}a veya sola gitmemizi sa\u{g}layacak herhangi
 bir tu\c{s}a bas{\i}yoruz. E\u{g}er sa\u{g}a gidersek, m\"{u}kemmel,
 \c{c}\"{u}nk\"{u} amac{\i}m{\i}za yakla\c{s}t{\i}k. Bu durumda sa\u{g}a gitmeye
-devam edip sadece $2$ tu\c{s}a daha basarak amac{\i}m{\i}za ula\c{s}{\i}r{\i}z.
-Di\u{g}er durumda amac{\i}m{\i}zdan uzakla\c{s}{\i}yoruz, ama art{\i}k
-b\"{u}t\"{u}n tu\c{s}lar{\i}n nas{\i}l \c{c}al{\i}\c{s}t{\i}\u{g}{\i}n{\i} biliyoruz. Yine
-sa\u{g}a giderek amac{\i}m{\i}za $4$ hamlede ula\c{s}abiliriz. \\
-%
+devam ederek $4$'\"{u}nc\"{u} hamleden sonra sadece $2$ tu\c{s}a daha basarak
+amac{\i}m{\i}za ula\c{s}{\i}r{\i}z. Di\u{g}er durumda amac{\i}m{\i}zdan
+uzakla\c{s}{\i}yoruz, ama art{\i}k b\"{u}t\"{u}n tu\c{s}lar{\i}n nas{\i}l
+\c{c}al{\i}\c{s}t{\i}\u{g}{\i}n{\i} biliyoruz. Yine sa\u{g}a giderek
+$4$'\"{u}nc\"{u} hamleden sonra amac{\i}m{\i}za $4$ hamlede ula\c{s}abiliriz.
+
 \eqref{eq:tower2}'\"{u}n sa\u{g} taraf{\i}nda hesaplamad{\i}\u{g}{\i}m{\i}z bir beklenen de\u{g}er kald{\i}:
 %
 \begin{align*}
@@ -136,26 +139,28 @@ B5$ karesinde buluyorsak, demek ki yukar{\i} ve sola g\"{o}t\"{u}ren
 tu\c{s}lar{\i} biliyoruz. Geri kalan tu\c{s}lardan birine
 bast{\i}\u{g}{\i}m{\i}zda ya sa\u{g}a gidece\u{g}iz (iyi bir durum) ya da
 a\c{s}a\u{g}{\i} gidece\u{g}iz (k\"{o}t\"{u} bir durum). Sa\u{g}a
-gitti\u{g}imizde beklenen de\u{g}erimiz $4$, \c{c}\"{u}nk\"{u} sola ve sa\u{g}a
-giderken $2$ hamle yapt{\i}k. Bundan sonra amac{\i}m{\i}za ula\c{s}mak icin $2$
-hamle daha yapmam{\i}z gerekiyor. Di\u{g}er durumda ise beklenen de\u{g}erimiz
-$6$; \c{c}\"{u}nk\"{u} art{\i}k tu\c{s}lar{\i} nas{\i}l
-kullanaca\u{g}{\i}m{\i}z{\i} biliyoruz ama amac{\i}m{\i}zdan $4$ hamle
-uzaktay{\i}z: $2+4 = 6$.
+gitti\u{g}imizde $2$'inci hamleden sonra beklenen de\u{g}erimiz $4$,
+\c{c}\"{u}nk\"{u} sola ve sa\u{g}a giderken $2$ hamle yapt{\i}k. Bundan sonra
+amac{\i}m{\i}za ula\c{s}mak icin $2$ hamle daha yapmam{\i}z gerekiyor. Di\u{g}er
+durumda ise $2$'inci hamleden sonra beklenen de\u{g}erimiz $6$;
+\c{c}\"{u}nk\"{u} art{\i}k tu\c{s}lar{\i} nas{\i}l kullanaca\u{g}{\i}m{\i}z{\i}
+biliyoruz ama amac{\i}m{\i}zdan $4$ hamle uzaktay{\i}z: $2+4 = 6$.
 
-\c{S}imdi b\"{u}t\"{u}n bu hesaplamalar{\i}m{\i}z{\i}~\eqref{eq:tower1}'inci
-denkleme yerle\c{s}tirdi\u{g}imizde denklemin sa\u{g} taraf{\i}ndaki ilk terimi
-bulabiliriz.
-%
-\begin{equation*}
-    \mathbb{E}[C_0 \mid s_1=C4]\mathbb{P}(s_1=C4) = 6 \cdot \frac{1}{2} = 3.
-    % \label{eq:first_term}
-\end{equation*}
-%
+% \c{S}imdi b\"{u}t\"{u}n bu hesaplamalar{\i}m{\i}z{\i}~\eqref{eq:tower1}'inci
+% denkleme yerle\c{s}tirdi\u{g}imizde denklemin sa\u{g} taraf{\i}ndaki ilk terimi
+% bulabiliriz. 
+Bu hesaplar{\i} kullanarak~\eqref{eq:tower1}'inci denklemin sa\u{g}
+taraf{\i}ndaki ilk beklenen de\u{g}eri bulabiliriz: $\mathbb{E}[C_0 \mid s_1=C4] = 6$.
+% %
+% \begin{equation*}
+%     \mathbb{E}[C_0 \mid s_1=C4]\mathbb{P}(s_1=C4) = 6 \cdot \frac{1}{2} = 3.
+%     % \label{eq:first_term}
+% \end{equation*}
+% %
+
 Benzer hesaplamalar{\i} yaparak~\eqref{eq:tower1}'inci denklemin sa\u{g}
 taraf{\i}ndaki ikinci beklenen de\u{g}eri hesaplayal{\i}m. Bu sefer
-hesaplamalar{\i}n do\u{g}ruluklar{\i}n{\i} okurun kendisine
-inand{\i}rmas{\i}n{\i} bekliyoruz.
+hesaplamalar{\i}n do\u{g}ruluklar{\i}na okur kendisini inand{\i}rmal{\i}.
 %
 \begin{align*}
     \begin{split}
@@ -178,7 +183,7 @@ hesapl{\i}yoruz.
     \end{split}
 \end{align*}
 %
-Son olarak
+Son olarak,
 %
 \begin{align*}
     \begin{split}
@@ -188,15 +193,16 @@ Son olarak
     \end{split}
 \end{align*}
 %
-Bu hesaplamalar{\i} kullanarak~\eqref{eq:tower1}'inci denklemin sa\u{g}
-taraf{\i}ndaki ikinci terimi hesaplayabiliriz.
-%
-\begin{equation*}
-    \mathbb{E}[C_0 \mid s_1=C2]\mathbb{P}(s_1=C2) = \frac{22}{3} \cdot \frac{1}{2} = \frac{11}{3}.
-    \label{eq:second_term}
-\end{equation*}
-%
-Art{\i}k arad{\i}\u{g}{\i}m{\i}z her \c{s}eyi bulduk. \eqref{eq:tower1}'inci
+\eqref{eq:tower1}'inci denklemin sa\u{g} taraf{\i}ndaki ikinci beklenen
+de\u{g}eri de art{\i}k hesaplayabiliriz: $\mathbb{E}[C_0 \mid s_1=C2] =
+\frac{22}{3}$.
+% %
+% \begin{equation*}
+%     \mathbb{E}[C_0 \mid s_1=C2]\mathbb{P}(s_1=C2) = \frac{22}{3} \cdot \frac{1}{2} = \frac{11}{3}.
+%     \label{eq:second_term}
+% \end{equation*}
+% %
+Arad{\i}\u{g}{\i}m{\i}z her niceli\u{g}i hesaplad{\i}k. \eqref{eq:tower1}'inci
 denkleme geri d\"{o}nelim:
 % \[
 % \boxed{

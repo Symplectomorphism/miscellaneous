@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 15:04
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 17:04
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex
@@ -1201,19 +1201,19 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 
 Package hyperref Warning: Option `bookmarks' has already been used,
-(hyperref)                setting the option has no effect on input line 68.
+(hyperref)                setting the option has no effect on input line 87.
 
-Package hyperref Info: Option `unicode' set `false' on input line 68.
-Package hyperref Info: Option `pdftoolbar' set `true' on input line 68.
-Package hyperref Info: Option `pdfmenubar' set `true' on input line 68.
-Package hyperref Info: Option `pdffitwindow' set `false' on input line 68.
+Package hyperref Info: Option `unicode' set `false' on input line 87.
+Package hyperref Info: Option `pdftoolbar' set `true' on input line 87.
+Package hyperref Info: Option `pdfmenubar' set `true' on input line 87.
+Package hyperref Info: Option `pdffitwindow' set `false' on input line 87.
 
 Package hyperref Warning: Composite letter `\textdotaccent+I'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 68.
+(hyperref)                removing `\textdotaccent' on input line 87.
 
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 68.
-Package hyperref Info: Option `colorlinks' set `true' on input line 68.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 87.
+Package hyperref Info: Option `colorlinks' set `true' on input line 87.
 \c@defn=\count377
 \c@thm=\count378
 \c@prop=\count379
@@ -1439,9 +1439,9 @@ Underfull \hbox (badness 1122) in paragraph at lines 10--12
 
 
 
-{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./figures/drawing-eps-converted-to.pdf>] [2] [3]) (/home/aykut/repos/miscellaneous/dolambac/TeX/root.bbl [4]) 
+{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./figures/drawing-eps-converted-to.pdf>] [2] [3]) (/home/aykut/repos/miscellaneous/dolambac/TeX/root.bbl) 
 AED: lastpage setting LastPage
-[5]
+[4]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 82.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 82.
  (/home/aykut/repos/miscellaneous/dolambac/TeX/root.aux)
@@ -1457,19 +1457,19 @@ LaTeX Font Warning: Size substitutions with differences
 )
 
 Here is how much of LuaTeX's memory you used:
- 45014 strings out of 480991
+ 45012 strings out of 480991
  100000,1648299 words of node,token memory allocated
- 5592 words of node memory still in use:
-   147 hlist, 27 vlist, 32 rule, 36 math, 127 glue, 59 kern, 159 glyph, 123 attribute, 102 glue_spec, 123 attribute_list, 3 write, 16 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 1:1,2:926,3:101,4:29,5:397,6:17,7:3141,8:43,9:779,10:19,11:100
- 60643 multiletter control sequences out of 65536+600000
+ 5584 words of node memory still in use:
+   147 hlist, 27 vlist, 32 rule, 36 math, 127 glue, 59 kern, 159 glyph, 121 attribute, 102 glue_spec, 121 attribute_list, 3 write, 16 pdf_literal, 16 pdf_colorstack nodes
+   avail lists: 1:1,2:1094,3:101,4:30,5:460,6:17,7:3603,8:43,9:647,10:19,11:102
+ 60642 multiletter control sequences out of 65536+600000
  66 fonts using 5762643 bytes
- 75i,24n,100p,872b,466s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 75i,24n,100p,872b,386s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (5 pages, 144431 bytes).
+Output written on root.pdf (4 pages, 143951 bytes).
 
-PDF statistics: 146 PDF objects out of 1000 (max. 8388607)
- 106 compressed objects within 2 object streams
- 17 named destinations out of 1000 (max. 131072)
+PDF statistics: 142 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
+ 16 named destinations out of 1000 (max. 131072)
  192 words of extra memory for PDF output out of 10000 (max. 100000000)
 
