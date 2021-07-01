@@ -56,7 +56,7 @@ sa\u{g} taraf{\i}ndaki ilk beklenen de\u{g}er terimini ele alaca\u{g}{\i}z.
 
 \begin{align}
     \begin{split}
-    \mathbb{E}\left[ C_1 \mid s_1 = C4 \right] = &\underbrace{r_1 + r_2}_{=2} \\ 
+    \mathbb{E}\left[ C_0 \mid s_1 = C4 \right] = &\underbrace{r_1 + r_2}_{=2} \\ 
     &+ \underbrace{\mathbb{E}[C_2 \mid s_1 = C4, s_3 = D5]}_{=2} \underbrace{\mathbb{P}(s_3 = D5 \mid s_1 = C4)}_{=\frac{1}{3}} \\
     &+ \mathbb{E}[C_2 \mid s_1 = s_3 = C4] \underbrace{\mathbb{P}(s_3 = C4 \mid s_1 = C4)}_{=\frac{1}{3}} \\
     &+ \mathbb{E}[C_2 \mid s_1 = C4, s_3 = B5] \underbrace{\mathbb{P}(s_3 = B5 \mid s_1 = C4)}_{=\frac{1}{3}}.
@@ -127,7 +127,7 @@ denkleme yerle\c{s}tirdi\u{g}imizde denklemin sa\u{g} taraf{\i}ndaki ilk terimi
 bulabiliriz.
 %
 \begin{equation}
-    \mathbb{E}[C_1 \mid s_1=C4]\mathbb{P}(s_1=C4) = 6 \cdot \frac{1}{2} = 3.
+    \mathbb{E}[C_0 \mid s_1=C4]\mathbb{P}(s_1=C4) = 6 \cdot \frac{1}{2} = 3.
     \label{eq:first_term}
 \end{equation}
 %
@@ -138,10 +138,10 @@ inand{\i}rmas{\i}n{\i} bekliyoruz.
 %
 \begin{align}
     \begin{split}
-    \mathbb{E}\left[ C_1 \mid s_1 = C2 \right] =
-    &\underbrace{\mathbb{E}[C_1 \mid s_1 = C2, s_2 = B2]}_{=8} \underbrace{\mathbb{P}(s_2 = B2 \mid s_1 = C2)}_{=\frac{1}{3}} \\
-    &+ \mathbb{E}[C_1 \mid s_1=C2, s_2 = C3] \underbrace{\mathbb{P}(s_2 = C3 \mid s_1 = C2)}_{=\frac{1}{3}} \\
-    &+ \mathbb{E}[C_1 \mid s_1 = C2, s_2 = D2] \underbrace{\mathbb{P}(s_2 = D2 \mid s_1 = C2)}_{=\frac{1}{3}}.
+    \mathbb{E}\left[ C_0 \mid s_1 = C2 \right] =
+    &\underbrace{\mathbb{E}[C_0 \mid s_1 = C2, s_2 = B2]}_{=8} \underbrace{\mathbb{P}(s_2 = B2 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_0 \mid s_1=C2, s_2 = C3] \underbrace{\mathbb{P}(s_2 = C3 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_0 \mid s_1 = C2, s_2 = D2] \underbrace{\mathbb{P}(s_2 = D2 \mid s_1 = C2)}_{=\frac{1}{3}}.
     \end{split}
     \label{eq:tower3}
 \end{align}
@@ -151,7 +151,7 @@ hesapl{\i}yoruz.
 %
 \begin{align}
     \begin{split}
-    \mathbb{E}[C_1 \mid s_1=C2, \; &s_2=C3] = \underbrace{\sum_{i=1}^4 r_i}_{=4} \\
+    \mathbb{E}[C_0 \mid s_1=C2, \; &s_2=C3] = \underbrace{\sum_{i=1}^4 r_i}_{=4} \\
     &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=C3, s_5=D5]}_{=2} \underbrace{\mathbb{P}(s_5=D5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}} \\
     &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=C3, s_5=B5]}_{=4} \underbrace{\mathbb{P}(s_5=B5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}}.
     \end{split}
@@ -161,7 +161,7 @@ Son olarak
 %
 \begin{align}
     \begin{split}
-    \mathbb{E}[C_1 \mid s_1=C2, \; &s_2=D2] = \underbrace{\sum_{i=1}^3 r_i}_{=3} \\
+    \mathbb{E}[C_0 \mid s_1=C2, \; &s_2=D2] = \underbrace{\sum_{i=1}^3 r_i}_{=3} \\
     &+ \underbrace{\mathbb{E}[C_3 \mid s_1=C2, s_2=D2, s_4=E3]}_{=3} \underbrace{\mathbb{P}(s_4=E3 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}} \\
     &+ \underbrace{\mathbb{E}[C_3 \mid s_1=C2, s_2=s_4=D2]}_{=5} \underbrace{\mathbb{P}(s_4=D2 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}}.
     \end{split}
@@ -171,7 +171,7 @@ Bu hesaplamalar{\i} kullanarak~\eqref{eq:tower1}'inci denklemin sa\u{g}
 taraf{\i}ndaki ikinci terimi hesaplayabiliriz.
 %
 \begin{equation}
-    \mathbb{E}[C_1 \mid s_1=C2]\mathbb{P}(s_1=C2) = \frac{22}{3} \cdot \frac{1}{2} = \frac{11}{3}.
+    \mathbb{E}[C_0 \mid s_1=C2]\mathbb{P}(s_1=C2) = \frac{22}{3} \cdot \frac{1}{2} = \frac{11}{3}.
     \label{eq:second_term}
 \end{equation}
 %
