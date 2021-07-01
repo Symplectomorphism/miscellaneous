@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 13:49
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 14:09
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex
@@ -1459,14 +1459,14 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of LuaTeX's memory you used:
  45022 strings out of 480991
  100000,1648299 words of node,token memory allocated
- 5198 words of node memory still in use:
-   131 hlist, 23 vlist, 30 rule, 36 math, 119 glue, 53 kern, 145 glyph, 120 attribute, 102 glue_spec, 120 attribute_list, 3 write, 16 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 1:1,2:934,3:101,4:27,5:414,6:17,7:3320,8:45,9:646,10:19,11:113
+ 5520 words of node memory still in use:
+   143 hlist, 25 vlist, 32 rule, 36 math, 127 glue, 57 kern, 159 glyph, 121 attribute, 102 glue_spec, 121 attribute_list, 3 write, 16 pdf_literal, 16 pdf_colorstack nodes
+   avail lists: 1:1,2:932,3:101,4:27,5:410,6:17,7:3298,8:50,9:670,10:19,11:113
  60645 multiletter control sequences out of 65536+600000
  66 fonts using 5762643 bytes
  75i,24n,100p,872b,386s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (4 pages, 142977 bytes).
+Output written on root.pdf (4 pages, 143134 bytes).
 
 PDF statistics: 148 PDF objects out of 1000 (max. 8388607)
  109 compressed objects within 2 object streams
