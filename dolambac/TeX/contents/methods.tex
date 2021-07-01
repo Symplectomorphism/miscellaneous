@@ -1,0 +1,325 @@
+\section{Methods}
+\label{sec:methods}
+
+The goal of this paper to systematically design a stabilizing controller using a
+learning-based framework. To this end, we carefully combine the universal function
+approximation capability of neural networks with the intrinsic stabilization
+properties of passivity-based control theory. In particular, we tackle the task
+of solving the matching PDEs~\eqref{eq:pde_main} by formulating a neural network
+optimization problem and imposing the relevant constraints, which are elaborated in
+the subsequent subsections.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Main Learning Problem}
+\label{ssec:pinn}
+
+
+The IDA-PBC design can be formulated as the following feasibility problem:
+%
+% \begin{equation}
+%     \begin{aligned}
+%         \underset{M_d,\, J_2,\, V_d }{\textrm{minimize}} 
+%         &&\quad J &= \int_{\mathcal{X}} \; \Bigl\| \, l(x) \, \Bigr\|^2 \; \dd x, \\
+%         \textrm{subject to} 
+%         &&\quad M_d &= M_d^\top \succ 0, \\
+%         &&\quad J_2 &= -J_2^\top, \\
+%         &&\quad q^\star &= \underset{q}{\textrm{argmin}} \; V_d.  \\
+%     \end{aligned}    
+%     \label{eq:infinite_optim}
+% \end{equation}
+\begin{equation}
+    \begin{aligned}
+        \underset{M_d,\, J_2,\, V_d }{\textrm{minimize}} && 0 &, \\
+        \textrm{subject to} 
+        &&\quad 0 &= G^\perp \left( \nabla_qH - M_dM^{-1} \nabla_qH_d + J_2M_d^{-1}p \right), \\
+        &&\quad H_d &= \textrm{Eq.~\eqref{eq:desired_hamiltonian}}, \\
+        &&\quad M_d &= M_d^\top \succ 0, \\
+        &&\quad J_2 &= -J_2^\top, \\
+        &&\quad q^\star &= \underset{q}{\textrm{argmin}} \; V_d.  \\
+    \end{aligned}    
+    \label{eq:infinite_optim}
+\end{equation}
+%
+This is an infinite-dimensional, nonlinear optimization problem that is
+intractable to solve in closed-form. We therefore seek to reduce the problem to
+a finite-dimensional one through the means of approximation by neural networks.
+
+To this end, we proceed by representing the candidate solutions $M_d(q)$ and
+$J_2(q,p)$ by fully-connected neural networks $M_d^{\theta_m}: \mathbb{R}^n \to
+\mathbb{R}^{n \times n}$ and $J_2^{\theta_j}: \mathbb{R}^{2n} \to \mathbb{R}^{2n
+\times 2n}$, where $\theta_m \in \mathbb{R}^{n_m}$ and $\theta_j \in
+\mathbb{R}^{n_j}$ each denote the corresponding neural network parameters. 
+%
+% To accommodate the isolated minimum requirement of $V_d(q)$, we opt to
+% approximate it with a Sum-of-Squares (SoS) polynomial, denoted by
+% $V_d^{\theta_v}: \mathbb{R}^{n} \to \mathbb{R}$, with $\theta_{n_v}$
+% representing the polynomial coefficients. 
+%
+We opt to approximate $V_d(q)$ with a Sum-of-Squares (SoS) polynomial of degree $2d$, denoted
+by $V_d^{\theta_v}: \mathbb{R}^{n} \to \mathbb{R}$, with $\theta_{n_v} \in \mathbb{R}^{n_v}$
+representing the polynomial coefficients. 
+%
+For compactness, we shall refer to these function approximators as
+$M_d^\theta, J_2^\theta, V_d^\theta$ henceforth.
+
+\begin{definition}[SoS Polynomial] \label{def:sos_poly}
+    A polynomial $P \in \mathbb{R}[x]$ of degree $d = \eta_1 + \cdots +
+    \eta_n$, $\eta_i \in \mathbb{N}$, i.e.,
+    %
+    \begin{equation*}
+      P(x) = \sum_{\eta_1 + \cdots + \eta_n \leq d} c_\eta x_1^{\eta_1}
+             \cdots x_n^{\eta_n}
+    \end{equation*}
+    %
+    is a sum-of-squares if there exist a finite number of polynomials
+    $P_i \in \mathbb{R}[x]$ such that $P$ can be written as
+    %
+    $%\begin{equation*}
+      P(x) = \sum_i P_i^2(x).
+    $%\end{equation*}
+\end{definition}
+
+\begin{remark}
+    Note that if $P(x)$ is SoS, then $P(x) \geq 0\ \forall x \in \mathbb{R}^n$.
+    If the constant term is zero, i.e. $c_0 = 0$, then $P(x) = 0 \iff x = 0$.
+    Without loss of generality, this suggests a natural way to impose the
+    isolated minimum requirement of $V_d(q)$ by shifting the coordinate of $q$
+    and aligning $q^\star$ with the origin. Further, SoS polynomials can be
+    parametrized by the (convex) set of positive semidefinite matrices. This
+    simplifies the search for a SoS polynomial $V_d^{\theta}$ that best
+    satisfies~\eqref{eq:pde_2} once $M_d^{\theta}, J_2^\theta$ are identified.
+\end{remark}
+
+Let $\theta := (\theta_m, \theta_j, \theta_v) \in \mathbb{R}^{n_\theta}$ with
+$n_\theta = n_m + n_j + n_v$.
+%
+With $x = (q, p)$, define the loss function $l_\theta(x)$ as the
+inner product of the left-hand-side (LHS) of Eq.~\eqref{eq:pde_main}, i.e.
+%
+\begin{equation}
+    l_\theta(x) = \left\| G^\perp \left( \nabla_qH - M_d^\theta M^{-1} \nabla_q H_d^\theta + J_2^\theta {M_d^\theta}^{-1}p \right) \right\|^2,
+    \label{eq:loss_nn}
+\end{equation}
+%
+where $H_d^\theta(q,p) = \frac{1}{2} p^\top \left(M_d^\theta\right)^{-1} p +
+V_d^\theta(q)$.
+%
+The proposed framework aims to approximate the solution
+to~\eqref{eq:infinite_optim} by finding the parameters $\theta$ such that
+$l_\theta$ is minimized over the appropriate region $\Omega$ of the state space,
+i.e. $\Omega \subset \mathcal{X}$. We arrive at the following finite-dimensional
+optimization problem:
+%
+\begin{equation}
+    \begin{aligned}
+        \underset{\theta }{\textrm{minimize}} 
+        &&\quad J &= \sum_{x \in \Omega} l_\theta (x) , \\
+        \textrm{subject to} 
+        &&\quad M_d^\theta &= \big( M_d^\theta \big)^\top \succ 0, \\
+        &&\quad J_2^\theta &= -\big( J_2^\theta \big)^\top, \\
+        % &&\quad q^\star &= \underset{q}{\textrm{argmin}} \; V_d^\theta.  \\
+        &&\quad V_d^\theta (q) &\textrm{ is SoS}, \\
+        &&\quad V_d^\theta (q^\star) &= 0.
+    \end{aligned}    
+    \label{eq:finite_optim}
+\end{equation}
+
+\todo[inline]{Insert connection to Physics-Informed neural networks (PINN) here.} 
+As $J \rightarrow 0$, the function approximators $M_d^\theta, J_2^\theta,
+V_d^\theta$ converge to the solutions of the PDE~\eqref{eq:pde_main} governing
+the stabilization properties of IDA-PBC.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Constraints}
+\label{ssec:pinn}
+
+In the subsequent subsections, we elaborate on how the constraints
+in the optimization problem~\eqref{eq:finite_optim} are imposed. 
+%
+For the remainder of this document, we shall let $\mathbb{S}_n$ denote the set
+of symmetric $n \times n$ matrices, $\mathbb{S}^{+}_n$ the set of positive
+semidefinite $n \times n$ matrix, and $\mathbb{S}^{++}_n$ the set of positive
+definite $n \times n$ matrix.
+
+\subsubsection{Positive-Definiteness of $M_d^\theta$ and Skew-Symmetry of $J_2^\theta$}
+
+We leverage the Cholesky decomposition to ensure positive-definiteness of
+$M_d^\theta$, i.e.,
+%
+\begin{equation}
+    M_d^\theta(q) = L_{\theta}(q) L_{\theta}^\top(q),
+    \label{eq:cholesky}
+\end{equation}
+%
+where $L_\theta \in \mathbb{R}^{n \times n}$ is a lower-triangular matrix whose
+$n(n+1)/2$ entries are outputs of a neural network. The positive-definiteness is
+ensured as long as the diagonal elements of $M_d^\theta$ are positive. In our
+implementation, this is achieved by adding $\epsilon I$ to $M_d^\theta$, with
+$I$ denoting the identity matrix and $\epsilon$ a small positive constant.
+
+The skew symmetric $J_2^\theta$ is constructed by taking a square matrix
+$A_\theta$, whose entries are outputs of a dense neural network, and compute
+%
+\begin{equation}
+    J_2^\theta(q,p) = A_\theta(q,p) - A_\theta^\top (q,p).
+    \label{eq:skew_symmetric}
+\end{equation}
+
+\subsubsection{Positivity of $V_d^\theta$ with An Isolated Minimum at $q^\star$}
+
+By Definition~\ref{def:sos_poly}, a polynomial function is nonnegative as long
+as it is SoS. We therefore are concerned with constructing the polynomial
+$V_d^\theta$ as an SoS polynomial. 
+%
+\begin{theorem}~\citep{choi1995sums}
+    \label{thm:sos}
+    A polynomial $P \in \mathbb{R}[x]$ of degree $2d$ has a sum-of-squares
+    decomposition if and only if there exists a $Q \in \mathbb{S}^{+}_n$ such
+    that
+    %
+    \begin{equation*}
+        P(x) = m^\top(x) Q m(x),
+    \end{equation*}
+    %
+    where $m$ is the vector of all monomials in $x_1, \ldots, x_n$ of
+    degree less than or equal to $d$, i.e. $m(x) = \bmat{1 & x_1 & x_2 & \ldots &
+    x_n & x_1x_2 & \ldots & x_n^d}$. There exist $\binom{n+d}{n}$ such monomials.
+\end{theorem}
+
+This result presents an efficient way to construct $V_d^\theta$. The SoS
+constraint in~\eqref{eq:finite_optim} is then equivalent to finding a positive
+semidefinite matrix. We use the same Cholesky decomposition
+in~\eqref{eq:cholesky} to do this. With $R_\theta$ an $n \times n$ lower
+triangular matrix with constant entries, we define 
+%
+\begin{equation}
+    V_d^\theta(q) = m^\top(q) R_\theta R_\theta^\top m(q),
+    \label{eq:sos_Vd}
+\end{equation}
+%
+where $m$ is the vector of monomials $m = \bmat{q_1 & \ldots & q_n &
+q_1q_2 & \ldots & q_n^d}$. The constant monomial is excluded from $m(q)$ to
+ensure that the minimum of $V_d^\theta$ is at the origin.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Reducing the Sample Space}
+\label{ssec:sample}
+
+% We are interested in finding the solution to~\eqref{eq:finite_optim} over the
+% region $\Omega \subset \mathcal{X}$. 
+%
+In this subsection, we show how the loss function~\eqref{eq:loss_nn} can be
+expressed in a more explicit form which only depends on the variable $q$ instead
+of $(q,p)$. This reduces the sample complexity of the algorithm by half. 
+Following~\cite{ortega2002stabilization}, we use the fact that
+%
+\[
+    \nabla_q \left(z^\top A(q) z \right) = 
+    \left[ \nabla_q \left( A(q)z \right)\right]^\top z,
+    \; \forall z \in \mathbb{R}^n, \; \forall A \in \mathbb{S}_n,
+\]
+%
+to write the PDE constraint~\eqref{eq:pde_1} as
+%
+\begin{equation*}
+    G^\perp \left\{ \left[
+        \left[ \nabla_q \left( M^{-1} p \right) \right]^\top - 
+        M_d M^{-1} \left[ \nabla_q \left( M_d^{-1} p \right) \right]^\top + 
+        2 J_2 M_d^{-1} 
+    \right] p \right\}= 0.
+\end{equation*}
+%
+The identity
+%
+$
+    \nabla_q \left( A(q) z \right) = \sum_{k=1}^n \nabla_q \left( A_{(\cdot, k)} \right) z_k,
+$
+%
+where $A_{(\cdot, k)}$ denotes the $k^\textrm{th}$ column of the matrix $A$,
+holds for all $z \in \mathbb{R}^n$ and all $A \in \mathbb{R}^{n \times n}$. We
+use this identity to reparametrize $J_2^\theta$ in terms of the matrices $U_k^\theta(q) =
+\left(-U_k^\theta (q)\right)^\top \in \mathbb{R}^{n \times n}$ as
+%
+\[
+    2 J_2^\theta = \sum_{k=1}^n U^\theta_k p_k.
+\]
+
+We can now express~\eqref{eq:loss_nn} only in terms of $q$ as $l_\theta =
+\left( \sum_{k=1}^n l_{1k,\theta} \right) + l_{2,\theta}$, where
+% %
+% \begin{equation}
+%     G^\perp \left\{ 
+%         \left[ \nabla_q \left( M^{-1}_{(\cdot, k)} \right) \right]^\top - 
+%         M_d M^{-1} \left[ \nabla_q  \left( M_d^{-1}\right)_{(\cdot, k)} \right]^\top + 
+%         U_k M_d^{-1} 
+%     \right\}= 0.
+%     \label{eq:pde_1_revised}
+% \end{equation}
+% %
+% These results elude us to decompose~\eqref{eq:finite_optim} into two smaller
+% optimization problems. First we express the loss functions~\eqref{eq:loss_nn}
+% into two terms as
+% %
+\begin{align}
+    \label{eq:loss_decoupled_1}
+    l_{1k, \theta}(q) &= \left\| G^\perp \left\{ 
+        \left[ \nabla_q \left( M^{-1}_{(\cdot, k)} \right) \right]^\top - 
+        M_d^{\theta} M^{-1} \left[ \nabla_q  \left( \big( M_d^\theta \big)^{-1} \right)_{(\cdot, k)} \right]^\top + 
+        U_k^\theta \big( M_d^\theta \big)^{-1}
+    \right\} \right\|^2 , \\
+    \label{eq:loss_decoupled_2}
+    l_{2, \theta}(q) &= \left\| G^\perp \left\{ \nabla_qV - M_d^\theta M^{-1} \nabla_qV_d^\theta \right\} \right\|^2.
+\end{align}
+%
+Note that~\eqref{eq:loss_decoupled_1} is only dependent of $M_d^\theta$ and
+$U_k^\theta$. This implies that the problem~\eqref{eq:finite_optim} can be
+solved in two stages, as elaborated in the following subsection.
+
+
+\subsection{Solving the Optimization Problem}
+
+We rewrite the problem~\eqref{eq:finite_optim} into two smaller problems, first
+of which is
+%
+\begin{equation}
+    \begin{aligned}
+        \underset{\theta }{\textrm{minimize}} 
+        &&\quad J_1 &= \sum_{q \in \mathcal{Q}} \left( \sum_{k=1}^n l_{1k,\theta}(q) \right) , \\
+        \textrm{subject to} 
+        &&\quad M_d^\theta &= \big( M_d^\theta \big)^\top \succ 0, \\
+        &&\quad U_k^\theta &= -\big( U_k^\theta \big)^\top, \;\; k = 1,\ldots,n.
+    \end{aligned}    
+    \label{eq:solve_Md}
+\end{equation}
+%
+To solve this optimization problem, we exploit the recent developments in
+automatic differentiation (AD)~\citep{DifferentialEquations.jl-2017} to obtain
+the appropriate gradients for use with gradient-based search algorithms. In
+particular, we employ the reverse-mode AD implemented in the Julia language
+(\verb|ReverseDiff.jl|) and perform parameter updates according to
+ADAM~\citep{kingma2014adam}.
+
+Given the solutions $M_d^\theta, U_k^\theta$ to~\eqref{eq:solve_Md}, the
+following optimization problem can be solved to obtain the coefficients of
+$V_d^\theta$:
+%
+\begin{equation}
+    \begin{aligned}
+        \underset{\theta }{\textrm{minimize}} 
+        &&\quad J_2 &= \sum_{q \in \mathcal{Q}} l_{2,\theta}(q), \\
+        \textrm{subject to} 
+        &&\quad V_d^\theta (q) &\textrm{ is SoS}, \\
+        &&\quad V_d^\theta (q^\star) &= 0.
+    \end{aligned}    
+    \label{eq:solve_Vd}
+\end{equation}
+%
+As the gradient of~\eqref{eq:sos_Vd} can be analytically obtained, the
+problem~\eqref{eq:solve_Vd} can be re-formulated as the least squares problem:
+$\min\|Ax - b\|^2$. This problem is then solved in a single step, significantly
+increasing the computation speed of our algorithm.

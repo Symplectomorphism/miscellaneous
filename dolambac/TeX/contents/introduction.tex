@@ -1,0 +1,126 @@
+\section{Introduction}
+%
+Control of underactuated systems has been attacked by several researchers until
+today using various design strategies ranging from bang-bang control,
+energy-based approaches, and many others that have been extensively
+studied~\citep{mori1976control, park2009swing, mason2008time,
+aastrom2000swinging}. Another approach for algorithmic control of underactuated
+systems is passivity-based control~\citep{ortega2002stabilization,van2000l2},
+which may be viewed as a generalization of energy-shaping, can also be
+applied to swing up the pendulum. 
+%
+% Passivity-based control~\cite{ortega2002stabilization,van2000l2}, which is a
+% generalization of energy-shaping approach can also be applied to swing up the
+% pendulum. 
+%
+These techniques require precise knowledge of the mathematical model describing
+the system. 
+%
+For systems with high complexity, development of controllers using these methods
+can be intractable.
+
+The surge in popularity of machine learning has brought with it many data-driven
+solutions to the problem of the control design. In this category, the algorithms
+are usually more flexible as the same framework may be applicable to many
+different systems.
+%
+% For this reason, there has been a recent surge in popularity of using machine
+% learning as a solution to the problem of control design.
+%
+The main idea with this approach is to utilize data to find a control policy
+such that the closed-loop behavior of the system optimizes a certain objective
+given by some notion of accumulative reward/cost.
+%
+One of the most commonly used techniques in this area of research is
+reinforcement learning~\citep{sutton2018reinforcement}, which seeks a direct
+mapping from the system states to the control inputs.
+%
+Reinforcement learning algorithms have been used in multiple control tasks
+such as robot locomotion and
+manipulation~\citep{heess2017emergence,andrychowicz2020learning} and control of
+underactuated systems~\citep{lillicrap2015continuous}. 
+
+\textbf{Problem Statement.} 
+%
+The majority of data-driven approaches ignore the potential geometric or
+algebraic structures a given control system has, treating it as a black-box
+system. 
+%
+While this may increase the flexibility of the approach, it simultaneously
+increases tremendously the amount of training data required, making them
+inapplicable for high degree-of-freedom systems.
+%
+% It is not surprising that injecting prior knowledge about a system into a
+% machine learning framework is advantageous. In~\cite{deisenroth2011pilco}, the
+% dynamics is first learned and then later incorporated into a policy search. This
+% addresses the poor sample complexity of model-free reinforcement learning, but
+% does not allow physical structures of the system to be directly incorporated.
+% The neural ordinary differential equation (ODE)~\cite{chen2018neural}, is a
+% recent framework that connects deep neural networks to continuous-time dynamical
+% systems. This approach has provided researchers with a modeling basis for
+% incorporating physical structures into their machine learning problems, e.g.
+% using neural ODEs to learn the Hamiltonian dynamics of physical
+% systems~\cite{zhong2019symplectic}. 
+Recent advances in machine learning research have unsurprisingly indicated that
+it is advantageous to inject prior knowledge about the system into the learning
+framework.
+%
+In this paper, we discuss the data-driven control design which directly
+incorporates the dynamics of the system, drastically increasing the rate of
+learning.
+%
+The quintessential control problem that we tackle is the swing-up control of
+pendulum systems.
+
+% \vspace{3pt}
+
+\textbf{Related Work.}
+%
+Deisenroth and Rasmussen learn the dynamics of the system and then incorporate 
+it into a policy search in~\citet{deisenroth2011pilco}.
+%
+This addresses the poor sample complexity of model-free reinforcement learning,
+but does not allow physical structures of the system to be directly
+incorporated. 
+%
+A recently developed framework that connects deep neural networks to
+continuous-time dynamical systems is presented in Neural ordinary differential
+equations (ODE)~\citep{chen2018neural}.
+%
+The Neural ODE approach provides a modeling basis for incorporating physical
+structures into machine learning problems, e.g. using neural ODEs to learn the
+Hamiltonian dynamics of physical systems~\citep{zhong2019symplectic}. 
+%
+% In this work, we provide novel results in the design of data-driven control
+% laws for a class of underactuated mechanical systems. 
+%
+The recent extension to neural ODE~\citep{rackauckas2020universal} enables
+the incorporation of a neural network into the equations
+governing the system's evolution. 
+
+
+In this paper, neural-network-embedded ODEs are combined with passivity-based
+control techniques to automatically design controllers for unactuated mechanical
+systems.
+%
+The main difference in our work and~\citet{zhong2019symplectic} is that we do not
+learn the Hamiltonian dynamics. 
+%
+Rather, we leverage the known dynamics and train a neural network to learn an
+energy-like function, from which the controller is derived, thereby imposing
+desirable characteristics on the closed-loop system.
+%
+We illustrate, through simulations and hardware implementations, that our
+learning framework successfully comes up with controllers that
+are robust against model uncertainties.
+%
+% These characteristics are achieved by the design of loss functions based on a
+% transverse coordinate system.
+%
+% The contributions of this paper are summarized below:
+% %
+% \begin{itemize} \item Express the controller through a neural network and
+%     incorporate it into the ODE governing the evolution of the system, \item
+%     Design of loss functions based on a transverse coordinate system, which
+%     speeds up training, \item Provide simulation and experimental support for
+%     the framework. \end{itemize}

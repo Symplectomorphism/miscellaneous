@@ -1,0 +1,201 @@
+\section{Problemin \c{C}\"{o}z\"{u}m\"{u}}
+\label{sec:solution}
+
+Bu problemi anlayabilmek icin olas{\i}l{\i}k teorisinden bir teoremi
+\"{o}d\"{u}n\c{c} alaca\u{g}{\i}z. Bu teorem literat\"{u}rde toplam beklenen
+de\u{g}er kural{\i} ya da olas{\i}l{\i}k teorisinin kule kural{\i} olarak
+ge\c{c}er.~\cite{bertsekas2002introduction} Bu kural \c{s}unu s\"{o}ylemektedir.
+
+\begin{thm} \label{thm:kule}
+    $X$ bir rastgele de\u{g}i\c{s}ken ve $\{A_i\}_i^m$ \"{o}rneklem
+    uzay{\i}n{\i}n sonlu bir b\"{o}l\"{u}mlemesi olsun. O zaman, 
+    \[ \mathbb{E}[X] = \sum_i^m \mathbb{E}\left[ X \mid A_i \right]
+    \mathbb{P}(A_i). \]
+\end{thm}
+%
+\noindent Bu teoremde $\mathbb{E}$ beklenen de\u{g}eri, $\mathbb{P}$
+olas{\i}l{\i}k fonksiyonunu, \"{o}rneklem uzay{\i} terimi ise se\c{c}imlerin
+yap{\i}ld{\i}\u{g}{\i} k\"{u}meyi temsil etmektedir. $A_i$ olay{\i}n{\i}n
+do\u{g}rulu\u{g}u verilmi\c{s}se $X$'in beklenen de\u{g}erini temsil etmek
+i\c{c}in $\mathbb{E}\left[ X \mid A_i \right]$ terimini kullan{\i}yoruz.
+
+Biz problemimizde $k$'inci ad{\i}mda bulundu\u{g}umuz kareyi $s_k$, gitmek
+istedi\u{g}imiz kareyi de $g$ olarak adland{\i}ral{\i}m. Rastgele
+de\u{g}i\c{s}ken olarak da \c{s}u fonksiyon ailesini alal{\i}m.
+\begin{equation}
+    C_n := \sum_{k=n+1}^\infty r_k, \qquad r_k = 
+\begin{cases}
+    1 & \mbox{e\u{g}er } s_k \neq g \\
+    0 & \mbox{e\u{g}er } s_k = g
+\end{cases}.
+\label{eq:RVs}
+\end{equation}
+Bu denklemdeki toplam{\i}n iyi tan{\i}ml{\i} oldu\u{g}una kendimizi
+inand{\i}rmak i\c{c}in bir kere $g$ karesine geldikten sonra b\"{u}t\"{u}n
+$r_k$'lerin s{\i}f{\i}r de\u{g}erini ald{\i}\u{g}{\i}n{\i} g\"{o}zlemlememiz
+yeterli olacakt{\i}r. Bu durumda de\u{g}erini bulmak istedi\u{g}imiz nicelik
+$\mathbb{E}[C_0]$ olmaktad{\i}r. Kule kural{\i}n{\i}~\ref{thm:kule} kullanarak
+hesaplamaya ba\c{s}layal{\i}m.
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}[C_0] = \mathbb{E}\left[ C_1 \mid s_1 \in \{C4, D3\} \right] 
+    \underbrace{\mathbb{P}(s_1 \in \{C4, D3\})}_{=\frac{1}{2}} + \\ 
+    \mathbb{E}\left[ C_1 \mid s_1 \in \{B3, C2\} 
+    \right] \underbrace{\mathbb{P}(s_1 \in \{B3, C2\})}_{=\frac{1}{2}}.
+    \end{split}
+    \label{eq:tower1}
+\end{align}
+%
+\c{S}imdi, ilk durumda $s_1 = C4$ oldu\u{g}unu, ikinci durumda da $s_1 = C2$
+oldu\u{g}unu d\"{u}\c{s}\"{u}nelim. Problemdeki simetri sayesinde $s_1 = D3$
+durumunun $s_1 = C4$ durumu ile $s_1 = B3$ durumunun ise $s_1 = C2$ durumu ile
+ayn{\i} sonucu verece\u{g}i barizdir. Kule kural{\i}n{\i} kullanarak
+hesaplamalar{\i}m{\i}za devam edelim. \"{O}nce~\eqref{eq:tower1} denkleminin
+sa\u{g} taraf{\i}ndaki ilk beklenen de\u{g}er terimini ele alaca\u{g}{\i}z.
+
+\begin{align}
+    \begin{split}
+    \mathbb{E}\left[ C_1 \mid s_1 = C4 \right] = &\underbrace{r_1 + r_2}_{=2} \\ 
+    &+ \underbrace{\mathbb{E}[C_3 \mid s_1 = C4, s_3 = D5]}_{=2} \underbrace{\mathbb{P}(s_3 = D5 \mid s_1 = C4)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_3 \mid s_1 = s_3 = C4] \underbrace{\mathbb{P}(s_3 = C4 \mid s_1 = C4)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_3 \mid s_1 = C4, s_3 = B5] \underbrace{\mathbb{P}(s_3 = B5 \mid s_1 = C4)}_{=\frac{1}{3}}.
+    \end{split}
+    \label{eq:tower2}
+\end{align}
+%
+Bu denklemi yazarken \c{s}u g\"{o}zlemlerde bulunduk. E\u{g}er $s_1 = C4$ ise, o
+zaman amac{\i}m{\i}za giden yolda iyi bir hamle yapm{\i}\c{s} bulunuyoruz.
+Dolay{\i}s{\i}yla, bu hamleyi bir kere daha tekrarl{\i}yoruz ve kendimizi $s_2 =
+C5$ karesinde buluyoruz. Bu hamleleri yaparken $2$ tu\c{s}a basmam{\i}z gerekti;
+dolay{\i}s{\i}yla $r_1 + r_2 = 2$.
+
+\c{S}imdi, \eqref{eq:tower2}'\"{u}nc\"{u} denklemin sa\u{g} taraf{\i}ndaki
+beklenen de\u{g}erleri inceleyelim. \.Ilk beklenen de\u{g}erin $2$ oldu\u{g}unu
+zaten denklemin \"{u}zerinde belirttik. Bunun nedeni, e\u{g}er
+\"u\c{c}\"{u}nc\"{u} hamlede kendimizi $s_3 = D5$ karesinde buluyorsak, demek ki
+yukar{\i} ve sa\u{g}a giden tu\c{s}lar{\i} biliyoruz. Sa\u{g}a gitmeye devam
+ederek amac{\i}m{\i}za ula\c{s}abiliriz. Sa\u{g}a gitmek i\c{c}in de $2$ kere
+daha bu tu\c{s}a basmam{\i}z gerekir. Geri kalan iki beklenen de\u{g}eri bulmak
+icin kule kural{\i}n{\i} bir kere daha g\"{o}reve \c{c}a\u{g}{\i}raca\u{g}{\i}z.
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}[C_3 \mid s_1=s_3=C4] = &\underbrace{r_3+r_4}_{=2} \\
+    &+ \underbrace{\mathbb{E}[C_5 \mid s_1=s_3=C4, s_5=D5]}_{=2} \underbrace{\mathbb{P}(s_5=D5 \mid s_1=s_3=C4)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_5 \mid s_1=s_3=C4, s_5=B5]}_{=4} \underbrace{\mathbb{P}(s_5=B5 \mid s_1=s_3=C4)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align}
+%
+Buradaki hesaplamam{\i}z{\i} yaparken \c{s}u durumlar{\i} g\"{o}z \"{o}n\"{u}ne
+ald{\i}k. E\u{g}er $3$'\"{u}nc\"{u} hamlede kendimizi $s_3=C4$ karesinde
+buluyorsak yukar{\i} ve a\c{s}a\u{g}{\i} nas{\i}l gidildi\u{g}ini biliyoruz
+demektir. \"{O}nce yukar{\i} giderek hatam{\i}z{\i} d\"{u}zeltiyoruz: $r_3 + r_4
+= 2$. Bir sonraki hamlede sa\u{g}a veya sola gitmemizi sa\u{g}layacak herhangi
+bir tu\c{s}a bas{\i}yoruz. E\u{g}er sa\u{g}a gidersek, m\"{u}kemmel,
+\c{c}\"{u}nk\"{u} amac{\i}m{\i}za yakla\c{s}t{\i}k. Bu durumda sa\u{g}a gitmeye
+devam edip sadece $2$ tu\c{s}a daha basarak amac{\i}m{\i}za ula\c{s}{\i}r{\i}z.
+Di\u{g}er durumda amac{\i}m{\i}zdan uzakla\c{s}{\i}yoruz, ama art{\i}k
+b\"{u}t\"{u}n tu\c{s}lar{\i}n nas{\i}l \c{c}al{\i}\c{s}t{\i}\u{g}{\i}n{\i} biliyoruz. Yine
+sa\u{g}a giderek amac{\i}m{\i}za $4$ hamlede ula\c{s}abiliriz. \\
+%
+\eqref{eq:tower2}'\"{u}n sa\u{g} taraf{\i}nda hesaplamad{\i}\u{g}{\i}m{\i}z bir beklenen de\u{g}er kald{\i}:
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}[C_3 \mid s_1=C4, \; &s_3=B5] = \\
+    &\underbrace{\mathbb{E}[C_3 \mid s_1=C4, s_3=B5, s_4=C5]}_{=4} \underbrace{\mathbb{P}(s_4=C5 \mid s_1=C4, s_3=B5)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_3 \mid s_1=C4, s_3=B5, s_4=B4]}_{=6} \underbrace{\mathbb{P}(s_4=B4 \mid s_1=C4, s_3=B5)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align}
+%
+Bu hesaplamay{\i} yaparkenki g\"{o}zlemlerimiz yukar{\i}dakilerle
+a\c{s}a\u{g}{\i} yukar{\i} ayn{\i}. $3$'\"{u}nc\"{u} hamlede kendimizi $s_3 =
+B5$ karesinde buluyorsak, demek ki yukar{\i} ve sola g\"{o}t\"{u}ren
+tu\c{s}lar{\i} biliyoruz. Geri kalan tu\c{s}lardan birine
+bast{\i}\u{g}{\i}m{\i}zda ya sa\u{g}a gidece\u{g}iz (iyi bir durum) ya da
+a\c{s}a\u{g}{\i} gidece\u{g}iz (k\"{o}t\"{u} bir durum). Sa\u{g}a
+gitti\u{g}imizde beklenen de\u{g}erimiz $4$, \c{c}\"{u}nk\"{u} sola ve sa\u{g}a
+giderken $2$ hamle yapt{\i}k. Bundan sonra amac{\i}m{\i}za ula\c{s}mak icin $2$
+hamle daha yapmam{\i}z gerekiyor. Di\u{g}er durumda ise beklenen de\u{g}erimiz
+$6$; \c{c}\"{u}nk\"{u} art{\i}k tu\c{s}lar{\i} nas{\i}l
+kullanaca\u{g}{\i}m{\i}z{\i} biliyoruz ama amac{\i}m{\i}zdan $4$ hamle
+uzaktay{\i}z: $2+4 = 6$.
+
+\c{S}imdi b\"{u}t\"{u}n bu hesaplamalar{\i}m{\i}z{\i}~\eqref{eq:tower1}'inci
+denkleme yerle\c{s}tirdi\u{g}imizde denklemin sa\u{g} taraf{\i}ndaki ilk terimi
+bulabiliriz.
+%
+\begin{equation}
+    \mathbb{E}[C_1 \mid s_1=C4]\mathbb{P}(s_1=C4) = 6 \cdot \frac{1}{2} = 3.
+    \label{eq:first_term}
+\end{equation}
+%
+Benzer hesaplamalar{\i} yaparak~\eqref{eq:tower1}'inci denklemin sa\u{g}
+taraf{\i}ndaki ikinci beklenen de\u{g}eri hesaplayal{\i}m. Bu sefer
+hesaplamalar{\i}n do\u{g}ruluklar{\i}n{\i} okurun kendisine
+inand{\i}rmas{\i}n{\i} bekliyoruz.
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}\left[ C_1 \mid s_1 = C2 \right] =
+    &\underbrace{\mathbb{E}[C_1 \mid s_1 = C2, s_2 = B2]}_{=8} \underbrace{\mathbb{P}(s_2 = B2 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_1 \mid s_1=C2, s_2 = C3] \underbrace{\mathbb{P}(s_2 = C3 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_1 \mid s_1 = C2, s_2 = D2] \underbrace{\mathbb{P}(s_2 = D2 \mid s_1 = C2)}_{=\frac{1}{3}}.
+    \end{split}
+    \label{eq:tower3}
+\end{align}
+%
+Bir kere daha kule kural{\i}n{\i} kullanarak geri kalan iki beklenen de\u{g}eri
+hesapl{\i}yoruz.
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}[C_1 \mid s_1=C2, \; &s_2=C3] = \underbrace{\sum_{i=1}^4 r_i}_{=4} \\
+    &+ \underbrace{\mathbb{E}[C_5 \mid s_1=C2, s_2=C3, s_5=D5]}_{=2} \underbrace{\mathbb{P}(s_5=D5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_5 \mid s_1=C2, s_2=C3, s_5=B5]}_{=4} \underbrace{\mathbb{P}(s_5=B5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align}
+%
+Son olarak
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}[C_1 \mid s_1=C2, \; &s_2=D2] = \underbrace{\sum_{i=1}^3 r_i}_{=3} \\
+    &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=D2, s_4=E3]}_{=3} \underbrace{\mathbb{P}(s_4=E3 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=s_4=D2]}_{=5} \underbrace{\mathbb{P}(s_4=D2 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align}
+%
+Bu hesaplamalar{\i} kullanarak~\eqref{eq:tower1}'inci denklemin sa\u{g}
+taraf{\i}ndaki ikinci terimi hesaplayabiliriz.
+%
+\begin{equation}
+    \mathbb{E}[C_1 \mid s_1=C2]\mathbb{P}(s_1=C2) = 7 \cdot \frac{1}{2} = \frac{7}{2}.
+    \label{eq:second_term}
+\end{equation}
+%
+Art{\i}k arad{\i}\u{g}{\i}m{\i}z her \c{s}eyi bulduk. \eqref{eq:tower1}'inci
+denkleme geri d\"{o}nelim:
+% \[
+% \boxed{
+%     \mathbb{E}[C_0] = \underbrace{\mathbb{E}\left[ C_1 \mid s_1 \in \{C4, D3\} \right]}_{=6} 
+%     \underbrace{\mathbb{P}(s_1 \in \{C4, D3\})}_{=\frac{1}{2}} + \\ 
+%     % \underbrace{\mathbb{E}\left[ C_1 \mid s_1 \in \{B3, C2\}}_{=7}
+%     % \right] 
+%     \underbrace{\mathbb{P}(s_1 \in \{B3, C2\})}_{=\frac{1}{2}}.
+% }
+% \]
+%
+% \fbox{
+\begin{empheq}[box=\widefbox]{align}
+    \begin{split}
+    \mathbb{E}[C_0] = &\underbrace{\mathbb{E}\left[ C_1 \mid s_1 \in \{C4, D3\} \right]}_{=6}
+    \underbrace{\mathbb{P}(s_1 \in \{C4, D3\})}_{=\frac{1}{2}}\\ 
+    &+ \underbrace{\mathbb{E}\left[ C_1 \mid s_1 \in \{B3, C2\} \right]}_{=7} 
+    \underbrace{\mathbb{P}(s_1 \in \{B3, C2\})}_{=\frac{1}{2}} = \frac{13}{2}.
+    \end{split}
+    \label{eq:tower}
+\end{empheq}
+% }
+%

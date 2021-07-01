@@ -1,0 +1,82 @@
+% interactapasample.tex
+% v1.05 - August 2017
+
+\documentclass[]{interact}
+
+\usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
+\usepackage[caption=false]{subfig}% Support for small, `sub' figures and tables
+%\usepackage[nolists,tablesfirst]{endfloat}% To `separate' figures and tables from text if required
+%\usepackage[doublespacing]{setspace}% To produce a `double spaced' document if required
+%\setlength\parindent{24pt}% To increase paragraph indentation when line spacing is doubled
+
+% \usepackage[longnamesfirst,sort]{natbib}% Citation support using natbib.sty
+% \bibpunct[, ]{(}{)}{;}{a}{,}{,}% Citation support using natbib.sty
+% \renewcommand\bibfont{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using natbib.sty
+
+\usepackage[natbibapa,nodoi]{apacite}% Citation support using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\setlength\bibhang{12pt}% To set the indentation in the list of references using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+
+\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+
+\input{preamble.tex}
+
+\begin{document}
+
+% \articletype{}% Specify the article type or omit as appropriate
+
+\title{\.{I}lgin\c{c} Bir Olas{\i}l{\i}k Sorusu}
+
+\author{
+\name{G\"{o}khan At{\i}n\c{c}\textsuperscript{\dagger} and Aykut C. Sat{\i}c{\i}\textsuperscript{\ddagger}}
+% \affil{\textsuperscript{\dagger}Boise State University, Electrical and Computer Enginering Department, Boise, Idaho, USA}
+}
+
+\maketitle
+
+
+% \begin{abstract}
+%   Machine learning approaches to the problem of control design are flexible,
+%   but they demand large databases and computation time for training. Part of
+%   this central challenge is due to treating the environment as a black box,
+%   ignoring the useful geometric or algebraic structures of the control system.
+%   In this work, we propose an efficient data-driven procedure that leverages
+%   the known dynamics and techniques from nonlinear control theory in order to
+%   design swing-up controllers for underactuated robotic systems. We embed a
+%   neural network into the equations of motion of the robotic manipulator
+%   through its control input. This control function is determined by the
+%   appropriate gradients of a neural network, acting as an energy-like
+%   (Lyapunov) function. We encode the swing-up task through the use of
+%   transverse coordinates and goal sets; which provides a concise target for
+%   the neural network and drastically accelerates the rate of learning. We
+%   demonstrate the efficacy and robustness of the algorithm with numerical
+%   simulations and experiments on hardware.
+% \end{abstract}
+  
+% \begin{keywords}
+%   Sections; lists; figures; tables; mathematics; fonts; references; appendices
+% \end{keywords}
+
+  
+\input{contents/problem.tex}
+\input{contents/solution.tex}
+% \input{contents/methods.tex}
+% \input{contents/results.tex}
+% \input{template_example.tex}
+
+\bibliographystyle{apacite}
+\bibliography{bib/root,bib/main}
+
+\end{document}
