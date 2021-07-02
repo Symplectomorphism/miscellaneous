@@ -3,7 +3,7 @@
 Bu basit ama çok ilginç soru sevgili arkadaşım Gökhan Atınç tarafından tasarlandı.
 
 * Sorunun açıklaması ve çözümü şu PDF
-  [dökumaninda](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
+  [dökümanında](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
   bulunabilir (eğer ilk sayfa herhangi bir nedenden dolayı boş görünüyorsa, sağ
   üst köşedeki "Download" tuşuna basın ve sistem göstericisi ile açın).
 
