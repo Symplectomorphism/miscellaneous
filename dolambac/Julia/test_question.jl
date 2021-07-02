@@ -470,6 +470,6 @@ function monte_carlo(;iter::Int=3_000_000, t::Float64=0.01)
     end
     p = 2*exp( -2*iter*iter*t*t / (8^2) / iter )
     @info "Average cost of $iter samples is C̄ = $(round(average_cost, digits=4))."
-    @info "By the Hoeffding bound, P(|C̄ - E[C]| >= $t) =  $(round(p, digits=6))."
+    @info "By the Hoeffding bound, P(|C̄ - E[C]| >= $t) <=  $(round(p, digits=6))."
     return average_cost
 end
