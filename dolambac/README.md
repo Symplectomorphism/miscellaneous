@@ -1,6 +1,6 @@
 # İlginç bir olasılık sorusu
 
-Bu basit ama cok ilginc soru sevgili arkadaşım Gokhan Atinc tarafindan tasarlandi.
+Bu basit ama çok ilginç soru sevgili arkadaşım Gökhan Atınç tarafından tasarlandı.
 
 * Sorunun açıklaması ve çözümü şu PDF
   [dökumaninda](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
@@ -13,8 +13,8 @@ Bu basit ama cok ilginc soru sevgili arkadaşım Gokhan Atinc tarafindan tasarla
 
 # An interesting probability question
 
-This is a simple, yet very interesting question posed by my dear friend Gokhan
-Atinc.  
+This is a simple, yet very interesting question posed by my dear friend Gökhan
+Atınç.  
 
 * The question and its solution may be found in the PDF
   [document](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
