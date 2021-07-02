@@ -26,6 +26,17 @@ function Env()
     Env(s, a, g, true_keymap, belief_keymap, 0)
 end
 
+function reset_environment!(e::Env)
+    empty!(e.state_history)
+    push!(e.state_history, [3,3])
+    empty!(e.action_history)
+    key_set = randperm(4)
+    action_set = [:left, :right, :up, :down]
+    e.true_keymap = Dict(zip(key_set, action_set))
+    e.belief_keymap = Dict{Int, Symbol}()
+    e.cost = 0
+end
+
 
 function dynamics(s::Vector, a::Symbol)
     if a == :left
@@ -452,12 +463,17 @@ end
 
 
 function monte_carlo(;iter::Int=100_000)
-    total_cost = 0.0
-    for i = 1:iter
-        e = Env()
+    e = Env()
+    # total_cost = 0.0
+    average_cost = 0.0
+    for n = 1:iter
+        reset_environment!(e)
         simulate(e)
         @assert e.state_history[end] == [5,5]
-        total_cost += e.cost
+        # total_cost += e.cost
+        average_cost = average_cost*(n-1)/n + e.cost/n
     end
-    return total_cost/iter
+    # return total_cost/iter
+    @info "Sample average cost is $(average_cost)"
+    return average_cost
 end
