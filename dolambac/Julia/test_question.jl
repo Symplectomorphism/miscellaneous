@@ -1,6 +1,6 @@
 using Random
 
-struct Env
+mutable struct Env
     # board::Matrix
     state_history::Array{Array{Int, 1}}
     action_history::Array{Symbol, 1}
@@ -14,10 +14,11 @@ function Env()
     # board = Matrix()
     s = Array{Array{Int, 1}}(undef, 0)
     a = Array{Array{Int, 1}}(undef, 0)
-    push!(s, [2,2])
+    push!(s, [3,3])
     g = [5,5]
 
     key_set = randperm(4)
+    # key_set = [3, 4, 1, 2]
     action_set = [:left, :right, :up, :down]
     true_keymap = Dict(zip(key_set, action_set))
     belief_keymap = Dict{Int, Symbol}()
@@ -28,13 +29,13 @@ end
 
 function dynamics(s::Vector, a::Symbol)
     if a == :left
-        s[1] != 0 ? s_next = s - [1, 0] : s_next = s
+        s[1] != 1 ? s_next = s - [1, 0] : s_next = s
     elseif a == :right
         s[1] != 5 ? s_next = s + [1, 0] : s_next = s
     elseif a == :up
         s[2] != 5 ? s_next = s + [0, 1] : s_next = s
     elseif a==:down
-        s[2] != 0 ? s_next = s - [0, 1] : s_next = s
+        s[2] != 1 ? s_next = s - [0, 1] : s_next = s
     else
         error("Not a valid action")
     end
@@ -49,12 +50,414 @@ function simulate(e::Env)
         e.cost += 1
     end
     if e.cost == 1
-        if e.state_history[end] == [2,3] || e.state_history[end] == [3,2]
+        if e.state_history[end] == [4,3]
             push!(e.action_history, e.belief_keymap[1])
-            push!(e.state_history, dynamics(e.state_history[1], e.action_history[end]))
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
             e.cost += 1
 
-            
+            push!(e.action_history, e.true_keymap[2])
+            push!(e.belief_keymap, 2=>e.action_history[end])
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+            e.cost += 1
+            if e.state_history[end] == [5,4]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+            end
+            if e.state_history[end] == [5,2]
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [5,3]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [4,2]
+                    push!(e.action_history, e.belief_keymap[1])
+                    push!(e.belief_keymap, 4=>:up)
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [4,3]
+                push!(e.action_history, e.belief_keymap[1])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [5,2]
+                    push!(e.belief_keymap, 4=>:up)
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [5,4]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
         end
     end
+    if e.cost == 1
+        if e.state_history[end] == [3,4]
+            push!(e.action_history, e.belief_keymap[1])
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+            e.cost += 1
+
+            push!(e.action_history, e.true_keymap[2])
+            push!(e.belief_keymap, 2=>e.action_history[end])
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+            e.cost += 1
+            if e.state_history[end] == [4,5]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+            end
+            if e.state_history[end] == [2,5]
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [3,5]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [2,4]
+                    push!(e.action_history, e.belief_keymap[1])
+                    push!(e.belief_keymap, 4=>:right)
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [3,4]
+                push!(e.action_history, e.belief_keymap[1])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [2,5]
+                    push!(e.belief_keymap, 4=>:right)
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [4,5]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+        end
+    end
+
+    if e.cost == 1
+        if e.state_history[end] == [3,2]
+            push!(e.action_history, e.true_keymap[2])
+            push!(e.belief_keymap, 2=>e.action_history[end])
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+            e.cost += 1
+
+            if e.state_history[end] == [2,2]
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [3,2]
+                    push!(e.belief_keymap, 3=>:right)
+                    push!(e.belief_keymap, 4=>:up)
+
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                else
+                    push!(e.belief_keymap, 3=>:up)
+                    push!(e.belief_keymap, 4=>:right)
+
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [3,3]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [4,5]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [2,5]
+                    push!(e.belief_keymap, 4=>:right)
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [4,2]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [5,3]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [4,2]
+                    push!(e.belief_keymap, 4=>:up)
+                    push!(e.action_history, e.belief_keymap[2])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+        end
+    end
+    if e.cost == 1
+        if e.state_history[end] == [2,3]
+            push!(e.action_history, e.true_keymap[2])
+            push!(e.belief_keymap, 2=>e.action_history[end])
+            push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+            e.cost += 1
+
+            if e.state_history[end] == [2,2]
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [3,2]
+                    push!(e.belief_keymap, 3=>:right)
+                    push!(e.belief_keymap, 4=>:up)
+
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                else
+                    push!(e.belief_keymap, 3=>:up)
+                    push!(e.belief_keymap, 4=>:right)
+
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [3,3]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [5,4]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [5,2]
+                    push!(e.belief_keymap, 4=>:up)
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+            if e.state_history[end] == [2,4]
+                push!(e.action_history, e.belief_keymap[2])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                push!(e.action_history, e.true_keymap[3])
+                push!(e.belief_keymap, 3=>e.action_history[end])
+                push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                e.cost += 1
+
+                if e.state_history[end] == [3,5]
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[3])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+                if e.state_history[end] == [2,4]
+                    push!(e.belief_keymap, 4=>:right)
+                    push!(e.action_history, e.belief_keymap[2])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                    push!(e.action_history, e.belief_keymap[4])
+                    push!(e.state_history, dynamics(e.state_history[end], e.action_history[end]))
+                    e.cost += 1
+                end
+            end
+        end
+    end
+end
+
+
+function monte_carlo(;iter::Int=100_000)
+    total_cost = 0.0
+    for i = 1:iter
+        e = Env()
+        simulate(e)
+        @assert e.state_history[end] == [5,5]
+        total_cost += e.cost
+    end
+    return total_cost/iter
 end
