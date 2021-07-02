@@ -11,8 +11,6 @@ Bu basit ama çok ilginç soru sevgili arkadaşım Gökhan Atınç tarafından t
   [klasörünün](https://github.com/Symplectomorphism/miscellaneous/tree/master/dolambac/Julia)
   altında bulunabilir.
 
-![Sample simulation](./Julia/monte_carlo_sample.png)
-
 # An interesting probability question
 
 This is a simple, yet very interesting question posed by my dear friend Gökhan
@@ -26,3 +24,5 @@ Atınç.
 * A companion Monte-Carlo simulation to the theoretical solution may be found
   under the Julia
   [folder](https://github.com/Symplectomorphism/miscellaneous/tree/master/dolambac/Julia).
+
+![Sample simulation](./Julia/monte_carlo_sample.png)
