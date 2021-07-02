@@ -17,8 +17,9 @@ ge\c{c}er~\cite{bertsekas2002introduction}.
 \noindent Bu teoremde $\mathbb{E}$ beklenen de\u{g}eri, $\mathbb{P}$
 olas{\i}l{\i}k fonksiyonunu, \"{o}rneklem uzay{\i} terimi ise se\c{c}imlerin
 yap{\i}ld{\i}\u{g}{\i} k\"{u}meyi temsil etmektedir. $A_i$ olay{\i}n{\i}n
-do\u{g}rulu\u{g}u verilmi\c{s}se $X$'in beklenen de\u{g}erini temsil etmek
-i\c{c}in $\mathbb{E}\left[ X \mid A_i \right]$ terimini kullan{\i}yoruz.
+do\u{g}rulu\u{g}u bilindi\u{g}i takdirde $X$'in beklenen de\u{g}erine
+\textit{ko\c{s}ullu beklenen de\u{g}er} denir ve $\mathbb{E}\left[ X \mid A_i
+\right]$ sembol\"{u} ile temsil edilir.
 
 Biz problemimizde $k$'inci ad{\i}mda bulundu\u{g}umuz kareyi $s_k$, gitmek
 istedi\u{g}imiz kareyi de $g$ olarak adland{\i}ral{\i}m. Rastgele
@@ -174,9 +175,10 @@ bulmam{\i}z{\i} sa\u{g}l{\i}yor: \fbox{$\mathbb{E}[C_0 \mid s_1=C4] = 6$}.
 % \end{equation*}
 % %
 
-Benzer hesaplamalar{\i} yaparak~\eqref{eq:tower1}'inci denklemin sa\u{g}
-taraf{\i}ndaki ikinci beklenen de\u{g}eri hesaplayal{\i}m. Bu sefer
-hesaplamalar{\i}n do\u{g}ruluklar{\i}na okur kendisini inand{\i}rmal{\i}.
+Benzer \c{s}ekilde~\eqref{eq:tower1}'inci denklemin sa\u{g} taraf{\i}ndaki
+ikinci beklenen de\u{g}eri hesaplayal{\i}m. 
+% Bu sefer
+% hesaplamalar{\i}n do\u{g}ruluklar{\i}na okur kendisini inand{\i}rmal{\i}.
 %
 \begin{align}
     \begin{split}
@@ -189,6 +191,14 @@ hesaplamalar{\i}n do\u{g}ruluklar{\i}na okur kendisini inand{\i}rmal{\i}.
 \end{align}
 %
 \hphantom{aha} \\[-1ex]
+\eqref{eq:tower3}'\"{u}nc\"{u} denklemin sa\u{g} taraf{\i}nda $8$ olarak
+belirlenen ilk beklenen de\u{g}eri inceleyerek ba\c{s}layal{\i}m. E\u{g}er ilk
+iki ad{\i}mda $C2$ ve $B2$ karelerini ziyaret etmi\c{s}sek, a\c{s}a\u{g}{\i} ve
+sola nas{\i}l gidilece\u{g}ini biliyoruz demektir. Kalan iki tu\c{s}tan herhangi
+birine basarak amac{\i}m{\i}za yakla\c{s}abiliriz ve kalan tu\c{s} ile
+amac{\i}m{\i}za ula\c{s}{\i}r{\i}r{\i}z. Bu $2$'\"{u}nc\"{u} hamleden sonra $6$
+hamle daha alacakt{\i}r.
+
 Bir kere daha kule kural{\i}n{\i} kullanarak geri kalan iki beklenen de\u{g}eri
 hesapl{\i}yoruz.
 %
@@ -201,7 +211,18 @@ hesapl{\i}yoruz.
 \end{align*}
 %
 \hphantom{aha} \\[-2ex]
-Son olarak,
+Burada a\c{s}a\u{g}{\i} ve yukar{\i} giden tu\c{s}lar{\i} ke\c{s}fetmi\c{s}
+bulunuyoruz. Bu tu\c{s}lar{\i} kullanarak $C5$ karesine ula\c{s}abiliriz. Bu
+noktada rastgele bir tu\c{s} se\c{c}ti\u{g}imizde ya sa\u{g}a ya da sola
+gidece\u{g}iz. Sa\u{g}a gidersek bu davran{\i}\c{s}{\i} tekrarlayarak
+amac{\i}m{\i}za ula\c{s}{\i}rken, sola gidersek daha
+kullanmad{\i}\u{g}{\i}m{\i}z kalan tu\c{s}a basarak amac{\i}m{\i}za
+ula\c{s}{\i}r{\i}z. \.{I}lk durumda $4$'\"{u}nc\"{u} ad{\i}mdan sonra $2$ hamle
+daha yapmam{\i}z gerekirken, ikinci durumda $4$ hamle daha yapmam{\i}z
+gerekiyor.
+
+\eqref{eq:tower3}'\"{u}n sa\u{g} taraf{\i}nda hesaplamad{\i}\u{g}{\i}m{\i}z bir
+beklenen de\u{g}er kald{\i}:
 %
 \vspace{-2mm}
 \begin{align*}
@@ -212,6 +233,18 @@ Son olarak,
     \end{split}
 \end{align*}
 %
+\hphantom{aha} \\[-2ex]
+Bu sefer a\c{s}a\u{g}{\i} ve sa\u{g}a giden tu\c{s}lar{\i} ke\c{s}fetmi\c{s}
+durumday{\i}z. Sa\u{g}a bir kere daha giderek amac{\i}m{\i}za yakla\c{s}abiliriz
+ve bu noktada $3$ hamle yapm{i}\c{s} oluruz. Bir sonraki hamlede kalan
+tu\c{s}lardan birini kullanarak ya $E3$'e ya da $D2$'ye gidece\u{g}iz. $E3$'e
+gidersek, bu tu\c{s}u kullanmaya devam ederek amac{\i}m{\i}za
+ula\c{s}{\i}r{\i}z. Bunu durumda $3$'\"{u}nc\"{u} hamleden sonra $3$ hamle
+yapm{\i}\c{s} oluyoruz. E\u{g}er kendimizi $D2$'de bulursak, art{\i}k
+b\"{u}t\"{u}n tu\c{s}lar{\i}n nas{\i}l \c{c}al{\i}\c{s}t{\i}\u{g}{\i}n{\i}
+biliyoruz ve amac{\i}m{\i}zdan $4$ kare uzaktay{\i}z; yani $3$'\"{u}nc\"{u}
+hamleden sonra $5$ hamleye daha yapmaya ihtiyac{\i}m{\i}z var.
+
 Art{\i}k \eqref{eq:tower1}'inci denklemin sa\u{g} taraf{\i}ndaki ikinci beklenen
 de\u{g}eri hesaplamak i\c{c}in~\eqref{eq:tower3}'\"{u} kullabiliriz:
 \fbox{$\mathbb{E}[C_0 \mid s_1=C2] = \frac{22}{3}$}.
