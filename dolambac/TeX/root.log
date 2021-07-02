@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 20:51
+This is LuaHBTeX, Version 1.12.0 (TeX Live 2020)  (format=lualatex 2020.4.24)  1 JUL 2021 20:56
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex
@@ -1381,12 +1381,12 @@ Here is how much of LuaTeX's memory you used:
  100000,1648299 words of node,token memory allocated
  5698 words of node memory still in use:
    147 hlist, 27 vlist, 32 rule, 36 math, 127 glue, 59 kern, 159 glyph, 189 attribute, 98 glue_spec, 120 attribute_list, 3 write, 16 pdf_literal, 16 pdf_colorstack nodes
-   avail lists: 1:1,2:1483,3:128,4:32,5:360,6:19,7:3735,8:60,9:939,10:14,11:162
+   avail lists: 1:1,2:1492,3:128,4:32,5:360,6:19,7:3730,8:60,9:941,10:14,11:163
  60490 multiletter control sequences out of 65536+600000
  56 fonts using 5621523 bytes
  75i,24n,101p,872b,466s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on root.pdf (4 pages, 119178 bytes).
+Output written on root.pdf (4 pages, 119150 bytes).
 
 PDF statistics: 162 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams

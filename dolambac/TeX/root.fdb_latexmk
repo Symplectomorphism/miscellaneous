@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex root"] 1625194069 "root.aux" "root.bbl" "root" 1625194283
+["bibtex root"] 1625194069 "root.aux" "root.bbl" "root" 1625194583
   "/usr/local/texlive/2020/texmf-dist/bibtex/bst/apacite/apacite.bst" 1374530685 141073 9d7b79dbf9d91133318126032cff8c27 ""
   "bib/main.bib" 1625161502 12100 3a0dd4973efeeb6fe9d1749fd8a53e9f ""
   "bib/root.bib" 1624905902 3431 331df733db865712ac8fcee496542df0 ""
-  "root.aux" 1625194282 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c "lualatex"
+  "root.aux" 1625194583 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c "lualatex"
   (generated)
   "root.blg"
   "root.bbl"
-["lualatex"] 1625194281 "/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex" "/home/aykut/repos/miscellaneous/dolambac/TeX/root.pdf" "root" 1625194283
+["lualatex"] 1625194582 "/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex" "/home/aykut/repos/miscellaneous/dolambac/TeX/root.pdf" "root" 1625194583
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/fonts/otl/lmroman10-bold.luc" 1596299153 124231 0da642536c2efdaf3b85e365d12a01e1 ""
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/fonts/otl/lmroman10-italic.luc" 1596299153 132153 b6aa6d563ae77df31521f0bcfc04fcd6 ""
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/fonts/otl/lmroman10-regular.luc" 1596260166 123160 fae69f77759c5c9c8b33ffe7ddbbe92a ""
@@ -15,7 +15,7 @@
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/fonts/otl/lmroman12-regular.luc" 1596262902 123499 e08a20c30733e27e40d80ff26a1ae696 ""
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/fonts/otl/lmroman8-regular.luc" 1596262914 123967 c03585571dc8058181de3bc5ea9b3b64 ""
   "/home/aykut/.texlive2020/texmf-var/luatex-cache/generic-dev/names/luaotfload-names.luc" 1601177725 1237164 732d8327f62f762bd6b182be2361f0ca ""
-  "/home/aykut/repos/miscellaneous/dolambac/TeX/root.aux" 1625194282 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c ""
+  "/home/aykut/repos/miscellaneous/dolambac/TeX/root.aux" 1625194583 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c ""
   "/home/aykut/repos/miscellaneous/dolambac/TeX/root.tex" 1625194281 4088 fc625d9c92eee6f74cd0ec0040b3b12c ""
   "/usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf" 1255129361 111240 0af0b64d6d3df41bead3f9de314afbd4 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf" 1255129361 118828 4d461c73423fe2666dad2ff0dfc3ca68 ""
@@ -395,20 +395,20 @@
   "/usr/local/texlive/2020/texmf-var/web2c/luahbtex/lualatex.fmt" 1587710348 2691943 c5af9ba40dbb9c3521c18178b2a8d53c ""
   "booktabs.sty" 1624905902 6557 d6853889294fa12971722b6cf6ead043 ""
   "contents/problem.tex" 1625191743 1086 5bf131c0dcba60f61963503d60df2c84 ""
-  "contents/solution.tex" 1625193521 11656 33c7f4e0d684119632405d36bbf6c954 ""
+  "contents/solution.tex" 1625194581 11693 944760be5097b32e0638b4e6e916a334 ""
   "epsfig.sty" 1624905902 3206 2f837c4549129e17184412966f24b595 ""
   "figures/drawing.eps" 1625160688 14500 409bc305cae0471d76e9f63df892b61c ""
   "natbib.sty" 1624905902 46712 8d4348633d6c3362b9c9a329f0b79b1a ""
   "preamble.tex" 1625194089 5509 8613e71d4284f411ada2c949447bbd11 ""
-  "root.aux" 1625194282 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c "lualatex"
+  "root.aux" 1625194583 2174 2522f9a2fc4a5e6f7aca51be2b0aa18c "lualatex"
   "root.bbl" 1625194069 615 4a43cdb88ac598d3062662cccae18f54 "bibtex root"
-  "root.out" 1625194282 127 4750eb97e7c552ab858b659b1a7e5511 "lualatex"
+  "root.out" 1625194583 127 4750eb97e7c552ab858b659b1a7e5511 "lualatex"
   "root.tex" 1625194281 4088 fc625d9c92eee6f74cd0ec0040b3b12c ""
   "rotating.sty" 1624905902 5839 78438764e1c05fc9de733c39db22a9c8 ""
   (generated)
   "root.pdf"
+  "root.aux"
+  "root.out"
+  "/home/aykut/repos/miscellaneous/dolambac/TeX/root.pdf"
   "/home/aykut/repos/miscellaneous/dolambac/TeX/root.log"
   "root.log"
-  "/home/aykut/repos/miscellaneous/dolambac/TeX/root.pdf"
-  "root.out"
-  "root.aux"
