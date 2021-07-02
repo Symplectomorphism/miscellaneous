@@ -1,10 +1,7 @@
-% interactapasample.tex
-% v1.05 - August 2017
+\documentclass[11pt,letterpaper]{article}
 
-\documentclass[]{interact}
-
-\usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
-\usepackage[caption=false]{subfig}% Support for small, `sub' figures and tables
+% \usepackage{epstopdf}% To incorporate .eps illustrations using PDFLaTeX, etc.
+% \usepackage[caption=false]{subfig}% Support for small, `sub' figures and tables
 %\usepackage[nolists,tablesfirst]{endfloat}% To `separate' figures and tables from text if required
 %\usepackage[doublespacing]{setspace}% To produce a `double spaced' document if required
 %\setlength\parindent{24pt}% To increase paragraph indentation when line spacing is doubled
@@ -16,20 +13,24 @@
 \usepackage[natbibapa,nodoi]{apacite}% Citation support using apacite.sty. Commands using natbib.sty MUST be deactivated first!
 \setlength\bibhang{12pt}% To set the indentation in the list of references using apacite.sty. Commands using natbib.sty MUST be deactivated first!
 \renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\usepackage[english]{babel}
+\addto{\captionsenglish}{%
+    \renewcommand{\refname}{Referanslar}%
+    \renewcommand{\contentsname}{Table of Contents}}
 
-\theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{proposition}[theorem]{Proposition}
+% \theoremstyle{plain}% Theorem-like structures provided by amsthm.sty
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{proposition}[theorem]{Proposition}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
+% \theoremstyle{definition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{example}[theorem]{Example}
 
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}
-\newtheorem{notation}{Notation}
+% \theoremstyle{remark}
+% \newtheorem{remark}{Remark}
+% \newtheorem{notation}{Notation}
 
 \input{preamble.tex}
 
@@ -37,14 +38,24 @@
 
 % \articletype{}% Specify the article type or omit as appropriate
 
-\title{\.{I}lgin\c{c} Bir Olas{\i}l{\i}k Sorusu}
-
-\author{
-\name{G\"{o}khan At{\i}n\c{c}\textsuperscript{\dagger} and Aykut C. Sat{\i}c{\i}\textsuperscript{\ddagger}}
-% \affil{\textsuperscript{\dagger}Boise State University, Electrical and Computer Enginering Department, Boise, Idaho, USA}
+% \title{\.{I}lgin\c{c} Bir Olas{\i}l{\i}k Sorusu}
+\section*{
+    \begin{center}
+        \.{I}lgin\c{c} Bir Olas{\i}l{\i}k Sorusu
+    \end{center}
 }
 
-\maketitle
+\begin{center}
+    G\"{o}khan At{\i}n\c{c}\textsuperscript{\dagger} ve Aykut C. Sat{\i}c{\i}\textsuperscript{\ddagger} \\[0ex]
+    % 1 Temmuz 2021
+\end{center}
+
+% \author{
+% \name{G\"{o}khan At{\i}n\c{c}\textsuperscript{\dagger} and Aykut C. Sat{\i}c{\i}\textsuperscript{\ddagger}}
+% \affil{\textsuperscript{\dagger}Boise State University, Electrical and Computer Enginering Department, Boise, Idaho, USA}
+% }
+
+% \maketitle
 
 
 % \begin{abstract}
