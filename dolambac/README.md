@@ -1,15 +1,15 @@
-# Ilginc bir olasilik sorusu
+# İlginç bir olasılık sorusu
 
 Bu basit ama cok ilginc soru sevgili arkadaşım Gokhan Atinc tarafindan tasarlandi.
 
-* Sorunun aciklamasi ve cozumu su PDF
-  [dokumaninda](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
-  bulunabilir (eger ilk sayfa herhangi bir nedenden dolayi bos gorunuyorsa, sag
-  ust kosedeki "Download" tusuna basin ve sistem gostericisi ile acin).
+* Sorunun açıklaması ve çözümü şu PDF
+  [dökumaninda](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
+  bulunabilir (eğer ilk sayfa herhangi bir nedenden dolayı boş görünüyorsa, sağ
+  üst köşedeki "Download" tuşuna basın ve sistem göstericisi ile açın).
 
-* Teorik cozume eşlik eden bir Monte-Carlo simulasyonu Julia
-  [klasorunun](https://github.com/Symplectomorphism/miscellaneous/tree/master/dolambac/Julia)
-  altinda bulunabilir.
+* Teorik çözüme eşlik eden bir Monte-Carlo simulasyonu Julia
+  [klasörünün](https://github.com/Symplectomorphism/miscellaneous/tree/master/dolambac/Julia)
+  altında bulunabilir.
 
 # An interesting probability question
 
