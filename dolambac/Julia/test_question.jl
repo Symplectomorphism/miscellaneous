@@ -1,7 +1,6 @@
 using Random
 
 mutable struct Env
-    # board::Matrix
     state_history::Array{Array{Int, 1}}
     action_history::Array{Symbol, 1}
     goal::Array{Int, 1}
@@ -11,14 +10,12 @@ mutable struct Env
 end
 
 function Env()
-    # board = Matrix()
     s = Array{Array{Int, 1}}(undef, 0)
     a = Array{Array{Int, 1}}(undef, 0)
     push!(s, [3,3])
     g = [5,5]
 
     key_set = randperm(4)
-    # key_set = [3, 4, 1, 2]
     action_set = [:left, :right, :up, :down]
     true_keymap = Dict(zip(key_set, action_set))
     belief_keymap = Dict{Int, Symbol}()
@@ -464,16 +461,13 @@ end
 
 function monte_carlo(;iter::Int=100_000)
     e = Env()
-    # total_cost = 0.0
     average_cost = 0.0
     for n = 1:iter
         reset_environment!(e)
         simulate(e)
         @assert e.state_history[end] == [5,5]
-        # total_cost += e.cost
         average_cost = average_cost*(n-1)/n + e.cost/n
     end
-    # return total_cost/iter
     @info "Sample average cost is $(average_cost)"
     return average_cost
 end
