@@ -19,7 +19,7 @@ This is a simple, yet very interesting question posed by my dear friend Gökhan
 Atınç.  
 
 * The question and its solution may be found in the PDF
-  [document](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/root.pdf)
+  [document](https://github.com/Symplectomorphism/miscellaneous/blob/master/dolambac/TeX/english/root.pdf)
   (if the first page is blank for some reason, click "Download" on the top right
   corner and open with system viewer).
 
