@@ -459,7 +459,7 @@ function simulate(e::Env)
 end
 
 
-function monte_carlo(;iter::Int=100_000)
+function monte_carlo(;iter::Int=3_000_000, t::Float64=0.01)
     e = Env()
     average_cost = 0.0
     for n = 1:iter
@@ -468,6 +468,8 @@ function monte_carlo(;iter::Int=100_000)
         @assert e.state_history[end] == [5,5]
         average_cost = average_cost*(n-1)/n + e.cost/n
     end
-    @info "Sample average cost is $(average_cost)"
+    p = 2*exp( -2*iter*iter*t*t / (8^2) / iter )
+    @info "Average cost of $iter samples is $(round(average_cost, digits=4))."
+    @info "By the Hoeffding bound, P(|X̄ - E[X̄]| >= $t) =  $(round(p, digits=6))."
     return average_cost
 end
