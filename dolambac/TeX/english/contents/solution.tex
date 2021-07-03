@@ -34,7 +34,7 @@ literaturer~\cite{bertsekas2002introduction}.
 % Biz problemimizde $k$'inci ad{\i}mda bulundu\u{g}umuz kareyi $s_k$, gitmek
 % istedi\u{g}imiz kareyi de $g$ olarak adland{\i}ral{\i}m. Rastgele
 % de\u{g}i\c{s}ken olarak da \c{s}u fonksiyon ailesini alal{\i}m.
-We denote the square on which the robot resides at the $k^{\text{th}}$ step by
+\noindent We denote the square on which the robot resides at the $k^{\text{th}}$ step by
 $s_k$ and the goal square by $g$. Consider the following family of random
 variables.
 \begin{equation}
@@ -53,7 +53,7 @@ variables.
 % a\c{s}a\u{g}{\i}da \c{c}ok\c{c}a kullanaca\u{g}{\i}z.
 The sum in this definition is well-defined because once the robot reaches $g$,
 all the remaining $r_k$'s take the value zero. We are being asked the value of
-$\mathbb{E}[C_0]$. To that end, we will use the following result of
+$\mathbb{E}[C_0]$. To that end, we will use the following repercussion of
 definition~\eqref{eq:RVs}.
 % \vspace{-2mm}
 \begin{equation*} 
@@ -62,15 +62,16 @@ definition~\eqref{eq:RVs}.
 % \vspace{-3mm}
 % Beklenen de\u{g}erin \"{o}zelliklerini kullanarak a\c{s}a\u{g}{\i}daki sonuca
 % varabiliriz.
-Using the properties of expectation, we deduce the following result.
+Using the properties of expectation, if $s_i \neq g$ for $m < i < n$, we can
+deduce the following result.
 % \vspace{-1mm}
 \begin{equation*} 
-    \mathbb{E}[C_m] = \sum_{i=m+1}^n \mathbb{E}[r_i] + \mathbb{E}[C_n] = n-m + \mathbb{E}[C_n],
+    \mathbb{E}[C_m] = \sum_{i=m+1}^n \mathbb{E}[r_i] + \mathbb{E}[C_n] = n-m + \mathbb{E}[C_n].
     % \begin{cases}
     %     k + \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i \neq g \\
     %     \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i = g
     % \end{cases}, 
-    \qquad m < i < n, \;\; s_i \neq g.
+    % \qquad m < i < n, \;\; s_i \neq g.
 \end{equation*}
 % \vspace{-2mm} 
 % Yukar{\i}daki \"{o}zde\c{s}liklerin benzerleri elbette ko\c{s}ullu beklenen
@@ -148,7 +149,7 @@ equation~\eqref{eq:tower1}.
 % hamleden itibaren $2$ kere daha bu tu\c{s}a basmam{\i}z gerekir. Geri kalan iki
 % beklenen de\u{g}eri bulmak icin kule kural{\i}n{\i} bir kere daha g\"{o}reve
 % \c{c}a\u{g}{\i}raca\u{g}{\i}z.
-We delve further into the computation of the two expected values in
+\noindent We delve further into the computation of the two expected values in
 equation~\eqref{eq:tower2}, whose values are not immediately apparent.
 %
 \begin{align*}
