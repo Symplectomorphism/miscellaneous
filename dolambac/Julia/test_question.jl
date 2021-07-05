@@ -499,7 +499,7 @@ function simulate(e::Env)
 end
 
 
-function monte_carlo(m::MonteCarlo;iter::Int=1_000_000, t::Float64=0.01)
+function monte_carlo(m::MonteCarlo=MonteCarlo(); iter::Int=1_000_000, t::Float64=0.01)
     reset!(m)
     for n = 1:iter
         reset_environment!(m.e)
@@ -524,6 +524,8 @@ function monte_carlo(m::MonteCarlo;iter::Int=1_000_000, t::Float64=0.01)
     p_hoeff = 2*exp( -2*iter*iter*t*t / ((8-4)^2) / iter )
     @info "Average cost of $iter samples is C̄ = $(round(m.avg_cost, digits=4))."
     @info "By the Hoeffding bound, P(|C̄ - E[C]| >= $t) <=  $(round(p_hoeff, digits=6))."
+
+    show_distribution(m)
 end
 
 function show_distribution(m::MonteCarlo)
