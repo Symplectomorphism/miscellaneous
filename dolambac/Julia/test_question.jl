@@ -1,5 +1,17 @@
 using Random
-
+using PyPlot
+################################################################################
+#
+# *********************************
+# * (1,5) (2,5) (3,5) (4,5) (5,5) *
+# * (1,4) (2,4) (3,4) (4,4) (5,4) *
+# * (1,3) (2,3) (3,3) (4,3) (5,3) *
+# * (1,2) (2,2) (3,2) (4,2) (5,2) *
+# * (1,1) (2,1) (3,1) (4,1) (5,1) *
+# *********************************
+#
+################################################################################
+ 
 mutable struct Env
     state_history::Array{Array{Int, 1}}
     action_history::Array{Symbol, 1}
@@ -21,6 +33,34 @@ function Env()
     belief_keymap = Dict{Int, Symbol}()
 
     Env(s, a, g, true_keymap, belief_keymap, 0)
+end
+
+mutable struct MonteCarlo
+    e::Env
+    p::Array{Matrix{Float64}, 1}
+    counts::Array{Int, 1}
+    avg_cost::Float64
+    fig::Figure
+end
+
+function MonteCarlo()
+    p = Array{Matrix{Float64}, 1}()
+    for i = 1:9
+        push!(p, zeros(5,5))
+    end
+    counts = zeros(Int, 9)
+    fig = figure(1)
+    MonteCarlo(Env(), p, counts, 0.0, fig)
+end
+
+function reset!(m::MonteCarlo)
+    reset_environment!(m.e)
+    for i = 1:9
+        m.p[i] = zeros(Float64, 5, 5)
+        m.counts[i] = 0
+    end
+    m.avg_cost = 0.0
+    m.fig.clf()
 end
 
 function reset_environment!(e::Env)
@@ -459,17 +499,52 @@ function simulate(e::Env)
 end
 
 
-function monte_carlo(;iter::Int=1_000_000, t::Float64=0.01)
-    e = Env()
-    average_cost = 0.0
+function monte_carlo(m::MonteCarlo;iter::Int=1_000_000, t::Float64=0.01)
+    reset!(m)
     for n = 1:iter
-        reset_environment!(e)
-        simulate(e)
-        @assert e.state_history[end] == [5,5]
-        average_cost = average_cost*(n-1)/n + e.cost/n
+        reset_environment!(m.e)
+        simulate(m.e)
+        @assert m.e.state_history[end] == [5,5]
+        for i = 1:length(m.e.state_history)
+            for j = 1:5
+                for k = 1:5
+                    if m.e.state_history[i] == [j,k]
+                        m.p[i][j,k] += 1
+                    end
+                end
+            end
+        end
+        m.counts[1:length(m.e.state_history)] .+= 1
+        m.avg_cost = m.avg_cost * (n-1)/n + m.e.cost/n
     end
-    p = 2*exp( -2*iter*iter*t*t / ((8-4)^2) / iter )
-    @info "Average cost of $iter samples is C̄ = $(round(average_cost, digits=4))."
-    @info "By the Hoeffding bound, P(|C̄ - E[C]| >= $t) <=  $(round(p, digits=6))."
-    return average_cost
+    for i = 1:9
+        # m.p[i] = m.p[i] ./ m.counts[i]
+        m.p[i] = m.p[i] ./ m.counts[1]
+    end
+    p_hoeff = 2*exp( -2*iter*iter*t*t / ((8-4)^2) / iter )
+    @info "Average cost of $iter samples is C̄ = $(round(m.avg_cost, digits=4))."
+    @info "By the Hoeffding bound, P(|C̄ - E[C]| >= $t) <=  $(round(p_hoeff, digits=6))."
+end
+
+function show_distribution(m::MonteCarlo)
+    x = 0:5
+    y = 6:-1:1
+    for i = 1:8
+        ax = m.fig.add_subplot(2,4,i)
+        # ax.pcolormesh(x, y, m.p[i+1])
+        ax.imshow(m.p[i+1] |> rotl90, cmap="YlGn")
+        ax.set_xticklabels(x)
+        ax.set_yticklabels(y)
+
+        for j = 1:5
+            for k = 5:-1:1
+                ax.text(k-1, j-1, rotl90(m.p[i+1])[j,k], ha="center", va="center", color="w")
+            end
+        end
+        # ax.set_xlabel("Hamle: $(i)", fontsize=16)
+        ax.set_xlabel("Move: $(i)", fontsize=16)
+    end
+    # m.fig.suptitle("Durum Dağılımı", fontsize=16)
+    m.fig.suptitle("State Distribution", fontsize=16)
+    m.fig.tight_layout(rect=[0, 0.03, 1, 0.95])
 end

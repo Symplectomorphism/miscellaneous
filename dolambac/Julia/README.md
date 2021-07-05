@@ -8,3 +8,7 @@ The Julia file tests the theoretical result. Here are the steps to follow:
 
 <!-- ## Sample result: -->
 ![Sample simulation](monte_carlo_sample.png)
+
+
+## State Distribution
+![State Distribution](state_distribution.png)
