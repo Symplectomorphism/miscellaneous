@@ -35,3 +35,8 @@ Atınç.
 * We can also use Monte-Carlo simulation to find the probability distribution of the states over all the moves.
 * This distribution then obviates the computation of the expected value of minimum moves it takes to reach the destination: ```1/6*4 + 1/3*6 + 1/2*8 = 20/3 = 6.66666...```
 ![State Distribution](./Julia/state_distribution.png)
+
+
+* To get this state distribution, we used the following optimal policy, taking the correct action whenever we know the corresponding keymap.
+
+![State Distribution](./TeX/figures/drawing_policy.png)
