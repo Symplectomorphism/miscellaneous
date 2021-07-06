@@ -25,4 +25,7 @@ Atınç.
   under the Julia
   [folder](https://github.com/Symplectomorphism/miscellaneous/tree/master/dolambac/Julia).
 
+# Numerical Solution
+
 ![Sample simulation](./Julia/monte_carlo_sample.png)
+![State Distribution](state_distribution.png)
