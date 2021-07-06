@@ -28,7 +28,7 @@ Atınç.
 # Numerical Solution
 
 * We can use Monte-Carlo simulation to compute various statistics.
-* In particular, we can compute the statistic that the questions asks: what is the expected minimum number of moves it takes to reach the destionation?
+* In particular, we can compute the statistic that the questions asks: what is the expected minimum number of moves it takes to reach the destination?
 
 ![Sample simulation](./Julia/monte_carlo_sample.png)
 
