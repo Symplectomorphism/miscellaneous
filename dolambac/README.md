@@ -34,6 +34,7 @@ Atınç.
 
 * We can also use Monte-Carlo simulation to find the probability distribution of the states over all the moves.
 * This distribution then obviates the computation of the expected value of minimum moves it takes to reach the destination: ```1/6*4 + 1/3*6 + 1/2*8 = 20/3 = 6.66666...```
+
 ![State Distribution](./Julia/state_distribution.png)
 
 
