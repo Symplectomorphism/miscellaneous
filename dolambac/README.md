@@ -27,7 +27,11 @@ Atınç.
 
 # Numerical Solution
 
-* Notice that the expected value of minimum moves it takes to reach the destination may be found after the computation of the state distribution: ```1/6*4 + 1/3*6 + 1/2*8 = 20/3 = 6.66666...```
+* We can use Monte-Carlo simulation to compute various statistics.
+* In particular, we can compute the statistic that the questions asks: what is the expected minimum number of moves it takes to reach the destionation?
 
 ![Sample simulation](./Julia/monte_carlo_sample.png)
+
+* We can also use Monte-Carlo simulation to find the probability distribution of the states over all the moves.
+* This distribution then obviates the computation of the expected value of minimum moves it takes to reach the destination: ```1/6*4 + 1/3*6 + 1/2*8 = 20/3 = 6.66666...```
 ![State Distribution](./Julia/state_distribution.png)
