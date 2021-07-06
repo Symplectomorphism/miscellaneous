@@ -27,9 +27,7 @@ Atınç.
 
 # Numerical Solution
 
-* Notice that the expected value of minimum moves it takes to reach the destination may be found after the computation of the state distribution:
-
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+* Notice that the expected value of minimum moves it takes to reach the destination may be found after the computation of the state distribution: ```1/6*4 + 1/3*6 + 1/2*8 = 20/3 = 6.66666...```
 
 ![Sample simulation](./Julia/monte_carlo_sample.png)
 ![State Distribution](./Julia/state_distribution.png)
