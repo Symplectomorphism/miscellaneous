@@ -1,9 +1,11 @@
 using JuMP
 using Mosek, MosekTools
 using LinearAlgebra
+using DataFrames
 
 function find_best(best_N::Int=0, best_t::Int=0)
     best_value = 0.0
+    best_history = DataFrame()
     for N = 0:Int(round(log(2,21), RoundUp)*2)
         X = 100
 
@@ -65,18 +67,25 @@ function find_best(best_N::Int=0, best_t::Int=0)
 
         if termination_status(model) == MOI.OPTIMAL 
             println("N = $N is feasible.")
-            display( hcat(value.(a), value.(s), value.(t)) )
             if best_t < value(T)
                 best_t = Int(value(T))
                 best_N = Int(round(N))
                 best_value = value.(a)[end] + value.(s)[end] + round(maximum(value.(t)))
+                best_history = DataFrame()
+                insertcols!(best_history, 1, :age=>Int.(round.(value.(a))))
+                insertcols!(best_history, 2, :resource=>value.(s))
+                insertcols!(best_history, 3, :time=>Int.(round.(value.(t))))
             end
             println("Maximum t = $(Int(value(T)))")
-            println("α + β + γ = $(value.(a)[end] + value.(s)[end] + round(value(T)))")
+            println("α + β + γ = $(round(value.(a)[end] + value.(s)[end] + value(T); digits=6))")
             println()
         end
     end
 
-    return best_t, best_N, best_value
+    return best_t, best_N, best_value, best_history
 end
-best_t, best_N, best_value = find_best()
+best_t, best_N, best_value, best_history = find_best()
+
+println("The best path to take has the value: α + β + γ = $(best_value)")
+println("Its trajectory is (age, resource, time):")
+display(best_history)
