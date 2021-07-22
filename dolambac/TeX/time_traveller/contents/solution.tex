@@ -1,0 +1,212 @@
+\section{Sorunun \c{C}\"{o}z\"{u}m\"{u}}
+\label{sec:solution}
+
+Elbette bu sorunun cozumunu yapmak icin deneme yanilma ile ilerleyebiliriz. Bu
+dokumani yazmamdaki amacimiz, bu soruyu nasil bir karma tamsayi eniyileme
+sorusuna (mixed-integer optimization problem) donusturebilecegimizi ve bu tip
+eniyileme sorularini cozen programlari kullanarak nasil cevabi bulabilecegimizi
+aciklamaktir.
+
+Sorunun cozumune baslamak icin once uc tane degisken tanimlayalim: 
+\begin{enumerate}
+    \item $\mathbb{N} \ni t_k $: Sonaj'in $k^{\text{inci}}$ adimda icinde bulundugu zaman (yil ve tamsayi),
+    \item $\mathbb{N} \ni a_k$: Sonaj'in $k^{\text{inci}}$ adimdaki yas (tamsayi),
+    \item $\mathbb{R} \ni s_k$: Sonaj'in $k^{\text{inci}}$ adimda elinde bulunan kaynak (mg ve gercel sayi).
+\end{enumerate}
+%
+Bunlara ek olarak Sonaj $k^{\text{inci}}$ adimda $3$ secimle karsi karsiya
+kaliyor: (i) zamanda 33 yil ileri yolculuk etmek, (ii) 11 yil beklemek, (iii)
+zamanda 33 yil geri yolculuk etmek. Bu secimi gostermek icin de
+$\{u_{kj}\}_{j=1}^3 \in \{0, 1\}$ simgesini kullanalim, oyle ki
+%
+\begin{equation}
+    \sum_{j=1}^3 u_{kj} = 1,
+    \label{eq:constraints_u}
+\end{equation}
+%
+olsun. Demek ki $u_k$ Sonaj'in $k^{\text{inci}}$ adimdaki kararini temsil eden
+bir $3$-vektor. Her elemani ya sifir ya da bir olacak, ve yukaridaki toplami
+saglamak icinse tam olarak bir elemani bir olmak zorunda. Bu vektoru de soyle
+kodlayalim: eger $u_{k1} = 1$ ise Sonaj $33$ yil ileri, $u_{k3} = 1$ ise $33$
+yil geri yolculuk ediyor olsun. $u_{k2} = 1$ olursa da Sonaj $11$ yil bekliyor
+olsun.
+
+Diyelim ki birinci adimdan basliyoruz, yani $k=1$'den basliyor. Bu noktada $k$
+ile dizinledigimiz adimlar sayisinin kaca kadar gideceginizi daha bilmiyoruz. Bu
+sayiya simdilik $N$ diyelim. Fakat $N$ hakkinda soyle bir bilgimiz var: Sonaj
+her zaman yolculugundan sonra 11 yil beklemek zorunda ve kaynak (Secium 731) her
+11 yilda bir yarilaniyor. Zaman yolculugu yapmak icin de kaynaktan en az 1 birim
+bulunmasi gerekiyor. Hal boyleyken kac yarilanmadan sonra zaman yolculugu icin
+Sonaj'in elinde yeterince kaynak kalmaz? Hemen hesaplayalim:
+%
+\begin{equation*}
+    \frac{s_1}{2^m} \leq 1 \Rightarrow m \leq \log_2{(s_1)}.
+\end{equation*}
+%
+Yani, Sonaj $t=0$'a geri donmek istiyorsa en fazla $\log_2{(s_1)}$ yarilanmaya
+tahammul edebilir. Soruda bize, kaynagin baslama degeri $s_1 = 21$ olarak
+verilmis. Her yarilanma arasinda da bir yolculuk yapabilecegine gore, toplam
+adim sayisina su ust siniri dayatabiliriz:
+\[ N \leq 2 \left(\lceil \log_2{(s_1)} \rceil\right) \approx 2\left(\lceil 4.39
+\rceil\right) = 10. \]
+%
+Bundan sonra stratejimiz soyle olacak: $N$'i sifirdan baslatacagiz (hic adim
+atmama durumu) ve $N=10$'a kadar ayni eniyileme sorusunu cozup, buldugumuz en
+iyi degeri dogru cevap olarak ilan edecegiz.
+
+Son olarak iki tane daha eniyileme degiskenine ihtiyacimiz var. Bunlari
+$\mathbb{N} \ni T$ (tamsayi) ve $\left\{y_k \in \{0, 1\}:k = \{1, \ldots, N\}
+\right\}$ olarak gosterecegiz. Bu degiskenleri tanitmamizin nedeni de ``Sonaj'in
+zamanda gorebilecegi en ileri tarihi gormus'' olmasini matematiksel olarak ifade
+etme istegimizdir. Simdi, bizim $t$ vektorumuz her $k \in \underline{N} := \{1,
+\ldots, N\}$ icin Sonaj'in $k^{\text{inci}}$ adimda icinde bulundugu yili temsil
+etmekte. Amacimiz bu vektorun en buyuk elemanini maksimize etmek. Bunu
+matematiksel eniyileme teorisini uygulamaya en elverisli sekilde ifade etmemiz
+lazim ki eniyileme programimiz soruyu cozebilsin. Bunu soyle elde ediyoruz.
+Oncelikle $y$ vektorunun elemanlarinin toplamini $1$ yapiyoruz ki sadece ve
+sadece bir elemani $1$ degerini alsin, gerisi $0$ olsun: 
+\begin{equation}
+    \sum_{k=1}^N y_k = 1. 
+    \label{eq:constraints_y}
+\end{equation}
+%
+Sonra, $T$ degiskenini oyle sececegiz ki, eniyileme programi bu degeri
+$t$-vektorunun en buyuk elemanindan ufak yapmak isteyecek. Bunu da eniyileme
+literaturunde big-$M$ yontemini~\citep{griva2009linear,wiki:Big_M_method}
+kullanarak yapacagiz. Yontem buyuk ve sabit bir $M$ degeri secerek basliyor. Bu
+deger her soruya gore degisik olacaktir. Biz bu problem icin $M=100$ degerinin
+calistigini gozlemledik. Once bu yontemin bize verdigi kisita goz atalim, sonra
+neden bu kisitin calistigini anlatalim.
+%
+\begin{equation}
+    T - t_k \leq M\left( 1 - y_k \right), \qquad k = 1, \ldots, N.
+    \label{eq:T_kisiti}
+\end{equation}
+%
+Elbette eniyileme amacimiz $T$'yi maksimize etmek olacak.
+Denklem~\eqref{eq:T_kisiti}'deki kisit neden calisiyor? Hemen anlamaya
+calisalim. Oncelikle hatirlayalim ki $y_j$'lerden sadece biri $1$ degerini,
+gerisi $0$ degerini alacak. Diyelim ki $y_m = 1$ ve geri kalan $y_j = 0$ ve $t$
+vektorumuz oyle ki gercekten de $t_m \geq t_j, \; \forall j \neq m$. Tabi ki $1
+\leq j, m \leq N$. Bu durumda yukaridaki kisitimiz soyle cozunuyor:
+%
+\begin{align*}
+    T &\leq t_m, \\
+    T &\leq t_j + M, \quad j \neq m.
+\end{align*}
+%
+Gordugumuz gibi bu gercekten de istedigimiz davranis sekli. $M$ buyuk bir sabit
+oldugu icin ikinci satirdaki esitsizlikler eniyileme sorumuzu kotu-tanimli
+yapmazken, birinci satirdaki esitsizlik eniyileme programinin $T$'nin seciminde
+$T$'yi $t_m$'ye kadar yukseltme olanagi sunuyor. 
+
+Peki ya $y_m = 1$ degil de $y_n = 1$ ve $n \neq m$, yani $t_n \leq t_m$ olsaydi
+ne olacakti? O zaman hala bu insa bize istedegimizi verecek miydi? Hemen analiz
+edelim. Bu durumda~\eqref{eq:T_kisiti}'deki kisitlar su sekilde cozunuyor:
+%
+\begin{align*}
+    T &\leq t_n, \\
+    T &\leq t_j + M, \quad j \neq n.
+\end{align*}
+%
+Hal boyle olunca, eniyileme programi $T$ degerini maksimize ederken en fazla
+$t_n$'nin degerine kadar cikarabilir. Oysa $t_m$'nin degeri $t_n$'den daha
+buyuk! Korkmamiza gerek yok, cunku $y$ vektoru eniyileme programinin kontrolu
+altinda. Bu durumda $y_n = 1$ degil de $y_m = 1$ secimini yaptiginda daha iyi
+sonuc elde edecegini eniyileme programinin bulgulayicisi (heuristic)
+hesaplayacaktir. Bunun icin elimizde iyi teorik yontemler
+var~\cite{griva2009linear}.
+
+Soruyu eniyileme programina devretmeden once birkac kisit daha koymamiz
+gerekiyor cunku $u_{kj}$'in degerine gore $a_{k+1}$, $s_{k+1}$, ve $t_{k+1}$'in
+alacagi degerler uzerinde bazi kisitlar var ve onlari daha modellemedik.
+Sonaj'in yasini simgeleyen $a$ ile baslayalim. O zaman,
+%
+\begin{equation*}
+    a_{k+1} = 
+    \begin{cases}
+        a_k + 11 & \mbox{ eger } u_{k2} = 1, \\
+        a_k & \mbox{ eger } u_{k1} + u_{k3} = 1.
+    \end{cases}
+    % \label{eq:a_constraints_if_else}
+\end{equation*}
+%
+Tabi bu denklemi bu sekilde eniyileme programina sunamayiz. Kosullu aciklamalari
+matematiksel olarak programa anlatmamiz gerekmekte. Bunu da yine ``big-$M$''
+yontemini kullanarak elde edebiliriz. Her $k \in \underline{N}$ icin su
+kisitlari dayatalim:
+%
+\begin{align}
+    \begin{split}
+    a_{k+1} &\leq a_k + 11 + M\left( 1 - u_{k2} \right), \\
+    a_{k+1} &\geq a_k + 11 - M\left( 1 - u_{k2} \right), \\
+    a_{k+1} &\leq a_k + M\left( 1 - u_{k1} - u_{k3} \right), \\
+    a_{k+1} &\geq a_k - M\left( 1 - u_{k1} - u_{k3} \right).
+    \end{split}
+    \label{eq:a_constraints_big_M}
+\end{align}
+%
+Bu kisitlarin ustunde biraz dusunursek neden calistiklarini anlayacagiz.
+Oncelikle $k^{\text{inci}}$ adimda Sonaj'in $11$ yil bekleme karari aldigini
+dusunelim. Yani $u_{k2} = 1$ olsun. Bu durumda ilk iki esitsizlik bir araya
+gelip bize istedigimiz $a_{k+1} = a_k + 11$ denklemini veriyor. Ucuncu ve
+dorduncu esitsizlikler ise asagidakini donusuyor: 
+\[
+    a_k - M \leq a_{k+1} \leq a_k + M, 
+\]
+%
+Gordugumuz gibi $M$ buyuk bir sayi oldugu icin bu esitsizlikler herhangi bir
+tutarsizliga neden olmuyor. Simdi diger durumu dusunelim, yani $u_{k1} = 1$
+olsun. Bu durumda ucuncu ve dorduncu denklem bize $a_{k+1} = a_k$ verirken, ilk
+iki denklem de yine $M$'nin buyuk degerinden dolayi tutarsizlik yaratmiyor: 
+\[ a_k + 11 - M \leq a_{k+1} \geq a_k + 11 + M. \]
+%
+\begin{rem}
+    Dikkatli olalim, eger $M$'yi $11$ degerinden kucuk secseydik, eniyileme
+    programi $a_{k+1} = a_k$'yi gecerli sayamazdi ve dolayisiyla elimizdeki
+    soruyu duzgun ifade etmemis olurduk.
+\end{rem}
+
+Artik ``big-$M$'' yontemini kullanmayi ogrendik. Her $k \in \underline{N}$ icin
+$s_{k+1}$ uzerindeki kisitlari da bu yontemi kullanarak yazalim.
+%
+\begin{align}
+    \begin{split}
+        s_{k+1} &\leq \nicefrac{s_k}{2} + M\left( 1 - u_{k2} \right), \\
+        s_{k+1} &\geq \nicefrac{s_k}{2} - M\left( 1 - u_{k2} \right), \\
+        s_{k+1} &\leq s_k + 1 + M\left( 1 - u_{k1} - u_{k3} \right), \\
+        s_{k+1} &\geq s_k + 1 - M\left( 1 - u_{k1} - u_{k3} \right).
+    \end{split}
+    \label{eq:s_constraints_big_M}
+\end{align}
+%
+Ayni sekilde, $t_{k+1}$ uzerindeki kisitlari da su sekilde ifade edebiliriz.
+%
+\begin{align}
+    \begin{split}
+        t_{k+1} &\leq t_k + 33 + M\left( 1 - u_{k1} \right), \\
+        t_{k+1} &\geq t_k + 33 - M\left( 1 - u_{k1} \right), \\
+        t_{k+1} &\leq t_k + 11 + M\left( 1 - u_{k2} \right), \\
+        t_{k+1} &\geq t_k + 11 - M\left( 1 - u_{k2} \right), \\
+        t_{k+1} &\leq t_k - 33 + M\left( 1 - u_{k3} \right), \\
+        t_{k+1} &\geq t_k - 33 - M\left( 1 - u_{k3} \right).
+    \end{split}
+    \label{eq:t_constraints_big_M}
+\end{align}
+%
+Simdiye kadarki butun argumanlarimizi bir araya getirince ve soruda verilen
+sinir sartlarini da sorumuza ekleyince, eniyileme programimizi sonunda tam
+olarak yazabiliriz. Hatirlayalim ki, $N$'yi $1$'den baslatip $10$ degerine kadar
+bu eniyileme programimizi tekrar cozecegiz.
+%
+\begin{equation}
+    \begin{aligned}
+        \underset{a,\, s, \, t, \, u, \, y, \, T }{\textrm{maximize}} && T &, \\
+        \textrm{subject to} 
+        &&\quad (1) &-(6), \\
+        &&\quad t_1 &= t_{N+1} = 0, \\
+        &&\quad a_1 &= 15, \\
+        &&\quad s_1 &= 21.  \\
+    \end{aligned}    
+    \label{eq:optimization}
+\end{equation}
