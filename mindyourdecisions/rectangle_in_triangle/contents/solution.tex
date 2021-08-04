@@ -1,0 +1,193 @@
+\section{Solution of the Problem}
+\label{sec:solution}
+
+\begin{minipage}{0.5\textwidth}
+    Let us define the positive real numbers $x$ and $y$ as in the figure to the
+    right. Note that the area of the rectangle is given by $xy$ and twice the
+    area of the triangle is given by one of the following:
+    \begin{align*}
+    2A(\triangle ABC) = (3+x)(4+y) &= 12 + 4x + 3y + xy \\
+    &= 4x + 3y + 2xy.
+    \end{align*}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+\tkzInit[xmax=8, ymax=8/3]
+% \tkzDefPoint(0,0){B}
+\tkzDefPoint(0,0){A}
+\tkzDefPoint(8,0){C}
+\tkzDrawTriangle[two angles = 90 and 18.43494882292201](A,C)
+\tkzGetPoint{B}
+\tkzLabelPoints[below left](A)
+\tkzLabelPoints[below right](C)
+\tkzLabelPoints[above left](B)
+
+\tkzDefPoint(0,1){D}
+\tkzDefPoint(5,0){E}
+\tkzDefPoint(5,1){F}
+\tkzDrawPolygon[fill=black!50!blue!20!, opacity=0.75](A,D,F,E)
+% \tkzLabelPoints[below](E)
+% \tkzLabelPoints[left](D)
+
+\tkzMarkRightAngles(C,A,tkzPointResult)
+\tkzDrawPoints(A,B,C)
+
+\tkzDefPoint(5,-0.1){E1}
+\tkzDefPoint(5,-0.3){E2}
+\tkzDrawSegment[color=black](E1,E2)
+\tkzDefPoint(8,-0.1){C1}
+\tkzDefPoint(8,-0.3){C2}
+\tkzDrawSegment[color=black](C1,C2)
+\tkzDefMidPoint(E1,E2) \tkzGetPoint{E12mid}
+\tkzDefMidPoint(C1,C2) \tkzGetPoint{C12mid}
+\tkzDrawSegment[color=black](E12mid,C12mid)
+
+\tkzDefPoint(0,-0.1){Ab1}
+\tkzDefPoint(0,-0.3){Ab2}
+\tkzDrawSegment[color=black](Ab1,Ab2)
+\tkzDefMidPoint(Ab1,Ab2) \tkzGetPoint{Ab12mid}
+\tkzDrawSegment[color=black](E12mid,Ab12mid)
+
+\tkzDefPoint(-0.1,8/3){B1}
+\tkzDefPoint(-0.3,8/3){B2}
+\tkzDrawSegment[color=black](B1,B2)
+\tkzDefPoint(-0.1,1){D1}
+\tkzDefPoint(-0.3,1){D2}
+\tkzDrawSegment[color=black](D1,D2)
+\tkzDefMidPoint(B1,B2) \tkzGetPoint{B12mid}
+\tkzDefMidPoint(D1,D2) \tkzGetPoint{D12mid}
+\tkzDrawSegment[color=black](B12mid,D12mid)
+
+\tkzDefPoint(-0.1,0){A1}
+\tkzDefPoint(-0.3,0){A2}
+\tkzDrawSegment[color=black](A1,A2)
+\tkzDefMidPoint(A1,A2) \tkzGetPoint{A12mid}
+\tkzDrawSegment[color=black](D12mid,A12mid)
+
+
+\tkzLabelSegment[left, font=\footnotesize](B12mid,D12mid){4}
+\tkzLabelSegment[left, font=\footnotesize](D12mid,A12mid){$y$}
+\tkzLabelSegment[below, font=\footnotesize](E12mid,C12mid){3}
+\tkzLabelSegment[below, font=\footnotesize](E12mid,Ab12mid){$x$}
+
+\tkzDrawTriangle[two angles = 90 and 18.43494882292201, fill=orange!30](D,F)
+\tkzDrawTriangle[two angles = 90 and 18.43494882292201, fill=magenta!30](E,C)
+
+\end{tikzpicture}
+\end{center}
+\end{minipage}
+%
+
+\begin{enumerate}
+    \setlength\itemsep{0em}
+    \item There are multiple methods we can invoke the find the area of the
+    rectangle. Let us illustrate two methods here.
+
+    \begin{enumerate}
+    \item[(i)] Equating the two equivalent expressions for twice the area of
+    the triangle (see above) immediately implies that $xy = 12$.
+    \item[(ii)] The triangles shaded in orange and magenta are similar yielding
+    the relationship $\nicefrac{4}{x} = \nicefrac{y}{3}$, implying that $xy =
+    12$.
+    \end{enumerate}
+
+    \item Set up the following optimization problem 
+    \begin{equation}
+    \begin{aligned}
+        \underset{x, \, y }{\textrm{minimize}} && &24 + 4x + 3y , \\
+        \textrm{subject to} 
+        &&\quad &xy = 12, \\
+        &&\quad &x,y \geq 0.  \\
+    \end{aligned}    
+    \label{eq:optimization}
+\end{equation}
+\end{enumerate}
+%
+We will simply ignore the nonnegativity constraints on the decision variables
+for the moment and verify that the solution we end up with satisfies these
+conditions to verify the answer. To solve the optimization
+problem~\eqref{eq:optimization}, introduce and perform unconstrained
+optimization of the Lagrangian
+\[ \mc{L} = 24 + 4x + 3y + \lambda(12-xy) \] To that end, consider the
+first-order conditions
+%
+\begin{align*}
+    \pd{\mc{L}}{x} = 4 - \lambda y = 0 \quad &\Longrightarrow \quad \lambda y = 4, \\
+    \pd{\mc{L}}{y} = 3 - \lambda x = 0 \quad &\Longrightarrow \quad \lambda x = 3, \\
+    \pd{\mc{L}}{\lambda} = 12 - xy = 0 \quad &\Longrightarrow \quad xy = 12.
+\end{align*}
+%
+Take the ratio of the first to equations to get $y = \nicefrac{4x}{3}$ and
+substitute this in the last equation to get $x^2 = 9$, implying that $x = 3$ (it
+needs to be nonnegative). Now, we can substitute this solution back to the last
+equation above to get $y = 4$.
+%
+Hence the triangle with the minimum area satisfies $A(\triangle ABC) = 24$ and
+looks like the one below.
+%
+\begin{center}
+    \begin{tikzpicture}[scale=1.0]
+    \tkzInit[xmax=6, ymax=8]
+    % \tkzDefPoint(0,0){B}
+    \tkzDefPoint(0,0){A}
+    \tkzDefPoint(6,0){C}
+    \tkzDrawTriangle[two angles = 90 and 53.13010235415598](A,C)
+    \tkzGetPoint{B}
+    \tkzLabelPoints[below left](A)
+    \tkzLabelPoints[below right](C)
+    \tkzLabelPoints[above left](B)
+    
+    \tkzDefPoint(0,4){D}
+    \tkzDefPoint(3,0){E}
+    \tkzDefPoint(3,4){F}
+    \tkzDrawPolygon[fill=black!50!blue!20!, opacity=0.75](A,D,F,E)
+    % \tkzLabelPoints[below](E)
+    % \tkzLabelPoints[left](D)
+    
+    \tkzMarkRightAngles(C,A,tkzPointResult)
+    \tkzDrawPoints(A,B,C)
+    
+    \tkzDefPoint(3,-0.1){E1}
+    \tkzDefPoint(3,-0.3){E2}
+    \tkzDrawSegment[color=black](E1,E2)
+    \tkzDefPoint(6,-0.1){C1}
+    \tkzDefPoint(6,-0.3){C2}
+    \tkzDrawSegment[color=black](C1,C2)
+    \tkzDefMidPoint(E1,E2) \tkzGetPoint{E12mid}
+    \tkzDefMidPoint(C1,C2) \tkzGetPoint{C12mid}
+    \tkzDrawSegment[color=black](E12mid,C12mid)
+    
+    \tkzDefPoint(0,-0.1){Ab1}
+    \tkzDefPoint(0,-0.3){Ab2}
+    \tkzDrawSegment[color=black](Ab1,Ab2)
+    \tkzDefMidPoint(Ab1,Ab2) \tkzGetPoint{Ab12mid}
+    \tkzDrawSegment[color=black](E12mid,Ab12mid)
+    
+    \tkzDefPoint(-0.1,8){B1}
+    \tkzDefPoint(-0.3,8){B2}
+    \tkzDrawSegment[color=black](B1,B2)
+    \tkzDefPoint(-0.1,4){D1}
+    \tkzDefPoint(-0.3,4){D2}
+    \tkzDrawSegment[color=black](D1,D2)
+    \tkzDefMidPoint(B1,B2) \tkzGetPoint{B12mid}
+    \tkzDefMidPoint(D1,D2) \tkzGetPoint{D12mid}
+    \tkzDrawSegment[color=black](B12mid,D12mid)
+    
+    \tkzDefPoint(-0.1,0){A1}
+    \tkzDefPoint(-0.3,0){A2}
+    \tkzDrawSegment[color=black](A1,A2)
+    \tkzDefMidPoint(A1,A2) \tkzGetPoint{A12mid}
+    \tkzDrawSegment[color=black](D12mid,A12mid)
+    
+    
+    \tkzLabelSegment[left, font=\footnotesize](B12mid,D12mid){4}
+    \tkzLabelSegment[left, font=\footnotesize](D12mid,A12mid){$y=4$}
+    \tkzLabelSegment[below, font=\footnotesize](E12mid,C12mid){3}
+    \tkzLabelSegment[below, font=\footnotesize](E12mid,Ab12mid){$x=3$}
+    
+    \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=orange!30](D,F)
+    \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=magenta!30](E,C)
+    
+    \end{tikzpicture}
+\end{center}
