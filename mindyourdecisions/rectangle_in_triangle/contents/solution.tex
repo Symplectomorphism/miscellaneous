@@ -106,11 +106,10 @@
 %
 We will simply ignore the nonnegativity constraints on the decision variables
 for the moment and verify that the solution we end up with satisfies these
-conditions to verify the answer. To solve the optimization
-problem~\eqref{eq:optimization}, introduce and perform unconstrained
-optimization of the Lagrangian
-\[ \mc{L} = 24 + 4x + 3y + \lambda(12-xy) \] To that end, consider the
-first-order conditions
+conditions. To solve the optimization problem~\eqref{eq:optimization}, we
+introduce the Lagrangian
+\[ \mc{L} = 24 + 4x + 3y + \lambda(12-xy), \] and perform unconstrained
+optimization on it. To that end, consider the first-order conditions
 %
 \begin{align*}
     \pd{\mc{L}}{x} = 4 - \lambda y = 0 \quad &\Longrightarrow \quad \lambda y = 4, \\
@@ -118,10 +117,20 @@ first-order conditions
     \pd{\mc{L}}{\lambda} = 12 - xy = 0 \quad &\Longrightarrow \quad xy = 12.
 \end{align*}
 %
-Take the ratio of the first to equations to get $y = \nicefrac{4x}{3}$ and
-substitute this in the last equation to get $x^2 = 9$, implying that $x = 3$ (it
-needs to be nonnegative). Now, we can substitute this solution back to the last
-equation above to get $y = 4$.
+Substituting the ratio of the first two equations, which yields $y =
+\nicefrac{4x}{3}$, into the last equation gives $x^2 = 9$, implying that
+$x^\star = 3$ (it needs to be nonnegative). Now, we can use this solution in the
+last equation above to get $y^\star = 4$. At this solution, we also have
+$\lambda^\star=1$. Note that the Hessian of the Lagrangian given by
+\[H(x^\star, y^\star, \lambda^\star) = \bmat{
+    0 & -1 \\ -1 & 0
+} \]
+%
+is positive definite on the tangent space of the constraint manifold $T(x^\star,
+y^\star) := \{z \in \mathbb{R}^2: \bmat{y & x}z = 0 \} = \{z: z = t \bmat{x &
+-y}^\top, t \in \mathbb{R}\}$, verifying the sufficient conditions for
+minimality. Indeed, for $z \in T(x^\star, y^\star)$, we have 
+\[z \cdot Hz = t^2 xy = 12t^2 > 0 \;\; \text{ for all } \;\; t \neq 0. \]
 %
 Hence the triangle with the minimum area satisfies $A(\triangle ABC) = 24$ and
 looks like the one below.
