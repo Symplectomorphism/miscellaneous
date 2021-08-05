@@ -111,11 +111,80 @@ introduce the Lagrangian
 \[ \mc{L} = 24 + 4x + 3y + \lambda(12-xy), \] and perform unconstrained
 optimization on it. To that end, consider the first-order conditions
 %
+\begin{minipage}{0.6\textwidth}
 \begin{align*}
     \pd{\mc{L}}{x} = 4 - \lambda y = 0 \quad &\Longrightarrow \quad \lambda y = 4, \\
     \pd{\mc{L}}{y} = 3 - \lambda x = 0 \quad &\Longrightarrow \quad \lambda x = 3, \\
     \pd{\mc{L}}{\lambda} = 12 - xy = 0 \quad &\Longrightarrow \quad xy = 12.
 \end{align*}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+    \begin{center}
+        \begin{tikzpicture}[scale=1.0]
+        \tkzInit[xmax=3/2, ymax=2]
+        % \tkzDefPoint(0,0){B}
+        \tkzDefPoint(0,0){A}
+        \tkzDefPoint(3/2,0){C}
+        \tkzDrawTriangle[two angles = 90 and 53.13010235415598](A,C)
+        \tkzGetPoint{B}
+        \tkzLabelPoints[below left](A)
+        \tkzLabelPoints[below right](C)
+        \tkzLabelPoints[above left](B)
+        
+        \tkzDefPoint(0,1){D}
+        \tkzDefPoint(3/4,0){E}
+        \tkzDefPoint(3/4,1){F}
+        \tkzDrawPolygon[fill=black!50!blue!20!, opacity=0.75](A,D,F,E)
+        % \tkzLabelPoints[below](E)
+        % \tkzLabelPoints[left](D)
+        
+        \tkzMarkRightAngles(C,A,tkzPointResult)
+        \tkzDrawPoints(A,B,C)
+        
+        \tkzDefPoint(3/4,-0.1){E1}
+        \tkzDefPoint(3/4,-0.3){E2}
+        \tkzDrawSegment[color=black](E1,E2)
+        \tkzDefPoint(3/2,-0.1){C1}
+        \tkzDefPoint(3/2,-0.3){C2}
+        \tkzDrawSegment[color=black](C1,C2)
+        \tkzDefMidPoint(E1,E2) \tkzGetPoint{E12mid}
+        \tkzDefMidPoint(C1,C2) \tkzGetPoint{C12mid}
+        \tkzDrawSegment[color=black](E12mid,C12mid)
+        
+        \tkzDefPoint(0,-0.1){Ab1}
+        \tkzDefPoint(0,-0.3){Ab2}
+        \tkzDrawSegment[color=black](Ab1,Ab2)
+        \tkzDefMidPoint(Ab1,Ab2) \tkzGetPoint{Ab12mid}
+        \tkzDrawSegment[color=black](E12mid,Ab12mid)
+        
+        \tkzDefPoint(-0.1,2){B1}
+        \tkzDefPoint(-0.3,2){B2}
+        \tkzDrawSegment[color=black](B1,B2)
+        \tkzDefPoint(-0.1,1){D1}
+        \tkzDefPoint(-0.3,1){D2}
+        \tkzDrawSegment[color=black](D1,D2)
+        \tkzDefMidPoint(B1,B2) \tkzGetPoint{B12mid}
+        \tkzDefMidPoint(D1,D2) \tkzGetPoint{D12mid}
+        \tkzDrawSegment[color=black](B12mid,D12mid)
+        
+        \tkzDefPoint(-0.1,0){A1}
+        \tkzDefPoint(-0.3,0){A2}
+        \tkzDrawSegment[color=black](A1,A2)
+        \tkzDefMidPoint(A1,A2) \tkzGetPoint{A12mid}
+        \tkzDrawSegment[color=black](D12mid,A12mid)
+        
+        
+        \tkzLabelSegment[left, font=\footnotesize](B12mid,D12mid){4}
+        \tkzLabelSegment[left, font=\footnotesize](D12mid,A12mid){$y=4$}
+        \tkzLabelSegment[below, font=\footnotesize](E12mid,C12mid){3}
+        \tkzLabelSegment[below, font=\footnotesize](E12mid,Ab12mid){$x=3$}
+        
+        \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=orange!30](D,F)
+        \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=magenta!30](E,C)
+        
+        \end{tikzpicture}
+    \end{center}
+\end{minipage}\\[1ex]
 %
 Substituting the ratio of the first two equations, which yields $y =
 \nicefrac{4x}{3}$, into the last equation gives $x^2 = 9$, implying that
@@ -133,70 +202,5 @@ minimality. Indeed, for $z \in T(x^\star, y^\star)$, we have
 \[z \cdot Hz = t^2 xy = 12t^2 > 0 \;\; \text{ for all } \;\; t \neq 0. \]
 %
 Hence the triangle with the minimum area satisfies $A(\triangle ABC) = 24$ and
-looks like the one below.
+looks like the one in this page.
 %
-\begin{center}
-    \begin{tikzpicture}[scale=1.0]
-    \tkzInit[xmax=6, ymax=8]
-    % \tkzDefPoint(0,0){B}
-    \tkzDefPoint(0,0){A}
-    \tkzDefPoint(6,0){C}
-    \tkzDrawTriangle[two angles = 90 and 53.13010235415598](A,C)
-    \tkzGetPoint{B}
-    \tkzLabelPoints[below left](A)
-    \tkzLabelPoints[below right](C)
-    \tkzLabelPoints[above left](B)
-    
-    \tkzDefPoint(0,4){D}
-    \tkzDefPoint(3,0){E}
-    \tkzDefPoint(3,4){F}
-    \tkzDrawPolygon[fill=black!50!blue!20!, opacity=0.75](A,D,F,E)
-    % \tkzLabelPoints[below](E)
-    % \tkzLabelPoints[left](D)
-    
-    \tkzMarkRightAngles(C,A,tkzPointResult)
-    \tkzDrawPoints(A,B,C)
-    
-    \tkzDefPoint(3,-0.1){E1}
-    \tkzDefPoint(3,-0.3){E2}
-    \tkzDrawSegment[color=black](E1,E2)
-    \tkzDefPoint(6,-0.1){C1}
-    \tkzDefPoint(6,-0.3){C2}
-    \tkzDrawSegment[color=black](C1,C2)
-    \tkzDefMidPoint(E1,E2) \tkzGetPoint{E12mid}
-    \tkzDefMidPoint(C1,C2) \tkzGetPoint{C12mid}
-    \tkzDrawSegment[color=black](E12mid,C12mid)
-    
-    \tkzDefPoint(0,-0.1){Ab1}
-    \tkzDefPoint(0,-0.3){Ab2}
-    \tkzDrawSegment[color=black](Ab1,Ab2)
-    \tkzDefMidPoint(Ab1,Ab2) \tkzGetPoint{Ab12mid}
-    \tkzDrawSegment[color=black](E12mid,Ab12mid)
-    
-    \tkzDefPoint(-0.1,8){B1}
-    \tkzDefPoint(-0.3,8){B2}
-    \tkzDrawSegment[color=black](B1,B2)
-    \tkzDefPoint(-0.1,4){D1}
-    \tkzDefPoint(-0.3,4){D2}
-    \tkzDrawSegment[color=black](D1,D2)
-    \tkzDefMidPoint(B1,B2) \tkzGetPoint{B12mid}
-    \tkzDefMidPoint(D1,D2) \tkzGetPoint{D12mid}
-    \tkzDrawSegment[color=black](B12mid,D12mid)
-    
-    \tkzDefPoint(-0.1,0){A1}
-    \tkzDefPoint(-0.3,0){A2}
-    \tkzDrawSegment[color=black](A1,A2)
-    \tkzDefMidPoint(A1,A2) \tkzGetPoint{A12mid}
-    \tkzDrawSegment[color=black](D12mid,A12mid)
-    
-    
-    \tkzLabelSegment[left, font=\footnotesize](B12mid,D12mid){4}
-    \tkzLabelSegment[left, font=\footnotesize](D12mid,A12mid){$y=4$}
-    \tkzLabelSegment[below, font=\footnotesize](E12mid,C12mid){3}
-    \tkzLabelSegment[below, font=\footnotesize](E12mid,Ab12mid){$x=3$}
-    
-    \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=orange!30](D,F)
-    \tkzDrawTriangle[two angles = 90 and 53.13010235415598, fill=magenta!30](E,C)
-    
-    \end{tikzpicture}
-\end{center}

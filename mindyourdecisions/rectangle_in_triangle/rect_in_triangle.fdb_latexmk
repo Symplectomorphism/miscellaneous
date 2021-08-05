@@ -1,5 +1,5 @@
 # Fdb version 3
-["lualatex"] 1628091350 "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.tex" "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.pdf" "rect_in_triangle" 1628091351
+["lualatex"] 1628176984 "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.tex" "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.pdf" "rect_in_triangle" 1628176985
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1604509254 123160 3b0402565744b2f17ecaaa15217a889f ""
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc" 1604530195 124128 93a709a9d5fdb971f2bc265ce9be1799 ""
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc" 1604530132 123499 c5f7384c64afc561e21f1eba24e9f128 ""
@@ -7,7 +7,7 @@
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/fonts/otl/lmroman8-regular.luc" 1605109782 123967 89f9a1900ac4e9dc9d3bf2bf0db4ceec ""
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/fonts/otl/lmroman9-regular.luc" 1607018000 123789 d7714dc6c741dc26b005e714aea4f40a ""
   "/home/aykutsatici/.texlive2020/texmf-var/luatex-cache/generic/names/luaotfload-names.luc" 1604510218 1316083 33655382fbe4cc8d0c2dbe5c9198844c ""
-  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.aux" 1628091351 1334 43ef100adca9705eb92d60dfb8391d02 ""
+  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.aux" 1628176985 1334 43ef100adca9705eb92d60dfb8391d02 ""
   "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.tex" 1628082864 2351 0db28f84ff43bd06e401183fada5e824 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf" 1255129361 111536 ae9d1b331000d544f47e5223081b7b54 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf" 1255129361 110496 b9c8767d4cc3bf3f4b21f676bf89aa78 ""
@@ -402,15 +402,15 @@
   "/usr/local/texlive/2020/texmf-var/tex/generic/config/language.dat" 1604508048 6611 44502a5980c3c624f8f0e8b3787962dd ""
   "/usr/local/texlive/2020/texmf-var/web2c/luahbtex/lualatex.fmt" 1604508082 3229343 cc5b9c9b925beb88bf2824feba6193f0 ""
   "contents/problem.tex" 1628086699 2277 3b5d1974be3cdbe230f5804473778974 ""
-  "contents/solution.tex" 1628091349 7121 6ee4bf3de9cc6965cea021040dba3ee0 ""
+  "contents/solution.tex" 1628176983 7506 90e5fa2f372b29478fdc010676350f5d ""
   "preamble.tex" 1628083192 5477 7cddb5fec06609d012107427107787b6 ""
-  "rect_in_triangle.aux" 1628091351 1334 43ef100adca9705eb92d60dfb8391d02 "lualatex"
-  "rect_in_triangle.out" 1628091351 110 ef4bb72b8a12a1e1f3525eb701c69158 "lualatex"
+  "rect_in_triangle.aux" 1628176985 1334 43ef100adca9705eb92d60dfb8391d02 "lualatex"
+  "rect_in_triangle.out" 1628176985 110 ef4bb72b8a12a1e1f3525eb701c69158 "lualatex"
   "rect_in_triangle.tex" 1628082864 2351 0db28f84ff43bd06e401183fada5e824 ""
   (generated)
-  "rect_in_triangle.out"
-  "rect_in_triangle.pdf"
-  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.pdf"
+  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.log"
   "rect_in_triangle.log"
   "rect_in_triangle.aux"
-  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.log"
+  "rect_in_triangle.pdf"
+  "/home/aykutsatici/repos/miscellaneous/mindyourdecisions/rectangle_in_triangle/rect_in_triangle.pdf"
+  "rect_in_triangle.out"
