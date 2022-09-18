@@ -1,5 +1,6 @@
 \documentclass[tikz]{standalone}
 \input{./standalonepreamble.tex}
+\usepackage{tkz-euclide}
 
 \begin{document}
 
@@ -61,11 +62,25 @@
     \draw[color=green!80!blue] (P) -- (btwOQ) -- (T);
     \draw[thin, color=blue] (P) -- (midOQ) -- (R1);
 
+    \tkzMarkRightAngle[draw=blue, size=.05](P,midOQ,O1);
+
     \node [label={[label distance=-2ex]55:{\color{green!80!blue} \scriptsize $\ell_1$}}] (midPU) at ($ (P)!0.5!(btwOQ) $) {};
     \node [label={[label distance=-1.5ex]10:{\color{green!80!blue} \scriptsize $\ell_2$}}]
         (midUT) at ($ (btwOQ)!0.5!(T) $) {};
     \node [label={[label distance=-2ex]130:{\color{orange} \scriptsize $x$}}]
         (midMU) at ($ (midOQ)!0.5!(btwOQ) $) {};
+
+    \coordinate [label={[label distance=-1.2ex]20:\scriptsize $M^\prime$}] (midMR) at ($ (midOQ)!0.5!(R1) $);
+    \draw[color=blue] (T) -- (midMR);
+    \tkzMarkRightAngle[draw=blue, size=.05](T,midMR,P);
+    \tkzLabelAngle[dist=-0.035](T,midMR,P){$\color{blue} \cdot$};
+
+    \coordinate [] (midOM) at ($ (O1)!0.5!(midOQ)$);
+    \draw[very thin, color=orange] (T) -- (midOM) -- (btwOQ);
+    \tkzMarkRightAngle[very thin, draw=orange, size=.05](T,midOM,btwOQ);
+    \tkzLabelAngle[dist=0.035](T,midOM,btwOQ){$\color{orange} \cdot$};
+
+    \draw[very thin, color=red, densely dashdotted] (P) -- (T);
 \end{tikzpicture}
 
 \end{document}
