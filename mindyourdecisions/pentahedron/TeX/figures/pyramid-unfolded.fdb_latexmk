@@ -1,5 +1,5 @@
 # Fdb version 3
-["lualatex"] 1663520070 "pyramid-unfolded.tex" "pyramid-unfolded.pdf" "pyramid-unfolded" 1663520071
+["lualatex"] 1663529237 "pyramid-unfolded.tex" "pyramid-unfolded.pdf" "pyramid-unfolded" 1663529239
   "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1650643161 127327 a10453e432aae9a08361721794e3f42f ""
   "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc" 1657727285 128375 2fe06148a857036cbe137f178bce6db4 ""
   "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1650643161 307106 2fb35b48d2b3deebebc4d08524a071c7 ""
@@ -23,6 +23,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb" 1248133631 32915 7bf7720c61a5b3a7ff25b0964421c9b6 ""
   "/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -309,9 +310,9 @@
   "/usr/local/texlive/2022/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1647637340 13565 30cc2d8cecf79afb1abb4d5c12eb919a ""
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1650642213 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/luahbtex/lualatex.fmt" 1650642241 4560686 a76cc7484578281209741fcd1f228b0c ""
-  "pyramid-unfolded.aux" 1663520071 686 e6bf9f11827e1eae1d85e75b99e0a183 "lualatex"
+  "pyramid-unfolded.aux" 1663529239 686 e6bf9f11827e1eae1d85e75b99e0a183 "lualatex"
   "pyramid-unfolded.out" 0 -1 0 "lualatex"
-  "pyramid-unfolded.tex" 1663520069 3660 882bd479b8db41202f1a59e464c20a80 ""
+  "pyramid-unfolded.tex" 1663529236 3716 49f3c6e666c8e8968dbc05d3fedf2858 ""
   "standalonepreamble.tex" 1663468658 3038 6ee848143a5aa6a638c3ee34288d55e0 ""
   (generated)
   "pyramid-unfolded.aux"

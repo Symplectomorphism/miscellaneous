@@ -75,7 +75,7 @@
     \tkzMarkRightAngle[draw=blue, size=.05](T,midMR,P);
     \tkzLabelAngle[dist=-0.035](T,midMR,P){$\color{blue} \cdot$};
 
-    \coordinate [] (midOM) at ($ (O1)!0.5!(midOQ)$);
+    \coordinate [label={[label distance=-1ex]120:\scriptsize $\tilde{M}$}] (midOM) at ($ (O1)!0.5!(midOQ)$);
     \draw[very thin, color=orange] (T) -- (midOM) -- (btwOQ);
     \tkzMarkRightAngle[very thin, draw=orange, size=.05](T,midOM,btwOQ);
     \tkzLabelAngle[dist=0.035](T,midOM,btwOQ){$\color{orange} \cdot$};

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  18 SEP 2022 10:54
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  18 SEP 2022 13:27
  restricted system commands enabled.
  file:line:error style messages enabled.
 **pyramid-unfolded.tex
@@ -833,19 +833,19 @@ Package rerunfilecheck Info: File `pyramid-unfolded.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 47318 strings out of 477760
+ 47321 strings out of 477760
  125016,1977958 words of node,token memory allocated
  505 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 54 glue_spec, 8 attribute_list, 2 write nodes
-   avail lists: 1:9,2:1449,3:1376,4:135,5:86,6:3,7:1749,8:7,9:708
- 66465 multiletter control sequences out of 65536+600000
+   avail lists: 1:10,2:1491,3:1412,4:135,5:90,6:3,7:1809,8:6,9:744
+ 66468 multiletter control sequences out of 65536+600000
  34 fonts using 1971607 bytes
  115i,7n,111p,455b,767s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb>
-Output written on pyramid-unfolded.pdf (1 page, 40661 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb>
+Output written on pyramid-unfolded.pdf (1 page, 47766 bytes).
 
-PDF statistics: 36 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+PDF statistics: 40 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  2 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
