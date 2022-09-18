@@ -1,6 +1,7 @@
 # Fdb version 3
-["lualatex"] 1663474013 "pyramid.tex" "pyramid.pdf" "pyramid" 1663474014
+["lualatex"] 1663480320 "pyramid-unfolded.tex" "pyramid-unfolded.pdf" "pyramid-unfolded" 1663480321
   "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1650643161 127327 a10453e432aae9a08361721794e3f42f ""
+  "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc" 1657727285 128375 2fe06148a857036cbe137f178bce6db4 ""
   "/home/aykut/.texlive2022/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1650643161 307106 2fb35b48d2b3deebebc4d08524a071c7 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -20,6 +21,8 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsy5.tfm" 1136768653 1112 14d5d5f6bd3c949edecb5b872f295553 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmsy7.tfm" 1136768653 1120 2b3f9b25605010c69bc328bea6ac000f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1248133631 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2022/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty" 1576625341 40635 c40361e206be584d448876bba8a64a3b ""
   "/usr/local/texlive/2022/texmf-dist/tex/generic/bitset/bitset.sty" 1576016050 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
@@ -263,12 +266,12 @@
   "/usr/local/texlive/2022/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1647637340 13565 30cc2d8cecf79afb1abb4d5c12eb919a ""
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1650642213 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/luahbtex/lualatex.fmt" 1650642241 4560686 a76cc7484578281209741fcd1f228b0c ""
-  "pyramid.aux" 1663474014 686 e6bf9f11827e1eae1d85e75b99e0a183 "lualatex"
-  "pyramid.out" 0 -1 0 "lualatex"
-  "pyramid.tex" 1663474012 981 338d2d71a3b38511e466f9c83414570c ""
+  "pyramid-unfolded.aux" 1663480321 686 e6bf9f11827e1eae1d85e75b99e0a183 "lualatex"
+  "pyramid-unfolded.out" 0 -1 0 "lualatex"
+  "pyramid-unfolded.tex" 1663480318 2981 857ed33812805721f53df57b28867721 ""
   "standalonepreamble.tex" 1663468658 3038 6ee848143a5aa6a638c3ee34288d55e0 ""
   (generated)
-  "pyramid.aux"
-  "pyramid.log"
-  "pyramid.out"
-  "pyramid.pdf"
+  "pyramid-unfolded.aux"
+  "pyramid-unfolded.log"
+  "pyramid-unfolded.out"
+  "pyramid-unfolded.pdf"

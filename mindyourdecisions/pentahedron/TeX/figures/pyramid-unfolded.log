@@ -1,8 +1,8 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  17 SEP 2022 22:06
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  17 SEP 2022 23:52
  restricted system commands enabled.
  file:line:error style messages enabled.
-**pyramid.tex
-(./pyramid.tex
+**pyramid-unfolded.tex
+(./pyramid-unfolded.tex
 LaTeX2e <2021-11-15> patch level 1
 Lua module: luaotfload 2022-03-18 3.21 Lua based OpenType font support
 Lua module: lualibs 2021-05-20 2.74 ConTeXt Lua standard libraries.
@@ -654,8 +654,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 Package hyperref Info: Option `colorlinks' set `true' on input line 64.
 )
 Package translations Info: No language package found. I am going to use `english' as default language. on input line 4.
- (./pyramid.aux)
-\openout1 = pyramid.aux
+ (./pyramid-unfolded.aux)
+\openout1 = pyramid-unfolded.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
 LaTeX Font Info:    ... okay on input line 4.
@@ -716,38 +716,38 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 4.
 LaTeX Info: Redefining \pageref on input line 4.
 LaTeX Info: Redefining \nameref on input line 4.
- (./pyramid.out) (./pyramid.out)
+ (./pyramid-unfolded.out) (./pyramid-unfolded.out)
 \@outlinefile=\write4
 
-\openout4 = pyramid.out
-LaTeX Font Info:    Trying to load font information for U+msa on input line 7.
+\openout4 = pyramid-unfolded.out
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 7.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./pyramid.aux)
-Package rerunfilecheck Info: File `pyramid.out' has not changed.
+{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./pyramid-unfolded.aux)
+Package rerunfilecheck Info: File `pyramid-unfolded.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 44370 strings out of 477760
+ 44457 strings out of 477760
  125016,1648299 words of node,token memory allocated
- 501 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 7 attribute, 54 glue_spec, 7 attribute_list, 2 write nodes
-   avail lists: 1:9,2:549,3:516,4:39,5:62,6:3,7:613,8:6,9:280
- 63802 multiletter control sequences out of 65536+600000
- 33 fonts using 1839919 bytes
- 115i,7n,111p,446b,767s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-Output written on pyramid.pdf (1 page, 10374 bytes).
+ 505 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 8 attribute, 54 glue_spec, 8 attribute_list, 2 write nodes
+   avail lists: 1:9,2:1061,3:1024,4:71,5:82,6:3,7:1181,8:6,9:608
+ 63889 multiletter control sequences out of 65536+600000
+ 34 fonts using 1971607 bytes
+ 115i,7n,111p,455b,767s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb>
+Output written on pyramid-unfolded.pdf (1 page, 26150 bytes).
 
-PDF statistics: 20 PDF objects out of 1000 (max. 8388607)
- 15 compressed objects within 1 object stream
+PDF statistics: 28 PDF objects out of 1000 (max. 8388607)
+ 21 compressed objects within 1 object stream
  2 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

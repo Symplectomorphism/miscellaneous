@@ -3,10 +3,26 @@
 
 \begin{document}
 
-\begin{tikzpicture}[every node/.style={scale=1.0}]
+\begin{tikzpicture}[every node/.style={scale=0.5}]
     \coordinate [label=left:$P$] (P) at (0,0);
-    \coordinate [label=below:$Q$] (Q) at (1,-0.5);
+    \coordinate [label=below:$Q$] (Q) at ($ (P) + 3/sqrt(5)*(2/3, -1/3) $);
     \draw [name path=P--Q] (P) -- (Q);
+
+    \coordinate [label=right:$R$] (R) at ($(Q) + (1, 1/2)$);
+    \draw [name path=Q--R] (Q) -- (R);
+
+    \coordinate [label=above:$O$] (O) at ($(P) + 0.8*(1, 0.9)$);
+    \draw [name path=Q--R] (P) -- (O);
+    \draw [name path=O--Q] (O) -- (Q);
+    \draw [name path=O--R] (O) -- (R);
+
+    \coordinate [label=below:$S$] (S) at ($ (P) + 3/sqrt(5)*(2/3, 1/3) $);
+    \draw[densely dashed] [name path=P--S] (P) -- (S);
+    \draw[densely dashed] [name path=S--R] (S) -- (R);
+    \draw[densely dashed] [name path=O--S] (O) -- (S);
+
+    \node[label={[label distance=-1ex]30:$T$}] (T) at ($ (O)!0.5!(R) $) {};
+    \fill [red, opacity=0.5] (T) circle (1pt);
 \end{tikzpicture}
 
 \end{document}

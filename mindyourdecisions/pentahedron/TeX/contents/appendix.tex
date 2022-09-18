@@ -1,0 +1,21 @@
+\appendix
+
+\newcommand*{\bbU}{\mathbb{U}}
+
+\subsection{Computing the angle $\theta$ and $r$ from it}
+
+The right triangle $\triangle CAD$ provides the equality \[ \tan{2\theta} =
+\frac{2\tan{\theta}}{1-\tan^2{\theta}} = \frac{w}{h}, \] which implies the
+quadratic equation \[ \tan^2{\theta} + 2\nicefrac{h}{w}\tan{\theta} - 1 = 0. \]
+Solving for $\tan{\theta}$ such that $0 < \theta < \nicefrac{\pi}{2}$, we obtain
+\[ \frac{r}{h-r} = \tan{\theta} = \nicefrac{1}{w}(d-h), \] where the first 
+equality follows from the right triangle $\triangle EAX$. We can solve this
+equation for the radius, $r$, which provides the solution
+%
+\begin{equation}
+  r = \frac{h(d-h)}{w+d-h}.
+  \label{eq:radiusalt}
+\end{equation}
+%
+Simple computation shows that 
+\[ \frac{h(d-h)}{w+d-h} = \nicefrac{1}{2}(w+h-d). \]
