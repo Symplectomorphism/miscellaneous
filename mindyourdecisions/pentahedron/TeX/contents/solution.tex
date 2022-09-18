@@ -5,7 +5,7 @@ Shown in Figure~\ref{fig:unfolded}, we show the regular pyramid of
 Figure~\ref{fig:problem} unfolded onto the plane in such a manner that the edge
 $OQ$ remains glued, while the edges $OR$, $OS$, and $OP$ are unglued. An
 arbitrary piecewise straight path $\gamma$ from the vertex $P$ to the midpoint
-$T$ is then depicted as the green curve on this figure. The continuous portions,
+$T$ is then depicted as the green curve on this figure. The differentiable portions,
 $PU$ and $UT$, of this path have lengths $\ell_1$ and $\ell_2$, respectively.
 
 The line $PR$ that connects the vertices $P$ and $R$ is orthogonal to the edge
@@ -55,10 +55,10 @@ equations~\eqref{eq:ell1} and~\eqref{eq:ell2} yields \[ \ell_1^\star =
 gives the shortest distance between points $P$ and $T$ on the regular square
 pyramid as \[ \ell_1(x^\star) + \ell_2(x^\star) = \sqrt{7}\ell. \]
 
-\begin{lemma}{\textbf{Lemma 1.}}
-  The (green) path that yields the shortest distance $\sqrt{7}\ell$ is a
-  straight line.
-\end{lemma}
+\begin{lem}
+    The (green) path that yields the shortest distance $\sqrt{7}\ell$ is a
+    straight line.
+\end{lem}
 
 \begin{proof}
     Perhaps the easiest way to show this is to use the law of cosines to show
@@ -69,5 +69,5 @@ pyramid as \[ \ell_1(x^\star) + \ell_2(x^\star) = \sqrt{7}\ell. \]
     \begin{align*}
         \abs{PT}_{\text{red}}^2 &= (2\ell)^2 + \ell^2 - 2 \cdot 2\ell \cdot \ell
         \cos{120^\circ} = 7\ell^2
-    \end{align}
+    \end{align*}
 \end{proof}
