@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  17 SEP 2022 23:52
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022)  (format=lualatex 2022.4.22)  18 SEP 2022 00:07
  restricted system commands enabled.
  file:line:error style messages enabled.
 **root.tex
@@ -958,15 +958,12 @@ Package xcolor Warning: Incompatible color definition on input line 1.
 <./figures/pyramid-unfolded.pdf, id=33, 79.8192pt x 91.4336pt>
 File: ./figures/pyramid-unfolded.pdf Graphic file (type pdf)
 <use ./figures/pyramid-unfolded.pdf>
-Package luatex.def Info: ./figures/pyramid-unfolded.pdf  used on input line 10.
+Package luatex.def Info: ./figures/pyramid-unfolded.pdf  used on input line 21.
 (luatex.def)             Requested size: 258.0pt x 295.56511pt.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 9--12
+Overfull \hbox (6.0pt too wide) in paragraph at lines 20--23
  [][] 
  []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) (./contents/conclusion.tex
 
@@ -1032,17 +1029,17 @@ Package rerunfilecheck Info: File `root.out' has not changed.
 Here is how much of LuaTeX's memory you used:
  29490 strings out of 477760
  100000,1144653 words of node,token memory allocated
- 708 words of node memory still in use:
-   6 hlist, 2 vlist, 2 rule, 5 glue, 15 kern, 1 glyph, 35 attribute, 63 glue_spec, 19 attribute_list, 2 write, 1 pdf_action nodes
-   avail lists: 2:990,3:449,4:211,5:349,6:82,7:5720,8:47,9:508,10:8,11:346
+ 783 words of node memory still in use:
+   6 hlist, 2 vlist, 2 rule, 4 glue, 22 kern, 1 glyph, 49 attribute, 64 glue_spec, 26 attribute_list, 2 write, 1 pdf_action nodes
+   avail lists: 2:1065,3:484,4:211,5:520,6:88,7:8471,8:47,9:622,10:19,11:478
  48801 multiletter control sequences out of 65536+600000
  162 fonts using 11402215 bytes
  110i,20n,118p,628b,444s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on root.pdf (1 page, 133580 bytes).
+{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on root.pdf (1 page, 160124 bytes).
 
-PDF statistics: 122 PDF objects out of 1000 (max. 8388607)
- 97 compressed objects within 1 object stream
+PDF statistics: 135 PDF objects out of 1000 (max. 8388607)
+ 106 compressed objects within 2 object streams
  10 named destinations out of 1000 (max. 131072)
  76 words of extra memory for PDF output out of 10000 (max. 100000000)
 
