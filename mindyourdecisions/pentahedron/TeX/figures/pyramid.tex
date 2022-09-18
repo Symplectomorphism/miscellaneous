@@ -1,0 +1,12 @@
+\documentclass[tikz]{standalone}
+\input{./standalonepreamble.tex}
+
+\begin{document}
+
+\begin{tikzpicture}[every node/.style={scale=1.0}]
+    \coordinate [label=left:$P$] (P) at (0,0);
+    \coordinate [label=below:$Q$] (Q) at (1,-0.5);
+    \draw [name path=P--Q] (P) -- (Q);
+\end{tikzpicture}
+
+\end{document}
