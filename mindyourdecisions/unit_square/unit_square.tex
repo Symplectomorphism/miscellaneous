@@ -1,0 +1,39 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[natbibapa,nodoi]{apacite}% Citation support using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\setlength\bibhang{12pt}% To set the indentation in the list of references using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\renewcommand\bibliographytypesize{\fontsize{10}{12}\selectfont}% To set the list of references in 10 point font using apacite.sty. Commands using natbib.sty MUST be deactivated first!
+\usepackage[english]{babel}
+\addto{\captionsenglish}{%
+\renewcommand{\refname}{References}%
+\renewcommand{\contentsname}{Table of Contents}}
+
+\input{preamble.tex}
+
+\begin{document}
+
+% \articletype{}% Specify the article type or omit as appropriate
+
+% \title{\.{I}lgin\c{c} Bir Olas{\i}l{\i}k Sorusu}
+\section*{
+    \begin{center}
+        Probability on the Unit Square
+    \end{center}
+}
+
+\begin{center}
+    Aykut C. Satici \textsuperscript{} \\[0ex]
+    % Aykut C. Sat{\i}c{\i}\textsuperscript{} \\[0ex]
+    % 1 Temmuz 2021
+    \today
+\end{center}
+
+
+  
+\input{contents/problem.tex}
+\input{contents/solution.tex}
+
+% \bibliographystyle{apacite}
+% \bibliography{bib/main}
+
+\end{document}

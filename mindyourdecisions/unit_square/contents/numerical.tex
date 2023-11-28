@@ -1,0 +1,40 @@
+\section{Say{\i}sal \c{C}\"{o}z\"{u}m}
+\label{sec:numerical}
+
+Bolum~\ref{sec:solution}'de acikladigimiz yontemi uygulamak icin
+Julia~\citep{bezanson2017julia} programlama dilinde yazilmis olan
+JuMP~\citep{DunningHuchetteLubin2017} paketini ve Mosek~\citep{mosek}
+cozumleyicisini kullandik.
+
+\begin{table}[h]
+\caption{Eniyileme sonuclari}
+\label{tab:optimization_results}
+\centering
+\begin{tabular}{l|cccccc}
+   $N$ & $0$ & $1-3$ & $4$ & $5$ & $6$ & $7-10$ \\ \hline
+   $T$ & $0$ & Olursuz & 33 & Olursuz & 55 & Olursuz \\
+   $\alpha + \beta + \gamma$ & $36$ & Olursuz & $82.625$ & Olursuz & $104$ & Olursuz 
+\end{tabular}
+\end{table}
+
+Sonaj'in zamanda gorebilecegi en ileri tarih, yani eniyileme programimizin $T$
+olarak hesapladigi deger $N=6$ icin elde edilmis. Bu durumda bize sorunun
+sordugu niceligin degeri de \[ \alpha + \beta + \gamma = 104 \] olarak bulunmus.
+Merakimizi gidermek icin $N=6$ icin Sonaj'in izledigi yorungeyi de asagida
+kaydedelim:
+
+\begin{table}[h]
+    \caption{Sonaj'in en iyi yorungesi}
+    \label{tab:trajectory}
+    \centering
+    \begin{tabular}{l|ccc}
+       $k$ & Yas & Secium miktari & Zaman (Yil) \\ \hline
+       $1$ & $15$ & 21 & $0$ \\
+       $2$ & $15$ & 20 & $33$ \\
+       $3$ & $26$ & 10 & $44$ \\
+       $4$ & $37$ & 5 & $55$ \\
+       $5$ & $37$ & 4 & $22$ \\
+       $6$ & $48$ & 2 & $33$ \\
+       $7$ & $48$ & 1 & $0$
+    \end{tabular}
+\end{table}
