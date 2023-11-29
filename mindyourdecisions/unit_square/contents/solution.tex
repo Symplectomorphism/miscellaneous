@@ -1,2 +1,49 @@
 \section{Solution of the Problem}
 \label{sec:solution}
+
+$d \geq 1$ if and only if $d^2 = x^2 + y^2 \geq 1$ if and only if $y^2 \geq 1 -
+x^2$. The random variable $x$ is uniformly distributed. Thus, for a given $0
+\leq x \leq 1$, we have $p(y \geq \sqrt{1-x^2}) = 1- \sqrt{1 - x^2}$. As a
+result,
+\begin{equation}
+    \mathbb{P}(y \geq \sqrt{1-x^2}) = \int_0^1 \left(1 - \sqrt{1-x^2} \right)
+    \dd x
+    \label{eq:integral}
+\end{equation}
+%
+Let us take the indefinite integral $\int \sqrt{1-x^2} \dd x$ by substituting $x
+= \sin{(u)}$ and $\dd x = \cos{(u)} \dd u$.
+\begin{align*}
+    \int \sqrt{1-x^2} \dd x &= \int \cos{(u)}^2 \dd u = \int \left(
+    \frac{1}{2}\cos{(2u)} + \frac{1}{2} \right) \dd u = \frac{1}{4}\sin{(2u)} +
+    \frac{u}{2} + c = \frac{1}{2}\sin{(u)}\cos{(u)} + \frac{u}{2} + c \\
+    &= \frac{1}{2}\left( x\sqrt{1-x^2} + \arcsin{(x)}\right) + c
+\end{align*}
+%
+Using the above computation to evaluate the definite integral in
+equation~\eqref{eq:integral}, we obtain
+\[ \mathbb{P}(y \geq \sqrt{1-x^2}) = 1 - \frac{\pi}{4}. \]
+%
+Now, we have the following cases:
+%
+\begin{enumerate}
+    \item With $\nicefrac{1}{2}$ probability, the points $P$ and $Q$ are sampled
+        on adjacent sides, in which case, the above computation shows that
+        $\mathbb{P}(y \geq \sqrt{1-x^2}) = 1 - \frac{\pi}{4}$.
+    \item With $\nicefrac{1}{4}$ probability, the points $P$ and $Q$ are sampled
+        on opposite sides, in which case, $\mathbb{P}(y \geq \sqrt{1-x^2}) = 1$.
+    \item With $\nicefrac{1}{4}$ probability the points $P$ and $Q$ are sampled
+        on the same side, in which case, $\mathbb{P}(y \geq \sqrt{1-x^2}) = 0$.
+\end{enumerate}
+%
+By the law of total probability, we have 
+\begin{align*}
+    \mathbb{P}(d \geq 1) &= \mathbb{P}(d \geq 1 | \text{adjacent
+    sides})\mathbb{P}(\text{adjacent sides}) + \mathbb{P}(d \geq 1 | \text{same
+    sides})\mathbb{P}(\text{same sides}) \\
+     &+ \mathbb{P}(d \geq 1 | \text{opposite sides})\mathbb{P}(\text{opposite
+     sides}) = \nicefrac{1}{2}\left(1 - \nicefrac{\pi}{4}\right) +
+     \nicefrac{1}{4}\cdot 0 + \nicefrac{1}{4}\cdot 1 = \boxed{\nicefrac{3}{4} -
+     \nicefrac{\pi}{8}} \\
+     &\approx 0.3573.
+\end{align*}

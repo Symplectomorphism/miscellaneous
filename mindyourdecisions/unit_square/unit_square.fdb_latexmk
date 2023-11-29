@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1701189690 "unit_square.tex" "unit_square.pdf" "unit_square" 1701189691 0
+["lualatex"] 1701218331 "unit_square.tex" "unit_square.pdf" "unit_square" 1701218332 0
   "/home/icute/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1685760793 127327 0c22a2c7faa4e80fd8c3443dc8dd3208 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1136768653 1408 5937f58aa508ea2cea4901c07d10f5fe ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -32,10 +32,15 @@
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm" 1254269338 11880 ea60d06924270684e6f852f3141c992b ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmr10.tfm" 1254269338 11868 4f81e9b6033c032bdaf9884f4d7ef412 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmr12.tfm" 1254269338 11888 6841b91e46b65cf41a49b160e6e74130 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmr6.tfm" 1254269338 11836 e3b6ce3e601aec94f64a536e7f4224d5 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/tfm/public/lm/rm-lmr8.tfm" 1254269338 11864 309fd7f43e4a0ba39f6f7644d76e8edf ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1248133631 30251 6afa5cb1d0204815a708a080681d4674 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx12.pfb" 1255129361 116908 1fca96723793882c2e0160350c192fc8 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb" 1255129361 119235 f35b44530a1d90eb90fe15d9cba67ea0 ""
   "/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -388,11 +393,11 @@
   "/usr/local/texlive/2023/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1701187294 318501 92c4f0451651cc60cbeedca725992341 ""
   "/usr/local/texlive/2023/texmf-var/tex/generic/config/language.dat" 1685726851 6627 bf84cc5fb7ba8a6ae77714cdc4a5bfa9 ""
   "/usr/local/texlive/2023/texmf-var/web2c/luahbtex/lualatex.fmt" 1685726870 11878012 2d2364b39447e10714c61286362a7d96 ""
-  "contents/problem.tex" 1701189689 1613 b4d67d1a255bf602846f3435be2385a4 ""
-  "contents/solution.tex" 1701186849 54 426bb63587b4c375a40e78a4ddbc458a ""
+  "contents/problem.tex" 1701217481 1773 3a8424289cc6deb9b5bb4ca0d228a8f0 ""
+  "contents/solution.tex" 1701218330 2195 57a52bfbe6caa79012a1482354f0fdec ""
   "preamble.tex" 1701188360 5849 ef5b43b03c6ff8a4474b94a40eb0efd7 ""
-  "unit_square.aux" 1701189691 975 2c8caafc2cb26487ed7c834a063cd8b3 "lualatex"
-  "unit_square.out" 1701189691 110 ef4bb72b8a12a1e1f3525eb701c69158 "lualatex"
+  "unit_square.aux" 1701218332 1047 5cb9f93d9887105098ecce9011c2531d "lualatex"
+  "unit_square.out" 1701218332 110 ef4bb72b8a12a1e1f3525eb701c69158 "lualatex"
   "unit_square.tex" 1701187576 1189 31031afe3dc15675e8aa7ab17de8b28b ""
   (generated)
   "unit_square.aux"
