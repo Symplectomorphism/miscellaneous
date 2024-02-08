@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2023.6.2)  28 NOV 2023 17:38
+This is LuaHBTeX, Version 1.17.0 (TeX Live 2023)  (format=lualatex 2023.6.2)  7 FEB 2024 21:40
  restricted system commands enabled.
  file:line:error style messages enabled.
 **unit_square.tex
@@ -1234,19 +1234,19 @@ Package rerunfilecheck Info: File `unit_square.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 49524 strings out of 478305
+ 49523 strings out of 478305
  100000,1977958 words of node,token memory allocated
- 617 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 19 attribute, 69 glue_spec, 11 attribute_list, 2 write nodes
-   avail lists: 1:1,2:2029,3:720,4:59,5:591,6:52,7:6285,8:91,9:1390,10:5,11:240
- 67676 multiletter control sequences out of 65536+600000
+ 623 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 2 glue, 4 kern, 1 glyph, 21 attribute, 69 glue_spec, 12 attribute_list, 2 write nodes
+   avail lists: 1:1,2:2035,3:717,4:71,5:543,6:54,7:6543,8:96,9:1273,10:5,11:261
+ 67677 multiletter control sequences out of 65536+600000
  50 fonts using 3038711 bytes
  110i,13n,118p,1209b,821s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on unit_square.pdf (1 page, 115545 bytes).
+{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on unit_square.pdf (1 page, 130739 bytes).
 
-PDF statistics: 69 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 131072)
+PDF statistics: 77 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 131072)
  32 words of extra memory for PDF output out of 10000 (max. 100000000)
 
