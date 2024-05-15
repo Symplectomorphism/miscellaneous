@@ -1,0 +1,189 @@
+\appendix
+
+\noindent Recall from Section~\ref{sec:control} that the rms values of the
+electric field in the transverse plane on a test point $q = (x, z)$ is given by
+%
+\begin{align*}
+    \begin{split}
+        \bar{E}_{x}^2(q) &=
+        \frac{1}{2}\sum_{\alpha=1}^3\left(e_{\alpha}^2c_\alpha^2 -
+            \sum_{\alpha^\prime > \alpha}^3e_{\alpha}
+    e_{\alpha^\prime} c_{\alpha}c_{\alpha^\prime} \right), \\
+        \bar{E}_{z}^2(q) &= \frac{1}{2}\sum_{\alpha=1}^3\left( e_{\alpha
+            }^2s_\alpha^2 - \sum_{\alpha^\prime > \alpha}^3e_{\alpha}
+    e_{\alpha^\prime} s_{\alpha}s_{\alpha^\prime}\right),
+    \\
+    \bar{E}^2 &= \frac{1}{2}\sum_{\alpha=1}^3\left(e_\alpha^2 -
+    \sum_{\alpha^\prime > \alpha}^3 e_\alpha
+    e_{\alpha^\prime} c_{\alpha \alpha^\prime}\right)
+    \end{split}
+\end{align*}
+%
+where $e_i$ and $\theta_i$ are the electric field peak magnitude and heading
+angle from the $i^{\text{th}}$ wire to the test point $q$. 
+
+
+\subsection{Derivatives}
+\label{ssec:derivatives}
+
+The following derivatives are needed in various applications of the chain rule.
+%
+\begin{equation*}
+    \pd{\theta_\alpha}{x} = -\frac{1}{\xi}e_\alpha\sin{\theta_\alpha}, \quad
+    \pd{\theta_\alpha}{z} = -\frac{1}{\xi}e_\alpha\cos{\theta_\alpha}.
+\end{equation*}
+
+\begin{equation*}
+    \pd{e_\alpha}{x} = -\frac{1}{\xi}e_\alpha^2\cos{\theta_\alpha}, \quad
+    \pd{e_\alpha}{z} = \frac{1}{\xi}e_\alpha^2\sin{\theta_\alpha}.
+\end{equation*}
+
+\begin{align*}
+    \pd{\bar{E}_x^2}{e_\alpha} &= e_\alpha c_\alpha^2 -
+    \frac{1}{2}\sum_{\alpha^\prime \neq \alpha}^3 e_{\alpha^\prime} c_\alpha
+    c_{\alpha^\prime}, \\
+    \pd{\bar{E}_z^2}{e_\alpha} &= e_\alpha s_\alpha^2 -
+    \frac{1}{2}\sum_{\alpha^\prime \neq \alpha}^3 e_{\alpha^\prime} s_\alpha
+    s_{\alpha^\prime}.
+\end{align*}
+
+\begin{align*}
+    \pd{\bar{E}_x^2}{\theta_\alpha} &= -e_\alpha c_\alpha s_\alpha +
+    \frac{1}{2}\sum_{\alpha^\prime \neq \alpha}^3 e_\alpha e_{\alpha^\prime}
+    s_\alpha c_{\alpha^\prime}, \\
+    \pd{\bar{E}_z^2}{\theta_\alpha} &= e_\alpha c_\alpha s_\alpha -
+    \frac{1}{2}\sum_{\alpha^\prime \neq \alpha}^3 e_\alpha e_{\alpha^\prime}
+    c_\alpha s_{\alpha^\prime}.
+\end{align*}
+
+\begin{align*}
+    \pd{\bar{E}^2}{e_\alpha} &= e_\alpha - \frac{1}{2}\sum_{\alpha^\prime \neq
+    \alpha} e_{\alpha^\prime}c_{\alpha \alpha^\prime},\\
+    \pd{\bar{E}^2}{\theta_\alpha} &= \frac{1}{2} e_\alpha \sum_{\alpha^\prime \neq
+\alpha} e_{\alpha^\prime} s_{\alpha \alpha^\prime}.
+\end{align*}
+
+
+\subsection{Gradients}
+\label{ssec:gradients}
+%
+The Jacobian $J_{\bar{E}}$ is computed below using the chain rule.
+\renewcommand*{\arraystretch}{1.5}
+\[
+    J_{\bar{E}}(q) = \bmat{ \pd{\bar{E}_x}{x}(q) & \pd{\bar{E}_x}{z}(q) \\
+    \pd{\bar{E}_z}{x}(q) & \pd{\bar{E}_z}{z}(q)},
+\]
+%
+The computation of this matrix is facilitated by the chain rule
+%
+\begin{align*}
+    \pd{\bar{E}_x^2}{x} &= 2\bar{E}_x \pd{\bar{E}_x}{x} = \sum_{\alpha=1}^3
+    \left(\pd{\bar{E}_x^2}{e_\alpha}\pd{e_\alpha}{x} +
+    \pd{\bar{E}_x^2}{\theta_\alpha}\pd{\theta_\alpha}{x}\right), \\
+    \pd{\bar{E}_x^2}{z} &= 2\bar{E}_x \pd{\bar{E}_x}{z} =\sum_{\alpha=1}^3
+    \left(\pd{\bar{E}_x^2}{e_\alpha}\pd{e_\alpha}{z} +
+    \pd{\bar{E}_x^2}{\theta_\alpha}\pd{\theta_\alpha}{z}\right), \\
+    \pd{\bar{E}_z^2}{x} &= 2\bar{E}_z \pd{\bar{E}_z}{x} = \sum_{\alpha=1}^3
+    \left(\pd{\bar{E}_z^2}{e_\alpha}\pd{e_\alpha}{x} +
+    \pd{\bar{E}_z^2}{\theta_\alpha}\pd{\theta_\alpha}{x}\right), \\
+    \pd{\bar{E}_z^2}{z} &= 2\bar{E}_z \pd{\bar{E}_z}{z} = \sum_{\alpha=1}^3
+    \left(\pd{\bar{E}_z^2}{e_\alpha}\pd{e_\alpha}{z} +
+    \pd{\bar{E}_z^2}{\theta_\alpha}\pd{\theta_\alpha}{z}\right), \\
+    \pd{\bar{E}^2}{x} &= 2\bar{E} \pd{\bar{E}}{x} = \sum_{\alpha=1}^3
+    \left(\pd{\bar{E}^2}{e_\alpha}\pd{e_\alpha}{x} +
+    \pd{\bar{E}^2}{\theta_\alpha}\pd{\theta_\alpha}{x}\right), \\
+    \pd{\bar{E}^2}{z} &= 2\bar{E} \pd{\bar{E}}{z} = \sum_{\alpha=1}^3
+    \left(\pd{\bar{E}^2}{e_\alpha}\pd{e_\alpha}{z} +
+    \pd{\bar{E}^2}{\theta_\alpha}\pd{\theta_\alpha}{z}\right).
+\end{align*}
+%
+
+
+\subsection{Hessian}
+\label{ssec:hessian}
+
+\noindent We compute the Hessian of $H_{\bar{E}}(q) = \nabla_q^2 \bar{E}(q)$ of
+$\bar{E}$. First, note the identities
+
+\begin{align*}
+    \pd{}{x}\pd{\bar{E}^2}{x} &= \pd{}{x}\left( 2\bar{E}\pd{\bar{E}}{x} \right) =
+    2\left(\pd{\bar{E}}{x}\right)^2 + 2\bar{E}\pdd{\bar{E}}{x} \\
+&\Rightarrow \pdd{\bar{E}}{x} = \frac{1}{2\bar{E}} \pdd{\bar{E}^2}{x} -
+\frac{1}{\bar{E}}\left(\pd{\bar{E}}{x}\right)^2. \\
+    \pd{}{z}\left(\pd{\bar{E}^2}{x}\right) &=
+    \pd{}{z}\left(2\bar{E}\pd{\bar{E}}{x}\right) =
+    2\pd{\bar{E}}{z}\pd{\bar{E}}{x} + 2\bar{E}\frac{\partial^2 \bar{E}}{\partial
+    z \partial x} \\
+&\Rightarrow \frac{\partial^2 \bar{E}}{\partial z \partial x} = \frac{\partial^2
+\bar{E}}{\partial x \partial z} = \frac{1}{2\bar{E}} \frac{\partial^2
+\bar{E}^2}{\partial z \partial x} - \frac{1}{\bar{E}}
+\pd{\bar{E}}{z}\pd{\bar{E}}{x}. \\
+\pd{}{z}\pd{\bar{E}^2}{z} &= \pd{}{z}\left( 2\bar{E}\pd{\bar{E}}{z} \right) =
+    2\left(\pd{\bar{E}}{z}\right)^2 + 2\bar{E}\pdd{\bar{E}}{z} \\
+&\Rightarrow \pdd{\bar{E}}{z} = \frac{1}{2\bar{E}} \pdd{\bar{E}^2}{z} -
+\frac{1}{\bar{E}}\left(\pd{\bar{E}}{z}\right)^2.
+\end{align*}
+%
+We now compute the second derivatives
+%
+\begin{align*}
+    &\xi^2 \pdd{\bar{E}^2}{x} = \sum_{\alpha=1}^3 \left[e_\alpha^4 \left(1 +
+    2\cos{(2\theta_\alpha)}\right) - \right. \\ 
+    &\phantom{13}\left. \sum_{\alpha^\prime \neq \alpha} e_\alpha
+e_{\alpha^\prime}^3 \cos{(\theta_\alpha - 3\theta_{\alpha^\prime})} -
+\sum_{\alpha^\prime > \alpha} e_\alpha^2 e_{\alpha^\prime}^2 \cos{(2\theta_\alpha
+- \theta_{\alpha^\prime})}\right], \\
+   &\xi^2 \frac{\partial^2 \bar{E}^2}{\partial z \partial x} = \xi^2
+   \frac{\partial^2 \bar{E}^2}{\partial x \partial z} = \\
+   &\phantom{123}\sum_{\alpha=1}^3
+   \left( -2e_\alpha^4\sin{2\theta_\alpha} - \sum_{\alpha^\prime \neq \alpha}
+   e_\alpha e_{\alpha^\prime}^3 \sin{(\theta_\alpha -
+3\theta_{\alpha^\prime})}\right), \\
+&\xi^2 \pdd{\bar{E}^2}{z} = \sum_{\alpha=1}^3 \left[e_\alpha^4 \left(1 -
+    2\cos{(2\theta_\alpha)}\right) + \right. \\ 
+    &\phantom{13}\left. \sum_{\alpha^\prime \neq \alpha} e_\alpha
+e_{\alpha^\prime}^3 \cos{(\theta_\alpha - 3\theta_{\alpha^\prime})} -
+\sum_{\alpha^\prime > \alpha} e_\alpha^2 e_{\alpha^\prime}^2 \cos{(2\theta_\alpha
+- \theta_{\alpha^\prime})}\right].
+\end{align*}
+
+With these computations the Hessian matrix is given by 
+%
+\begin{equation*}
+    H_{\bar{E}}(q) = \bmat{
+        \pdd{\bar{E}}{x} & \frac{\partial^2 \bar{E}}{\partial z \partial x} \\
+        \frac{\partial^2 \bar{E}}{\partial x \partial z} & \pdd{\bar{E}}{z}
+    }.
+\end{equation*}
+
+
+\subsection{Potential Function}
+\label{ssec:potfcn}
+
+We define the potential function $V(q) \triangleq \nicefrac{1}{\bar{E}(q)^2}$. This
+is a decreasing function of $\bar{E}$. Its various derivatives satisfy the
+identities.
+
+\begin{equation*}
+    \pd{V}{x}(q) = -\dfrac{2}{\bar{E}^3}\pd{\bar{E}}{x}, \qquad 
+    \pd{V}{z}(q) = -\dfrac{2}{\bar{E}^3}\pd{\bar{E}}{z}.
+\end{equation*}
+
+\begin{align*}
+    \pdd{V}{x} &= \dfrac{6}{\bar{E}^4}\left( \pd{\bar{E}}{x} \right)^2 -
+    \frac{2}{\bar{E}^3}\pdd{\bar{E}}{x}, \\
+    \frac{\partial^2 V}{\partial z \partial x} &= \frac{\partial^2 V}{\partial x
+    \partial z} = \dfrac{6}{\bar{E}^4}\left( \pd{\bar{E}}{z} \pd{\bar{E}}{x}
+    \right) - \frac{2}{\bar{E}^3}\frac{\partial^2 \bar{E}}{\partial z \partial
+    x}, \\
+    \pdd{V}{z} &= \dfrac{6}{\bar{E}^4}\left( \pd{\bar{E}}{z} \right)^2 -
+    \frac{2}{\bar{E}^3}\pdd{\bar{E}}{z}.
+\end{align*}
+
+The Hessian of the potential function is given by 
+\begin{equation*}
+    H_{V}(q) = \bmat{
+        \pdd{V}{x} & \frac{\partial^2 V}{\partial z \partial x} \\
+        \frac{\partial^2 V}{\partial x \partial z} & \pdd{V}{z}
+    }.
+\end{equation*}
