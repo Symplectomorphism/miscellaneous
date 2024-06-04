@@ -4,7 +4,7 @@ import pandas as pd
 
 data = pd.read_csv("./data/vector_data.csv")
 
-names = [f"TIB_LAT_CFN", "TIB_MED_CFN", "PAT_CFN", "TIB_LAT_CoF", "TIB_MED_CoF", "PAT_CoF"]
+names = ["TIB_LAT_CFN", "TIB_MED_CFN", "PAT_CFN", "TIB_LAT_CoF", "TIB_MED_CoF", "PAT_CoF"]
 
 vahid_data = np.zeros((6, 12, 241, 3))
 amanda_data = np.zeros((6, 12, 241, 3))
