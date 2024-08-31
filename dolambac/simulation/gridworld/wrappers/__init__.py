@@ -1,1 +1,2 @@
 from gridworld.wrappers.relative_position import RelativePosition
+from gridworld.wrappers.invert_reward import InvertedReward

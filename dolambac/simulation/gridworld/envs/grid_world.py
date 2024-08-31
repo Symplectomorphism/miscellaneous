@@ -4,7 +4,7 @@ import pygame
 import gymnasium as gym
 from gymnasium import spaces
 
-class SiblingGridWorldEnv(gym.Env):
+class GridWorldEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
 
     def __init__(self, render_mode=None, size=5):
