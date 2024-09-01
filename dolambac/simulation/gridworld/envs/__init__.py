@@ -1,1 +1,2 @@
 from gridworld.envs.grid_world import GridWorldEnv
+from gridworld.envs.sibling_grid_world import SiblingGridWorldEnv
