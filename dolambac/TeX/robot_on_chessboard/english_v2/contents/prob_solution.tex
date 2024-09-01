@@ -6,6 +6,9 @@ the problem. This theorem is called the \textit{law of total expectation} or
 \textit{tower rule of probability theory} in the
 literature~\cite{bertsekas2002introduction}.
 %
+In this section, we use the correspondence $\{1, 2, 3, 4, 5\} \mapsto \{0, 1, 2,
+3, 4\}$ and $\{A, B, C, D, E\} \mapsto \{0, 1, 2, 3, 4\}$ for legacy reasons.
+%
 \begin{thm}[Tower rule] \label{thm:tower} Let $X$ be a random variable and
     $\{A_i\}_i^m$ be a finite partition of the sample space. Then, 
     \[ \mathbb{E}[X] = \sum_i^m \mathbb{E}\left[ X \mid A_i \right]
@@ -59,7 +62,7 @@ deduce the following result.
     % \qquad m < i < n, \;\; s_i \neq g.
 \end{equation*}
 %
-Similar identities to the above expression hold for conditional expecteations as
+Similar identities to the above expression hold for conditional expectations as
 well. Using the tower rule~\ref{thm:tower}, we start to compute.
 % %
 \begin{align}

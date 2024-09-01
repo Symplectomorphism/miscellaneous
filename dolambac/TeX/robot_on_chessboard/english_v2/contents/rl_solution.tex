@@ -3,5 +3,19 @@
 %
 We want to be able to programmatically solve this toy problem so that we can 
 find the solution for any given initial state. We can use reinforcement learning
-(RL) to solve this problem; however, to do this, we need to define our 
-observation and action spaces as well as the transition and reward functions.
+(RL) to solve this problem. 
+
+The reasoning goes as follows: we want to apply RL techniques, such as double
+$Q$-learning~\cite{morales2020grokking} to find the action-value function and
+from it the state-value function. However, in order to do this, we need to
+define the state, action, transition, and reward functions. The key to solving 
+this problem efficiently with RL methods is to observe that the state does not 
+only comprise the position of the robot on the chessboard, but also the ``world 
+belief''. Here, we define world belief as our current belief of mapping of the 
+arrow keys to the actual directions.
+
+Hence, we define the Markov decision process as follows:
+
+\begin{itemize}
+\item State space: $\mc{S} = \{\}$.
+\end{itemize}
