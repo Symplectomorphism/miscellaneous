@@ -14,8 +14,18 @@ only comprise the position of the robot on the chessboard, but also the ``world
 belief''. Here, we define world belief as our current belief of mapping of the 
 arrow keys to the actual directions.
 
-Hence, we define the Markov decision process as follows:
+Let $\uline{N} = \{0, 1, \ldots, N-1\}$ denote the set of nonnegative integers ranging from $0$ to $N-1$. We define the Markov decision process as follows:
 
 \begin{itemize}
-\item State space: $\mc{S} = \{\}$.
+\item \textbf{State space}: The product $\mc{S} = \uline{4} \times \uline{4}
+\times \uline{24}$. The first two factors product stands for the position of the
+robot in the grid world and the third factor to the ID number of the world, of
+which there are $4! = 24$. These $24$ worlds correspond to the possible ways to
+permute the four directions.
+\item \textbf{Action space}: The product $\mc{A} = \uline{4} \times \uline{24}$.
+The first factor corresponds to a particular direction to move the robot. The
+second factor corresponds to which of the $24$ worlds to move the current belief
+to. Of course, any direction chosen in this set would be the actual direction
+the robot would move if the current world belief were correct.
+\item \textbf{Transition function}: 
 \end{itemize}
