@@ -22,8 +22,8 @@ class SiblingGridWorldEnv(gym.Env):
         )
 
         
-        true_map = np.array([[1, 0], [0, -1], [-1, 0], [0, 1]])
-        tmp = np.array(list(permutations(true_map)))
+        self._true_world = np.array([[1, 0], [0, -1], [-1, 0], [0, 1]])
+        tmp = np.array(list(permutations(self._true_world)))
         self.worlds = dict(zip(range(24), tmp))
 
         """
@@ -32,10 +32,10 @@ class SiblingGridWorldEnv(gym.Env):
         taken. 
         """
         self.action_to_direction = {
-            0: true_map[0],
-            1: true_map[1],
-            2: true_map[2],
-            3: true_map[3],
+            0: self._true_world[0],
+            1: self._true_world[1],
+            2: self._true_world[2],
+            3: self._true_world[3],
         }
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
@@ -56,7 +56,9 @@ class SiblingGridWorldEnv(gym.Env):
     Useful function to be used in the `reset` and `step` methods.
     """
     def _get_obs(self):
-        return {"agent": self._agent_location, "target": self._target_location}
+        return {"agent": (self._agent_location, self._world_belief), 
+                "target": self._target_location
+        }
 
     """
     Utility function to report auxiliary information returned by `reset` and `step`.
@@ -74,32 +76,33 @@ class SiblingGridWorldEnv(gym.Env):
 
         # Choose the agent's location uniformly at random
         self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
+        self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
+        self._target_location = np.array([self.size-1, self.size-1], dtype=int)
 
-        # We will sample the target's location randomly until it does not coincide with the agent's location
-        self._target_location = self._agent_location
-        while np.array_equal(self._target_location, self._agent_location):
-            self._target_location = self.np_random.integers(
-                0, self.size, size=2, dtype=int
-            )
-        
         observation = self._get_obs()
         info = self._get_info()
         
         if self.render_mode == "human":
             self._render_frame()
             
-        return observation, info
+        return np.concatenate(observation["agent"]), info
 
     def step(self, action):
         # Map the action (element of {0, 1, 2, 3}) to a direction we walk in
-        direction = self.action_to_direction[action]
+        direction = self.action_to_direction[action[0]]
         # We use `np.clip` to make sure we don't leave the grid
         self._agent_location = np.clip(
             self._agent_location + direction, 0, self.size - 1
         )
+        self._world_belief = np.array([action[1]])
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
-        reward = 1 if terminated else 0 # Binary sparse rewards
+        reward = -10 if not terminated else 0 #Binary sparse rewards
+
+        for i in range(4):
+            if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
+                reward += 1
+
         observation = self._get_obs()
         info = self._get_info()
         

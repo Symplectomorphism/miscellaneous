@@ -28,11 +28,14 @@ permute the four key directions.
 The first factor corresponds to a particular direction to move the robot. The
 second factor corresponds to which of the $24$ worlds to move the current belief
 to. Of course, any direction chosen in this set would be the actual direction
-the robot would move if the current world belief were correct.
+the robot would move only if there is overlap between the assumed and correct 
+directions.
 \item \textbf{Transition function}: This is a deterministic function of the true
 world. If the robot is at position $(i, j)$ and the world belief is $w$, then1
-\item \textbf{Reward function}: $r(s, a, s') = -1$ if and only if $s \in \mc{S}$
-is nonterminal. Otherwise, it is equal to $0$.
+\item \textbf{Reward function}: A negative reward (penalty) of $-10$ is
+incurrent whenever $s \in \mc{S}$ is nonterminal. Otherwise, this reward is $0$.
+Furthermore, for each overlap between the assumed and correct directions
+the agent is rewarded $+1$.
 \end{itemize}
 
 Our implementation~\cite{saticiGitHub} of this MDP is carried out using 
