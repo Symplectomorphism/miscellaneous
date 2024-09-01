@@ -1,0 +1,179 @@
+\subsection{Probability Solution}
+\label{ssec:prob_sol}
+%
+We invoke a celebrated theorem from probability theory that will help us solve
+the problem. This theorem is called the \textit{law of total expectation} or
+\textit{tower rule of probability theory} in the
+literature~\cite{bertsekas2002introduction}.
+%
+\begin{thm}[Tower rule] \label{thm:tower} Let $X$ be a random variable and
+    $\{A_i\}_i^m$ be a finite partition of the sample space. Then, 
+    \[ \mathbb{E}[X] = \sum_i^m \mathbb{E}\left[ X \mid A_i \right]
+    \mathbb{P}(A_i). \]
+\end{thm}
+%
+We denote the square on which the robot resides at the $k^{\text{th}}$ step by
+$s_k$ and the goal square by $g$. Consider the following family of random
+variables.
+\begin{equation}
+    C_n := \sum_{k=n+1}^\infty r_k, \qquad r_k = 
+\begin{cases}
+    1 & \mbox{if } s_k \neq g \\
+    0 & \mbox{if } s_k = g
+\end{cases}.
+\label{eq:RVs}
+\end{equation}
+%
+The sum in this definition is well-defined because once the robot reaches $g$,
+all the remaining $r_k$'s take the value zero. We are being asked the value of
+$\mathbb{E}[C_0]$. To that end, we will use the following repercussion of
+definition~\eqref{eq:RVs}.
+% \vspace{-2mm}
+\begin{equation*} 
+    C_m = \sum_{i=m+1}^n r_i + C_n, \qquad m \leq n.
+\end{equation*}
+% \vspace{-3mm}
+% Beklenen de\u{g}erin \"{o}zelliklerini kullanarak a\c{s}a\u{g}{\i}daki sonuca
+% varabiliriz.
+Using the properties of expectation, if $s_i \neq g$ for $m < i < n$, we can
+deduce the following result.
+% \vspace{-1mm}
+\begin{equation*} 
+    \mathbb{E}[C_m] = \sum_{i=m+1}^n \mathbb{E}[r_i] + \mathbb{E}[C_n] = n-m + \mathbb{E}[C_n].
+    % \begin{cases}
+    %     k + \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i \neq g \\
+    %     \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i = g
+    % \end{cases}, 
+    % \qquad m < i < n, \;\; s_i \neq g.
+\end{equation*}
+%
+Using the properties of expectation, if $s_i \neq g$ for $m < i < n$, we can
+deduce the following result.
+%
+\begin{equation*} 
+    \mathbb{E}[C_m] = \sum_{i=m+1}^n \mathbb{E}[r_i] + \mathbb{E}[C_n] = n-m + \mathbb{E}[C_n].
+    % \begin{cases}
+    %     k + \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i \neq g \\
+    %     \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i = g
+    % \end{cases}, 
+    % \qquad m < i < n, \;\; s_i \neq g.
+\end{equation*}
+%
+Similar identities to the above expression hold for conditional expecteations as
+well. Using the tower rule~\ref{thm:tower}, we start to compute.
+% %
+\begin{align}
+   \begin{split}
+    \mathbb{E}[C_0] &= \mathbb{E}\left[ C_0 \mid s_1 \in \{C4, D3\} \right] 
+    \underbrace{\mathbb{P}(s_1 \in \{C4, D3\})}_{=\frac{1}{2}} \\ 
+    &+
+    \mathbb{E}\left[ C_0 \mid s_1 \in \{B3, C2\} 
+    \right] \underbrace{\mathbb{P}(s_1 \in \{B3, C2\})}_{=\frac{1}{2}}.
+    \end{split}
+    \label{eq:tower1}
+\end{align}
+%
+From now on, we will assume $s_1 = C4$ in the first term on the right-hand side
+and $s_1 = C2$ in the second. Notice that, because of the inherent symmetry of
+the problem, while the state $s_1 = D3$ is equivalent to $s_1 = C4$; $s_1 =
+B3$ is equivalent to $s_1 = C2$.
+
+\paragraph{Computation of the first conditional expectation
+in~\eqref{eq:tower1}} 
+% \"{O}nce~\eqref{eq:tower1}'inci denklemin sa\u{g} taraf{\i}ndaki ilk
+% beklenen de\u{g}er terimini ele alaca\u{g}{\i}z. Kule kural{\i}n{\i} kullanarak
+% hesaplamalar{\i}m{\i}za devam edelim. 
+First of all, we consider the first expectation term on the right-hand side of
+equation~\eqref{eq:tower1}.
+%
+\begin{align}
+    \begin{split}
+    \mathbb{E}&\left[ C_0 \mid s_1 = C4 \right] = \overbrace{r_1 + r_2}^{=2} 
+    \\ + &\overbrace{\mathbb{E}[C_2 \mid s_1 = C4, s_3 = D5]}^{=2} \overbrace{\mathbb{P}(s_3 = D5 \mid s_1 = C4)}^{=\frac{1}{3}} 
+    \\ + &\mathbb{E}[C_2 \mid s_1 = s_3 = C4] \underbrace{\mathbb{P}(s_3 = C4 \mid s_1 = C4)}_{=\frac{1}{3}} \\
+    + &\mathbb{E}[C_2 \mid s_1 = C4, s_3 = B5] \underbrace{\mathbb{P}(s_3 = B5 \mid s_1 = C4)}_{=\frac{1}{3}}.
+    \end{split}
+    \label{eq:tower2}
+\end{align}
+%
+We delve further into the computation of the two expected values in
+equation~\eqref{eq:tower2}, whose values are not immediately apparent.
+%
+\begin{align*}
+    \begin{split}
+    \mathbb{E}&[C_2 \mid s_1=s_3=C4] = \underbrace{r_3+r_4}_{=2}
+    \\ + &\underbrace{\mathbb{E}[C_4 \mid s_1=s_3=C4, s_5=D5]}_{=2} \underbrace{\mathbb{P}(s_5=D5 \mid s_1=s_3=C4)}_{=\frac{1}{2}} \\
+    + &\underbrace{\mathbb{E}[C_4 \mid s_1=s_3=C4, s_5=B5]}_{=4} \underbrace{\mathbb{P}(s_5=B5 \mid s_1=s_3=C4)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align*}
+%
+There is only one expected value that we have left to compute in
+equation~\eqref{eq:tower2}:
+%
+\begin{align*}
+    \begin{split}
+    \mathbb{E}&[C_2 \mid \; s_1=C4, s_3=B5] = \\
+    &\underbrace{\mathbb{E}[C_2 \mid s_1=C4, s_3=B5, s_4=C5]}_{=4} \\ &{\phantom{1234}} \times \underbrace{\mathbb{P}(s_4=C5 \mid s_1=C4, s_3=B5)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_2 \mid s_1=C4, s_3=B5, s_4=B4]}_{=6} \\ &\phantom{1234} \times \underbrace{\mathbb{P}(s_4=B4 \mid s_1=C4, s_3=B5)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align*}
+%
+The computations above allows us to determine the first expected value in
+equation~\eqref{eq:tower1} using equation~\eqref{eq:tower2}:
+\fbox{$\mathbb{E}[C_0 \mid s_1=C4] = 6$}.
+
+\paragraph{Computation of the second conditional expectation
+in~\eqref{eq:tower1}} 
+%
+We use similar techniques to compute the second expected value on the right-hand
+side of equation~\eqref{eq:tower1}.
+%
+
+\begin{align}
+    \begin{split}
+    \mathbb{E}&\left[ C_0 \mid s_1 = C2 \right] = \\
+    &\underbrace{\mathbb{E}[C_0 \mid s_1 = C2, s_2 = B2]}_{=8} \underbrace{\mathbb{P}(s_2 = B2 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_0 \mid s_1=C2, s_2 = C3] \underbrace{\mathbb{P}(s_2 = C3 \mid s_1 = C2)}_{=\frac{1}{3}} \\
+    &+ \mathbb{E}[C_0 \mid s_1 = C2, s_2 = D2] \underbrace{\mathbb{P}(s_2 = D2 \mid s_1 = C2)}_{=\frac{1}{3}}.
+    \end{split}
+    \label{eq:tower3}
+\end{align}
+%
+Once more, we utilize the tower rule to compute the expected values in
+equation~\eqref{eq:tower3} whose values are not immediately apparent.
+%
+\begin{align*}
+    \begin{split}
+    \mathbb{E}[C_0 \mid \; &s_1=C2, s_2=C3] = \overbrace{r_1 + r_2 + r_3 + r_4}^{=4} \\
+    &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=C3, s_5=D5]}_{=2} \\ &{\phantom{1234}}\times \underbrace{\mathbb{P}(s_5=D5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_4 \mid s_1=C2, s_2=C3, s_5=B5]}_{=4} \\ &{\phantom{1234}} \times \underbrace{\mathbb{P}(s_5=B5 \mid s_1=C2, s_2=C3)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align*}
+%
+There is only one expected value that we have left to compute in
+equation~\eqref{eq:tower3}:
+%
+\vspace{-2mm}
+\begin{align*}
+    \begin{split}
+    \mathbb{E}[C_0 \mid \; &s_1=C2, s_2=D2] = \overbrace{r_1 + r_2 + r_3}^{=3} \\
+    &+ \underbrace{\mathbb{E}[C_3 \mid s_1=C2, s_2=D2, s_4=E3]}_{=3} \\ &{\phantom{1234}}\times \underbrace{\mathbb{P}(s_4=E3 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}} \\
+    &+ \underbrace{\mathbb{E}[C_3 \mid s_1=C2, s_2=s_4=D2]}_{=5} \\ &{\phantom{1234}}\times \underbrace{\mathbb{P}(s_4=D2 \mid s_1=C2, s_2=D2)}_{=\frac{1}{2}}.
+    \end{split}
+\end{align*}
+%
+We can now use equation~\eqref{eq:tower3} in order to compute the second
+expected value on the right-hand side of
+equation~\eqref{eq:tower1}:\fbox{$\mathbb{E}[C_0 \mid s_1=C2] = \frac{22}{3}$}.
+%
+We have computed every quantity that we are interested in. Now, we go back to equation~\eqref{eq:tower1}:
+
+\begin{empheq}[box=\widefbox]{align}
+    \begin{split}
+    \mathbb{E}[C_0] = &\underbrace{\mathbb{E}\left[ C_0 \mid s_1 \in \{C4, D3\} \right]}_{=6}
+    \underbrace{\mathbb{P}(s_1 \in \{C4, D3\})}_{=\frac{1}{2}}\\ 
+    &+ \underbrace{\mathbb{E}\left[ C_0 \mid s_1 \in \{B3, C2\} \right]}_{=\frac{22}{3}} 
+    \underbrace{\mathbb{P}(s_1 \in \{B3, C2\})}_{=\frac{1}{2}} \\ &= \frac{20}{3} = 6.\bar{6}. \nonumber
+    \end{split}
+    % \label{eq:tower}
+\end{empheq}
