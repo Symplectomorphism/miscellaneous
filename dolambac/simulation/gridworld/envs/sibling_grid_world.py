@@ -79,10 +79,13 @@ class SiblingGridWorldEnv(gym.Env):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
 
-        # Choose the agent's location uniformly at random
         self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
-        self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
         self._target_location = np.array([self.size-1, self.size-1], dtype=int)
+        while np.array_equal(self._target_location, self._agent_location):
+            self._agent_location = self.np_random.integers(
+                0, self.size, size=2, dtype=int
+            )
+        self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
 
         self.cur_P = self._update_P(self._world_belief[0])
 

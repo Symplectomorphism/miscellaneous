@@ -6,6 +6,7 @@ from utils import *
 class SiblingGWAgent(object):
     def __init__(
         self,
+        env,
         gamma=1.0,
         init_alpha=0.5,
         min_alpha=-0.01,
@@ -23,7 +24,10 @@ class SiblingGWAgent(object):
             the usual suspects.
         """
 
-        self.Q = defaultdict(lambda: np.zeros(4))
+        nS, nA = np.prod(env.observation_space.nvec), np.prod(env.action_space.nvec)
+        self.pi_track = []
+        self.Q = np.zeros((nS, nA), dtype=np.float64)
+        self.Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float64)
         self.episode = 0
 
         self.gamma = gamma
@@ -36,15 +40,17 @@ class SiblingGWAgent(object):
 
         self.training_error = []
 
-    def select_action(self, state,  epsilon):
+    def select_action(self, state):
         """
         Returns the best action with probability (1  - epsilon)
         otherwise a random action with probability epsilon to ensure exploration.
         """
-        if np.random.random() > epsilon:
-            return np.argmax(self.Q[state])
+        state_idx = np.ravel_multi_index(state, self.env.observation_space.nvec, order='F')
+        
+        if np.random.random() > self.epsilons[self.episode]:
+            return np.argmax(self.Q[state_idx])
         else:
-            return np.random.randint(len(self.Q[state]))
+            return np.random.randint(len(self.Q[state_idx]))
 
     def update(
         self,
@@ -54,9 +60,12 @@ class SiblingGWAgent(object):
         terminated,
         next_obs
     ):
+        obs_idx = np.ravel_multi_index(obs, self.env.observation_space.nvec, order='F')
+        next_obs_idx = np.ravel_multi_index(next_obs, self.env.observation_space.nvec, order='F')
+
         """Updates the Q-value of an action."""
-        td_target = reward + self.gamma * np.max(self.Q[next_obs]) * (not terminated)
-        td_error = td_target - self.Q[obs][action]
-        self.Q[obs][action] = self.Q[obs][action] + self.alphas[self.episode] * td_error
+        td_target = reward + self.gamma * np.max(self.Q[next_obs_idx]) * (not terminated)
+        td_error = td_target - self.Q[obs_idx][action]
+        self.Q[obs_idx][action] = self.Q[obs_idx][action] + self.alphas[self.episode] * td_error
 
         self.training_error.append(td_error)
