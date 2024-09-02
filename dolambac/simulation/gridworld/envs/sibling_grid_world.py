@@ -1,5 +1,6 @@
 from itertools import permutations
 import numpy as np
+import copy
 import pygame
 
 import gymnasium as gym
@@ -8,19 +9,14 @@ from gymnasium import spaces
 class SiblingGridWorldEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
 
-    def __init__(self, render_mode=None, size=5):
+    def __init__(self, P, render_mode=None, size=5):
         self.size = size        # The size of the square grid
         self.window_size = 512  # The size of the PyGame window
+        self.gw_P = P           # Vanilla GridWorld transition matrix
+        self.cur_P = copy.deepcopy(self.gw_P)
 
-        self.observation_space = spaces.Box(
-            low=np.array([0, 0, 0]), high=np.array([size - 1, size - 1, 23]), 
-            dtype=int
-        )
-
-        self.action_space = spaces.Box(
-            low=np.array([0, 0]), high=np.array([3, 23]), dtype=int
-        )
-
+        self.observation_space = spaces.MultiDiscrete([size, size, 24])
+        self.action_space = spaces.MultiDiscrete([4, 24])
         
         self._true_world = np.array([[1, 0], [0, -1], [-1, 0], [0, 1]])
         tmp = np.array(list(permutations(self._true_world)))
@@ -37,6 +33,7 @@ class SiblingGridWorldEnv(gym.Env):
             2: self._true_world[2],
             3: self._true_world[3],
         }
+
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
@@ -70,6 +67,14 @@ class SiblingGridWorldEnv(gym.Env):
             ), 
         }
 
+    def _update_P(self, belief):
+        sigma = list(permutations(range(4)))[belief]
+        Pprime = copy.deepcopy(self.gw_P)
+        for s in range(len(self.gw_P)):
+            for a in range(len(self.gw_P[s])):
+                Pprime[s][a] = self.gw_P[s][sigma[a]]
+        return Pprime
+
     def reset(self, seed=None, options=None):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
@@ -78,6 +83,8 @@ class SiblingGridWorldEnv(gym.Env):
         self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
         self._target_location = np.array([self.size-1, self.size-1], dtype=int)
+
+        self.cur_P = self._update_P(self._world_belief[0])
 
         observation = self._get_obs()
         info = self._get_info()
@@ -95,6 +102,7 @@ class SiblingGridWorldEnv(gym.Env):
             self._agent_location + direction, 0, self.size - 1
         )
         self._world_belief = np.array([action[1]])
+        self.cur_P = self._update_P(self._world_belief[0])
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
         reward = -10 if not terminated else 0 #Binary sparse rewards
@@ -109,7 +117,7 @@ class SiblingGridWorldEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return observation, reward, terminated, False, info
+        return np.concatenate(observation["agent"]), reward, terminated, False, info
 
     def render(self):
         if self.render_mode == "rgb_array":
