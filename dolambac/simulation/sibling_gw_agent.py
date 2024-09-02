@@ -23,6 +23,7 @@ class SiblingGWAgent(object):
         Args:
             the usual suspects.
         """
+        self.env = env
 
         nS, nA = np.prod(env.observation_space.nvec), np.prod(env.action_space.nvec)
         self.pi_track = []
@@ -62,10 +63,11 @@ class SiblingGWAgent(object):
     ):
         obs_idx = np.ravel_multi_index(obs, self.env.observation_space.nvec, order='F')
         next_obs_idx = np.ravel_multi_index(next_obs, self.env.observation_space.nvec, order='F')
+        action_idx = np.ravel_multi_index(action, self.env.action_space.nvec, order='F')
 
         """Updates the Q-value of an action."""
         td_target = reward + self.gamma * np.max(self.Q[next_obs_idx]) * (not terminated)
-        td_error = td_target - self.Q[obs_idx][action]
-        self.Q[obs_idx][action] = self.Q[obs_idx][action] + self.alphas[self.episode] * td_error
+        td_error = td_target - self.Q[obs_idx][action_idx]
+        self.Q[obs_idx][action_idx] = self.Q[obs_idx][action_idx] + self.alphas[self.episode] * td_error
 
         self.training_error.append(td_error)
