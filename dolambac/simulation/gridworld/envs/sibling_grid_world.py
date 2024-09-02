@@ -69,11 +69,11 @@ class SiblingGridWorldEnv(gym.Env):
 
     def _update_P(self, belief):
         sigma = list(permutations(range(4)))[belief]
-        Pprime = copy.deepcopy(self.gw_P)
+        P = copy.deepcopy(self.gw_P)
         for s in range(len(self.gw_P)):
             for a in range(len(self.gw_P[s])):
-                Pprime[s][a] = self.gw_P[s][sigma[a]]
-        return Pprime
+                P[s][a] = self.gw_P[s][sigma[a]]
+        return P
 
     def reset(self, seed=None, options=None):
         # We need the following line to seed self.np_random
