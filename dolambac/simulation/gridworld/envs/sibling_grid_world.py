@@ -22,6 +22,11 @@ class SiblingGridWorldEnv(gym.Env):
         tmp = np.array(list(permutations(self._true_world)))
         self.worlds = dict(zip(range(24), tmp))
 
+        self._true_world_idx = 0
+        for i in range(24):
+            if np.array_equal(self._true_world, self.worlds[i]):
+                self._true_world_idx = i
+
         """
         The following dictionary is the true map of abstract actions from
         `self.action_space` to the direction we will walk in if that action is
@@ -89,6 +94,20 @@ class SiblingGridWorldEnv(gym.Env):
             )
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
 
+        # Experimental: change the true world as well
+        self._true_world = self.worlds[np.random.randint(24)]
+        self._true_world_idx = 0
+        for i in range(24):
+            if np.array_equal(self._true_world, self.worlds[i]):
+                self._true_world_idx = i
+
+        self.action_to_direction = {
+            0: self._true_world[0],
+            1: self._true_world[1],
+            2: self._true_world[2],
+            3: self._true_world[3],
+        }
+
         self.cur_P = self._update_P(self._world_belief[0])
 
         observation = self._get_obs()
@@ -119,7 +138,7 @@ class SiblingGridWorldEnv(gym.Env):
                 # reward += 10
 
         self.num_moves += 1
-        truncated = self.num_moves >= 10
+        truncated = self.num_moves >= 100
 
         observation = self._get_obs()
         info = self._get_info()
