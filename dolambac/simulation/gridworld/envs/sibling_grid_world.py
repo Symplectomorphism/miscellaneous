@@ -108,11 +108,11 @@ class SiblingGridWorldEnv(gym.Env):
         self.cur_P = self._update_P(self._world_belief[0])
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
-        reward = -10 if not terminated else 0 #Binary sparse rewards
+        reward = -1 if not terminated else 0 #Binary sparse rewards
 
         for i in range(4):
             if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
-                reward += 1
+                reward += 1/10
 
         observation = self._get_obs()
         info = self._get_info()
