@@ -81,7 +81,7 @@ class SiblingGridWorldEnv(gym.Env):
                 P[s][a] = self.gw_P[s][sigma[a]]
         return P
 
-    def reset(self, seed=None, options=None):
+    def reset(self, seed=None, options={'randomize_world': False}):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
         self.num_moves = 0
@@ -94,19 +94,20 @@ class SiblingGridWorldEnv(gym.Env):
             )
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
 
-        # # Experimental: change the true world as well
-        # self._true_world = self.worlds[np.random.randint(24)]
-        # self._true_world_idx = 0
-        # for i in range(24):
-        #     if np.array_equal(self._true_world, self.worlds[i]):
-        #         self._true_world_idx = i
+        # Experimental: change the true world as well
+        if options['randomize_world']:
+            self._true_world = self.worlds[np.random.randint(24)]
+            self._true_world_idx = 0
+            for i in range(24):
+                if np.array_equal(self._true_world, self.worlds[i]):
+                    self._true_world_idx = i
 
-        # self.action_to_direction = {
-        #     0: self._true_world[0],
-        #     1: self._true_world[1],
-        #     2: self._true_world[2],
-        #     3: self._true_world[3],
-        # }
+            self.action_to_direction = {
+                0: self._true_world[0],
+                1: self._true_world[1],
+                2: self._true_world[2],
+                3: self._true_world[3],
+            }
 
         self.cur_P = self._update_P(self._world_belief[0])
 
@@ -130,9 +131,11 @@ class SiblingGridWorldEnv(gym.Env):
         )
         self._world_belief = np.array([action[1]])
         self.cur_P = self._update_P(self._world_belief[0])
+
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
-        reward = -1 if not terminated else 0 #Binary sparse rewards
+        # terminated = terminated and np.array_equal(self._true_world, self.worlds[self._world_belief[0]])
+        reward = 1 if terminated else 0 
 
         # Reward (penalty) for getting correct directions
         if not np.array_equal(direction, expected_direction):

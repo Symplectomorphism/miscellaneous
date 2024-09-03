@@ -27,7 +27,7 @@ class SiblingGWAgent(object):
 
         nS, nA = np.prod(env.observation_space.nvec), np.prod(env.action_space.nvec)
         self.pi_track = []
-        self.Q = np.zeros((nS, nA), dtype=np.float32)
+        self.Q = np.ones((nS, nA), dtype=np.float32)*-100
         # self.Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float32)
         self.episode = 0
 
