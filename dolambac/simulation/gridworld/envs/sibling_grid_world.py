@@ -34,6 +34,7 @@ class SiblingGridWorldEnv(gym.Env):
             3: self._true_world[3],
         }
 
+        self.num_moves = 0
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
@@ -78,6 +79,7 @@ class SiblingGridWorldEnv(gym.Env):
     def reset(self, seed=None, options=None):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
+        self.num_moves = 0
 
         self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
         self._target_location = np.array([self.size-1, self.size-1], dtype=int)
@@ -110,9 +112,15 @@ class SiblingGridWorldEnv(gym.Env):
         terminated = np.array_equal(self._agent_location, self._target_location)
         reward = -1 if not terminated else 0 #Binary sparse rewards
 
+        # reward = 0
         for i in range(4):
             if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
-                reward += 1/10
+                reward += 0.25 # works well with reward = -1 if not terminated
+                # reward += 1/25
+                # reward += 1
+
+        self.num_moves += 1
+        truncated = self.num_moves >= 100
 
         observation = self._get_obs()
         info = self._get_info()
@@ -120,7 +128,7 @@ class SiblingGridWorldEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return np.concatenate(observation["agent"]), reward, terminated, False, info
+        return np.concatenate(observation["agent"]), reward, terminated, truncated, info
 
     def render(self):
         if self.render_mode == "rgb_array":
