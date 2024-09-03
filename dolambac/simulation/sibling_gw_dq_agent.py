@@ -57,7 +57,7 @@ class SiblingGWAgent(object):
 
 
     def custom_action(self, state):
-        state_idx = np.ravel_multi_index(state, self.env.observation_space.nvec, order='F')
+        state_idx = self.state_multi_to_lin(state)
 
         action = np.argmax(self.Q[state_idx])
         action = self.act_lin_to_multi(action)

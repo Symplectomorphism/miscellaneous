@@ -55,18 +55,18 @@ class SiblingGWAgent(object):
 
 
     def custom_action(self, state):
-        state_idx = np.ravel_multi_index(state, self.env.observation_space.nvec, order='F')
+        state_idx = self.state_multi_to_lin(state)
 
         action = np.argmax(self.Q[state_idx])
         action = self.act_lin_to_multi(action)
 
-        # P = self.env._update_P(state[-1])
-        P = self.env._update_P(0)
+        P = self.env._update_P(state[-1])
+        # P = self.env._update_P(0)
         Q_gw, V_gw, pi_gw = value_iteration(P)
         loc_idx = np.ravel_multi_index(
             state[:-1], self.env.observation_space.nvec[:-1], order='F')
 
-        return self.act_multi_to_lin(np.array([pi_gw(loc_idx), action[-1]]))
+        return V_gw, self.act_multi_to_lin(np.array([pi_gw(loc_idx), action[-1]]))
 
 
     def select_action(self, state):
@@ -78,7 +78,7 @@ class SiblingGWAgent(object):
         
         if np.random.random() > self.epsilons[self.episode]:
             return np.argmax(self.Q[state_idx])
-            # return self.custom_action(state)
+            # return self.custom_action(state)[1]
         else:
             return np.random.randint(len(self.Q[state_idx]))
 
@@ -94,8 +94,14 @@ class SiblingGWAgent(object):
         next_obs_idx = self.state_multi_to_lin(next_obs)
         action_idx = self.act_multi_to_lin(action)
 
+        # V_gw, _ =  self.custom_action(obs)
+
         """Updates the Q-value of an action."""
+        # loc_idx = np.ravel_multi_index(
+        #     obs[:-1], self.env.observation_space.nvec[:-1], order='F')
+        # td_target = V_gw[loc_idx]
         td_target = reward + self.gamma * np.max(self.Q[next_obs_idx]) * (not terminated)
+
         td_error = td_target - self.Q[obs_idx][action_idx]
         self.Q[obs_idx][action_idx] = self.Q[obs_idx][action_idx] + self.alphas[self.episode] * td_error
 

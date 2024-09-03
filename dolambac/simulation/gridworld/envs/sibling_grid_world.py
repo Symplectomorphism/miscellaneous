@@ -116,11 +116,10 @@ class SiblingGridWorldEnv(gym.Env):
         for i in range(4):
             if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
                 reward += 0.25 # works well with reward = -1 if not terminated
-                # reward += 1/25
-                # reward += 1
+                # reward += 10
 
         self.num_moves += 1
-        truncated = self.num_moves >= 100
+        truncated = self.num_moves >= 10
 
         observation = self._get_obs()
         info = self._get_info()
