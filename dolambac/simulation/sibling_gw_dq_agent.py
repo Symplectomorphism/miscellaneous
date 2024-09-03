@@ -9,7 +9,7 @@ class SiblingGWAgent(object):
         env,
         gamma=1.0,
         init_alpha=0.5,
-        min_alpha=-0.01,
+        min_alpha=0.01,
         alpha_decay_ratio=0.5,
         init_epsilon=1.0,
         min_epsilon=0.1,

@@ -94,19 +94,19 @@ class SiblingGridWorldEnv(gym.Env):
             )
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
 
-        # Experimental: change the true world as well
-        self._true_world = self.worlds[np.random.randint(24)]
-        self._true_world_idx = 0
-        for i in range(24):
-            if np.array_equal(self._true_world, self.worlds[i]):
-                self._true_world_idx = i
+        # # Experimental: change the true world as well
+        # self._true_world = self.worlds[np.random.randint(24)]
+        # self._true_world_idx = 0
+        # for i in range(24):
+        #     if np.array_equal(self._true_world, self.worlds[i]):
+        #         self._true_world_idx = i
 
-        self.action_to_direction = {
-            0: self._true_world[0],
-            1: self._true_world[1],
-            2: self._true_world[2],
-            3: self._true_world[3],
-        }
+        # self.action_to_direction = {
+        #     0: self._true_world[0],
+        #     1: self._true_world[1],
+        #     2: self._true_world[2],
+        #     3: self._true_world[3],
+        # }
 
         self.cur_P = self._update_P(self._world_belief[0])
 
@@ -119,8 +119,11 @@ class SiblingGridWorldEnv(gym.Env):
         return np.concatenate(observation["agent"]), info
 
     def step(self, action):
-        # Map the action (element of {0, 1, 2, 3}) to a direction we walk in
+        # Actual direction in which the agent is going to move.
         direction = self.action_to_direction[action[0]]
+        expected_direction = self.worlds[action[1]][action[0]]
+
+        old_loc = self._agent_location
         # We use `np.clip` to make sure we don't leave the grid
         self._agent_location = np.clip(
             self._agent_location + direction, 0, self.size - 1
@@ -131,11 +134,14 @@ class SiblingGridWorldEnv(gym.Env):
         terminated = np.array_equal(self._agent_location, self._target_location)
         reward = -1 if not terminated else 0 #Binary sparse rewards
 
-        # reward = 0
-        for i in range(4):
-            if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
-                reward += 0.25 # works well with reward = -1 if not terminated
-                # reward += 10
+        # Reward (penalty) for getting correct directions
+        if not np.array_equal(direction, expected_direction):
+            reward -= 3
+
+        # for i in range(4):
+        #     if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
+        #         reward += 0.25*0 # works well with reward = -1 if not terminated
+        #         # reward += 10
 
         self.num_moves += 1
         truncated = self.num_moves >= 100

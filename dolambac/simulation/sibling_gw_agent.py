@@ -9,7 +9,7 @@ class SiblingGWAgent(object):
         env,
         gamma=1.0,
         init_alpha=0.5,
-        min_alpha=-0.01,
+        min_alpha=0.01,
         alpha_decay_ratio=0.5,
         init_epsilon=1.0,
         min_epsilon=0.1,
@@ -27,8 +27,8 @@ class SiblingGWAgent(object):
 
         nS, nA = np.prod(env.observation_space.nvec), np.prod(env.action_space.nvec)
         self.pi_track = []
-        self.Q = np.zeros((nS, nA), dtype=np.float64)
-        self.Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float64)
+        self.Q = np.zeros((nS, nA), dtype=np.float32)
+        # self.Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float32)
         self.episode = 0
 
         self.gamma = gamma
