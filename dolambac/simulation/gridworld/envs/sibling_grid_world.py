@@ -15,7 +15,7 @@ class SiblingGridWorldEnv(gym.Env):
         self.gw_P = P           # Vanilla GridWorld transition matrix
         self.cur_P = copy.deepcopy(self.gw_P)
 
-        self.observation_space = spaces.MultiDiscrete([size, size, 24])
+        self.observation_space = spaces.MultiDiscrete([size, size])
         self.action_space = spaces.MultiDiscrete([4, 24])
         
         tmp = np.array(list(permutations(
@@ -95,8 +95,6 @@ class SiblingGridWorldEnv(gym.Env):
                 0, self.size, size=2, dtype=int
             )
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
-
-
         self.cur_P = self._update_P(self._world_belief[0])
 
         observation = self._get_obs()
@@ -105,14 +103,13 @@ class SiblingGridWorldEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
             
-        return np.concatenate(observation["agent"]), info
+        return observation["agent"][0], info
 
     def step(self, action):
         # Actual direction in which the agent is going to move.
         direction = self.action_to_direction[action[0]]
         expected_direction = self.worlds[action[1]][action[0]]
 
-        old_loc = self._agent_location
         # We use `np.clip` to make sure we don't leave the grid
         self._agent_location = np.clip(
             self._agent_location + direction, 0, self.size - 1
@@ -123,16 +120,13 @@ class SiblingGridWorldEnv(gym.Env):
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
         # terminated = terminated and np.array_equal(self._true_world, self.worlds[self._world_belief[0]])
-        reward = 1 if terminated else 0 
+        reward_gw = -1 if not terminated else 0 
 
         # Reward (penalty) for getting correct directions
+        reward_bandit = 0
         if not np.array_equal(direction, expected_direction):
-            reward -= 3
-
-        # for i in range(4):
-        #     if np.array_equal(self._true_world[i], self.worlds[self._world_belief[0]][i]):
-        #         reward += 0.25*0 # works well with reward = -1 if not terminated
-        #         # reward += 10
+            reward_bandit -= 1
+        reward = np.array([reward_gw, reward_bandit])
 
         self.num_moves += 1
         truncated = self.num_moves >= 100
@@ -143,7 +137,7 @@ class SiblingGridWorldEnv(gym.Env):
         if self.render_mode == "human":
             self._render_frame()
 
-        return np.concatenate(observation["agent"]), reward, terminated, truncated, info
+        return observation["agent"][0], reward, terminated, truncated, info
 
     def render(self):
         if self.render_mode == "rgb_array":

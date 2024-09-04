@@ -25,10 +25,12 @@ class SiblingGWAgent(object):
         """
         self.env = env
 
-        nS, nA = np.prod(env.observation_space.nvec), np.prod(env.action_space.nvec)
+        nS = np.prod(env.observation_space.nvec)
+        nA_gw, nA_bandit = env.action_space.nvec
         self.pi_track = []
-        self.Q = np.ones((nS, nA), dtype=np.float32)*-100
-        # self.Q_track = np.zeros((n_episodes, nS, nA), dtype=np.float32)
+        self.Q_gw = np.ones((nS, nA_gw), dtype=np.float32)*-100
+        self.Q_bandit = np.ones(nA_bandit, dtype=np.float32)*-100
+        self.N_bandit = np.zeros(nA_bandit, dtype=np.int32)
         self.episode = 0
 
         self.gamma = gamma
@@ -40,12 +42,6 @@ class SiblingGWAgent(object):
         )
 
         self.training_error = []
-
-    def act_lin_to_multi(self, action):
-        return np.unravel_index(action, self.env.action_space.nvec, order='F')
-
-    def act_multi_to_lin(self, action):
-        return np.ravel_multi_index(action, self.env.action_space.nvec, order='F')
     
     def state_lin_to_multi(self, state):
         return np.unravel_index(state, self.env.observation_space.nvec, order='F')
@@ -57,16 +53,26 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        action = np.argmax(self.Q[state_idx])
-        action = self.act_lin_to_multi(action)
+        act_bandit = np.argmax(self.Q_bandit)
 
-        P = self.env._update_P(state[-1])
-        # P = self.env._update_P(0)
+        P = self.env._update_P(act_bandit)
         Q_gw, V_gw, pi_gw = value_iteration(P)
-        loc_idx = np.ravel_multi_index(
-            state[:-1], self.env.observation_space.nvec[:-1], order='F')
 
-        return V_gw, self.act_multi_to_lin(np.array([pi_gw(loc_idx), action[-1]]))
+        return V_gw, np.array([pi_gw(state_idx), act_bandit])
+
+    def greedy_action(self, state):
+        state_idx = self.state_multi_to_lin(state)
+
+        act_gw = np.argmax(self.Q_gw[state_idx])
+        act_bandit = np.argmax(self.Q_bandit)
+        return np.array([act_gw, act_bandit])
+
+    def random_action(self, state):
+        state_idx = self.state_multi_to_lin(state)
+
+        act_gw = np.random.randint(len(self.Q_gw[state_idx]))
+        act_bandit = np.random.randint(len(self.Q_bandit))
+        return np.array([act_gw, act_bandit])
 
 
     def select_action(self, state):
@@ -77,10 +83,9 @@ class SiblingGWAgent(object):
         state_idx = self.state_multi_to_lin(state)
         
         if np.random.random() > self.epsilons[self.episode]:
-            return np.argmax(self.Q[state_idx])
-            # return self.custom_action(state)[1]
+            return self.greedy_action(state)
         else:
-            return np.random.randint(len(self.Q[state_idx]))
+            return self.random_action(state)
 
     def update(
         self,
@@ -92,17 +97,16 @@ class SiblingGWAgent(object):
     ):
         obs_idx = self.state_multi_to_lin(obs)
         next_obs_idx = self.state_multi_to_lin(next_obs)
-        action_idx = self.act_multi_to_lin(action)
-
-        # V_gw, _ =  self.custom_action(obs)
 
         """Updates the Q-value of an action."""
-        # loc_idx = np.ravel_multi_index(
-        #     obs[:-1], self.env.observation_space.nvec[:-1], order='F')
-        # td_target = V_gw[loc_idx]
-        td_target = reward + self.gamma * np.max(self.Q[next_obs_idx]) * (not terminated)
+        # V_gw, _ =  self.custom_action(obs)
+        # td_target = V_gw[obs_idx]
+        td_target = reward[0] + self.gamma * np.max(self.Q_gw[next_obs_idx]) * (not terminated)
 
-        td_error = td_target - self.Q[obs_idx][action_idx]
-        self.Q[obs_idx][action_idx] = self.Q[obs_idx][action_idx] + self.alphas[self.episode] * td_error
+        td_error = td_target - self.Q_gw[obs_idx][action[0]]
+        self.Q_gw[obs_idx][action[0]] += self.alphas[self.episode] * td_error
+
+        self.N_bandit[action[1]] += 1
+        self.Q_bandit[action[1]] += (reward[1] - self.Q_bandit[action[1]]) / self.N_bandit[action[1]]
 
         self.training_error.append(td_error)
