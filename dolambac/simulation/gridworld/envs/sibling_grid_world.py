@@ -88,12 +88,13 @@ class SiblingGridWorldEnv(gym.Env):
             zip(range(4), self.worlds[self._true_world_idx])
         )
 
-        self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
+        # self._agent_location = self.np_random.integers(0, self.size, size=2, dtype=int)
+        self._agent_location = np.array([2, 2])
         self._target_location = np.array([self.size-1, self.size-1], dtype=int)
-        while np.array_equal(self._target_location, self._agent_location):
-            self._agent_location = self.np_random.integers(
-                0, self.size, size=2, dtype=int
-            )
+        # while np.array_equal(self._target_location, self._agent_location):
+        #     self._agent_location = self.np_random.integers(
+        #         0, self.size, size=2, dtype=int
+        #     )
         self._world_belief = self.np_random.integers(0, 24, size=1, dtype=int)
         self.cur_P = self._update_P(self._world_belief[0])
 
@@ -129,7 +130,7 @@ class SiblingGridWorldEnv(gym.Env):
         reward = np.array([reward_gw, reward_bandit])
 
         self.num_moves += 1
-        truncated = self.num_moves >= 100
+        truncated = self.num_moves >= 8
 
         observation = self._get_obs()
         info = self._get_info()

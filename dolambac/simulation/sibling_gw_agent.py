@@ -29,7 +29,7 @@ class SiblingGWAgent(object):
         nA_gw, nA_bandit = env.action_space.nvec
         self.pi_track = []
         self.Q_gw = np.ones((nS, nA_gw), dtype=np.float32)*-100
-        self.Q_bandit = np.ones(nA_bandit, dtype=np.float32)*-100
+        self.Q_bandit = np.ones(nA_bandit, dtype=np.float32)*0
         self.N_bandit = np.zeros(nA_bandit, dtype=np.int32)
         self.episode = 0
 
@@ -53,7 +53,10 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        act_bandit = np.argmax(self.Q_bandit)
+        max_value = np.max(self.Q_bandit)
+        max_indices = np.where(self.Q_bandit == max_value)[0]
+        act_bandit = np.random.choice(max_indices)
+        # act_bandit = np.argmax(self.Q_bandit)
 
         P = self.env._update_P(act_bandit)
         Q_gw, V_gw, pi_gw = value_iteration(P)
@@ -83,7 +86,8 @@ class SiblingGWAgent(object):
         state_idx = self.state_multi_to_lin(state)
         
         if np.random.random() > self.epsilons[self.episode]:
-            return self.greedy_action(state)
+            # return self.greedy_action(state)
+            return self.custom_action(state)[1]
         else:
             return self.random_action(state)
 
