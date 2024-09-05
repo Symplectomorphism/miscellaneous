@@ -2,6 +2,7 @@ from itertools import permutations
 import numpy as np
 import copy
 import pygame
+from utils import value_iteration
 
 import gymnasium as gym
 from gymnasium import spaces
@@ -14,6 +15,7 @@ class SiblingGridWorldEnv(gym.Env):
         self.window_size = 512  # The size of the PyGame window
         self.gw_P = P           # Vanilla GridWorld transition matrix
         self.cur_P = copy.deepcopy(self.gw_P)
+        self.V_gw = value_iteration(self.gw_P)[1]
 
         self.observation_space = spaces.MultiDiscrete([size, size])
         self.action_space = spaces.MultiDiscrete([4, 24])
@@ -111,6 +113,7 @@ class SiblingGridWorldEnv(gym.Env):
         true_direction = self.action_to_direction[action[0]]
         expected_direction = self.worlds[action[1]][action[0]]
 
+        state_idx = np.ravel_multi_index(self._agent_location, self.observation_space.nvec, order='F')
         # We use `np.clip` to make sure we don't leave the grid
         self._agent_location = np.clip(
             self._agent_location + true_direction, 0, self.size - 1
@@ -124,13 +127,14 @@ class SiblingGridWorldEnv(gym.Env):
         reward_gw = -1 if not terminated else 0
 
         # Reward (penalty) for getting incorrect directions
-        reward_bandit = 0
-        if not np.array_equal(true_direction, expected_direction):
-            reward_bandit -= 1
+        next_state_idx = np.ravel_multi_index(self._agent_location, self.observation_space.nvec, order='F')
+        reward_bandit = self.V_gw[next_state_idx] - self.V_gw[state_idx]
+        # if np.array_equal(true_direction, expected_direction):
+        #     reward_bandit += 1/2
         reward = np.array([reward_gw, reward_bandit])
 
         self.num_moves += 1
-        truncated = self.num_moves > 8
+        truncated = self.num_moves > 50
 
         observation = self._get_obs()
         info = self._get_info()
