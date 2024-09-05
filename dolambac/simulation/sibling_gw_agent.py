@@ -54,6 +54,14 @@ class SiblingGWAgent(object):
             self.epsilons = [init_epsilon]
 
         self.training_error = []
+
+    def reset(self):
+        nS = np.prod(self.env.observation_space.nvec)
+        nA_gw, nA_bandit = self.env.action_space.nvec
+        self.Q_gw = np.ones((nS, nA_gw), dtype=np.float32)*-100
+        self.Q_bandit = np.ones(nA_bandit, dtype=np.float32)*0
+        self.N_bandit = np.zeros(nA_bandit, dtype=np.int32)
+        self.episode = 0
     
     def state_lin_to_multi(self, state):
         return np.unravel_index(state, self.env.observation_space.nvec, order='F')
