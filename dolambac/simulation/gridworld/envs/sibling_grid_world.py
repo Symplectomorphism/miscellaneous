@@ -129,8 +129,8 @@ class SiblingGridWorldEnv(gym.Env):
         # Reward (penalty) for getting incorrect directions
         next_state_idx = np.ravel_multi_index(self._agent_location, self.observation_space.nvec, order='F')
         reward_bandit = self.V_gw[next_state_idx] - self.V_gw[state_idx]
-        # if np.array_equal(true_direction, expected_direction):
-        #     reward_bandit += 1/2
+        if not np.array_equal(true_direction, expected_direction):
+            reward_bandit -= 2
         reward = np.array([reward_gw, reward_bandit])
 
         self.num_moves += 1

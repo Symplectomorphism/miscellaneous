@@ -81,14 +81,14 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        if self.Q_bandit[self.env._world_belief] > 0:
-            act_bandit = self.env._world_belief[0]
-        else:
-            # max_value = np.max(self.Q_bandit)
-            # max_indices = np.where(self.Q_bandit == max_value)[0]
-            # act_bandit = np.random.choice(max_indices)
-            act_bandit = np.argmax(self.Q_bandit)
-        # act_bandit = np.argmax(self.Q_bandit)
+        # if self.Q_bandit[self.env._world_belief] > 0:
+        #     act_bandit = self.env._world_belief[0]
+        # else:
+        #     # max_value = np.max(self.Q_bandit)
+        #     # max_indices = np.where(self.Q_bandit == max_value)[0]
+        #     # act_bandit = np.random.choice(max_indices)
+        #     act_bandit = np.argmax(self.Q_bandit)
+        act_bandit = np.argmax(self.Q_bandit)
 
         return np.array([self.pi_gw[act_bandit](state_idx), act_bandit])
 
@@ -139,33 +139,39 @@ class SiblingGWAgent(object):
         self.Q_gw[obs_idx][action[0]] += self.alphas[self.episode] * td_error
 
         # Find all the worlds with the same expected direction and update the bandits and then some...
-        # true_direction = self.env.action_to_direction[action[0]]
+        true_direction = self.env.action_to_direction[action[0]]
         expected_direction = self.env.worlds[action[1]][action[0]]
         good_worlds = set()
         bad_worlds = set()
         for i in range(self.env.action_space.nvec[1]):
-            if reward[1] < 0:
+            if reward[1] == -3:
                 if (self.all_actions[i] == action[0]).any():
                     bad_worlds.add(i)
+            elif reward[1] == -1:
+                test_direction = self.env.worlds[i][action[0]] 
+                if np.array_equal(test_direction, expected_direction):
+                   bad_worlds.add(i)
             elif reward[1] > 0:
                 if (self.all_actions[i] == action[0]).any():
                     good_worlds.add(i)
         
         self.blacklist.update(bad_worlds) 
         good_worlds = good_worlds.difference(self.blacklist)
-        self.whitelist = self.whitelist.intersection(good_worlds)
+        if len(good_worlds) > 0:
+            self.blacklist.update(self.whitelist.difference(good_worlds))
+        if len(self.blacklist) > 0:
+            self.whitelist = self.whitelist.difference(self.blacklist)
 
-            # test_direction = self.env.worlds[i][action[0]]
-            # if np.array_equal(test_direction, expected_direction):
-            #     similar_worlds.append(i)
 
         # Update the bandits
-        for w in good_worlds:
+        for w in self.whitelist:
             self.N_bandit[w] += 1
-            self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+            # self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+            self.Q_bandit[w] += (1 - self.Q_bandit[w]) / self.N_bandit[w]
         for w in self.blacklist:
             self.N_bandit[w] += 1
-            self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+            # self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+            self.Q_bandit[w] += (-1 - self.Q_bandit[w]) / self.N_bandit[w]
 
         # self.N_bandit[action[1]] += 1
         # self.Q_bandit[action[1]] += (reward[1] - self.Q_bandit[action[1]]) / self.N_bandit[action[1]]
