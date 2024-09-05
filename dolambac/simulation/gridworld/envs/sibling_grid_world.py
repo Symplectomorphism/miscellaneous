@@ -108,12 +108,12 @@ class SiblingGridWorldEnv(gym.Env):
 
     def step(self, action):
         # Actual direction in which the agent is going to move.
-        direction = self.action_to_direction[action[0]]
+        true_direction = self.action_to_direction[action[0]]
         expected_direction = self.worlds[action[1]][action[0]]
 
         # We use `np.clip` to make sure we don't leave the grid
         self._agent_location = np.clip(
-            self._agent_location + direction, 0, self.size - 1
+            self._agent_location + true_direction, 0, self.size - 1
         )
         self._world_belief = np.array([action[1]])
         self.cur_P = self._update_P(self._world_belief[0])
@@ -123,9 +123,9 @@ class SiblingGridWorldEnv(gym.Env):
         # terminated = terminated and np.array_equal(self._true_world, self.worlds[self._world_belief[0]])
         reward_gw = -1 if not terminated else 0
 
-        # Reward (penalty) for getting correct directions
+        # Reward (penalty) for getting incorrect directions
         reward_bandit = 0
-        if not np.array_equal(direction, expected_direction):
+        if not np.array_equal(true_direction, expected_direction):
             reward_bandit -= 1
         reward = np.array([reward_gw, reward_bandit])
 

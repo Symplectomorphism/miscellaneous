@@ -35,6 +35,13 @@ class SiblingGWAgent(object):
 
         self.gamma = gamma
 
+        self.V_gw, self.pi_gw = [], []
+        for i in range(nA_bandit):
+            P = self.env._update_P(i)
+            _, b, c = value_iteration(P)
+            self.V_gw.append(b)
+            self.pi_gw.append(c)
+
         if n_episodes > 1:
             self.alphas = decay_schedule(
                 init_alpha, min_alpha, alpha_decay_ratio, n_episodes
@@ -58,15 +65,15 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        # max_value = np.max(self.Q_bandit)
-        # max_indices = np.where(self.Q_bandit == max_value)[0]
-        # act_bandit = np.random.choice(max_indices)
-        act_bandit = np.argmax(self.Q_bandit)
+        if self.Q_bandit[self.env._world_belief] == 0:
+            act_bandit = self.env._world_belief[0]
+        else:
+            # max_value = np.max(self.Q_bandit)
+            # max_indices = np.where(self.Q_bandit == max_value)[0]
+            # act_bandit = np.random.choice(max_indices)
+            act_bandit = np.argmax(self.Q_bandit)
 
-        P = self.env._update_P(act_bandit)
-        Q_gw, V_gw, pi_gw = value_iteration(P)
-
-        return V_gw, np.array([pi_gw(state_idx), act_bandit])
+        return self.V_gw[act_bandit], np.array([self.pi_gw[act_bandit](state_idx), act_bandit])
 
     def greedy_action(self, state):
         state_idx = self.state_multi_to_lin(state)
@@ -108,19 +115,23 @@ class SiblingGWAgent(object):
         next_obs_idx = self.state_multi_to_lin(next_obs)
 
         """Updates the Q-value of an action."""
-        # V_gw, _ =  self.custom_action(obs)
-        # td_target = V_gw[obs_idx]
+        # td_target = V_gw[action[1]][obs_idx]
         td_target = reward[0] + self.gamma * np.max(self.Q_gw[next_obs_idx]) * (not terminated)
 
         td_error = td_target - self.Q_gw[obs_idx][action[0]]
         self.Q_gw[obs_idx][action[0]] += self.alphas[self.episode] * td_error
 
-        # Find all the worlds with the same expected direction and update the bandits
+        # Find all the worlds with the same expected direction and update the bandits and then some...
+        # true_direction = self.env.action_to_direction[action[0]]
         expected_direction = self.env.worlds[action[1]][action[0]]
         similar_worlds = []
         for i in range(24):
-            if np.array_equal(self.env.worlds[i][action[0]], expected_direction):
+            test_direction = self.env.worlds[i][action[0]]
+            if np.array_equal(test_direction, expected_direction):
                 similar_worlds.append(i)
+            if self.V_gw[i][obs_idx] >= self.V_gw[action[1]][next_obs_idx]:
+                if self.pi_gw[i](next_obs_idx) == action[0]:
+                    similar_worlds.append(i)
 
         # Update the bandits
         for w in similar_worlds:
