@@ -166,12 +166,12 @@ class SiblingGWAgent(object):
         # Update the bandits
         for w in self.whitelist:
             self.N_bandit[w] += 1
-            # self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+            # self.Q_bandit[w] += (np.abs(reward[1]) - self.Q_bandit[w]) / self.N_bandit[w]
             self.Q_bandit[w] += (1 - self.Q_bandit[w]) / self.N_bandit[w]
         for w in self.blacklist:
             self.N_bandit[w] += 1
-            # self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
-            self.Q_bandit[w] += (-1 - self.Q_bandit[w]) / self.N_bandit[w]
+            self.Q_bandit[w] += (-np.abs(reward[1]) - self.Q_bandit[w]) / self.N_bandit[w]
+            # self.Q_bandit[w] += (-1 - self.Q_bandit[w]) / self.N_bandit[w]
 
         # self.N_bandit[action[1]] += 1
         # self.Q_bandit[action[1]] += (reward[1] - self.Q_bandit[action[1]]) / self.N_bandit[action[1]]

@@ -36,6 +36,7 @@ class SiblingGridWorldEnv(gym.Env):
         )
 
         self.num_moves = 0
+        self.bad_moves = 0
 
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
@@ -81,6 +82,7 @@ class SiblingGridWorldEnv(gym.Env):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
         self.num_moves = 0
+        self.bad_moves = 0
 
         if options['randomize_world']:
             self._true_world_idx = np.random.randint(24)
@@ -129,6 +131,8 @@ class SiblingGridWorldEnv(gym.Env):
         # Reward (penalty) for getting incorrect directions
         next_state_idx = np.ravel_multi_index(self._agent_location, self.observation_space.nvec, order='F')
         reward_bandit = self.V_gw[next_state_idx] - self.V_gw[state_idx]
+        if reward_bandit <= 0:
+            self.bad_moves += 1
         if not np.array_equal(true_direction, expected_direction):
             reward_bandit -= 2
         reward = np.array([reward_gw, reward_bandit])
