@@ -46,7 +46,10 @@ class SiblingGWAgent(object):
             self.all_actions[i] = np.array([self.pi_gw[i](j) for j in range(nS-1)])
 
         self.blacklist = set()
+        self.graylist = set()
         self.whitelist = set(range(24))
+
+        self.border_idx = np.array([0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 20, 21, 22, 23])
 
         if n_episodes > 1:
             self.alphas = decay_schedule(
@@ -69,6 +72,7 @@ class SiblingGWAgent(object):
         self.N_bandit = np.zeros(nA_bandit, dtype=np.int32)
         self.episode = 0
         self.blacklist.clear()
+        self.graylist.clear()
         self.whitelist = set(range(24))
     
     def state_lin_to_multi(self, state):
@@ -88,7 +92,16 @@ class SiblingGWAgent(object):
         #     # max_indices = np.where(self.Q_bandit == max_value)[0]
         #     # act_bandit = np.random.choice(max_indices)
         #     act_bandit = np.argmax(self.Q_bandit)
+
+        max_value = np.max(self.Q_bandit)
+        max_indices = np.where(self.Q_bandit == max_value)[0]
+
         act_bandit = np.argmax(self.Q_bandit)
+        if state_idx in self.border_idx:
+            for i in max_indices:
+                if i not in self.graylist:
+                    act_bandit = i
+                    break
 
         return np.array([self.pi_gw[act_bandit](state_idx), act_bandit])
 
@@ -142,6 +155,7 @@ class SiblingGWAgent(object):
         true_direction = self.env.action_to_direction[action[0]]
         expected_direction = self.env.worlds[action[1]][action[0]]
         good_worlds = set()
+        okay_worlds = set()
         bad_worlds = set()
         for i in range(self.env.action_space.nvec[1]):
             if reward[1] == -3:
@@ -150,17 +164,20 @@ class SiblingGWAgent(object):
             elif reward[1] == -1:
                 test_direction = self.env.worlds[i][action[0]] 
                 if np.array_equal(test_direction, expected_direction):
-                   bad_worlds.add(i)
+                   okay_worlds.add(i)
             elif reward[1] > 0:
                 if (self.all_actions[i] == action[0]).any():
                     good_worlds.add(i)
         
         self.blacklist.update(bad_worlds) 
-        good_worlds = good_worlds.difference(self.blacklist)
+        self.graylist.update(okay_worlds)
+        good_worlds.difference_update(self.blacklist)
+        okay_worlds.difference_update(self.blacklist)
         if len(good_worlds) > 0:
             self.blacklist.update(self.whitelist.difference(good_worlds))
         if len(self.blacklist) > 0:
-            self.whitelist = self.whitelist.difference(self.blacklist)
+            self.whitelist.difference_update(self.blacklist.union(self.graylist))
+            self.graylist.difference_update(self.blacklist.union(self.whitelist))
 
 
         # Update the bandits
