@@ -34,12 +34,17 @@ class SiblingGWAgent(object):
         self.episode = 0
 
         self.gamma = gamma
-        self.alphas = decay_schedule(
-            init_alpha, min_alpha, alpha_decay_ratio, n_episodes
-        )
-        self.epsilons = decay_schedule(
-            init_epsilon, min_epsilon, epsilon_decay_ratio, n_episodes
-        )
+
+        if n_episodes > 1:
+            self.alphas = decay_schedule(
+                init_alpha, min_alpha, alpha_decay_ratio, n_episodes
+            )
+            self.epsilons = decay_schedule(
+                init_epsilon, min_epsilon, epsilon_decay_ratio, n_episodes
+            )
+        else:
+            self.alphas = [init_alpha]
+            self.epsilons = [init_epsilon]
 
         self.training_error = []
     
@@ -53,10 +58,10 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        max_value = np.max(self.Q_bandit)
-        max_indices = np.where(self.Q_bandit == max_value)[0]
-        act_bandit = np.random.choice(max_indices)
-        # act_bandit = np.argmax(self.Q_bandit)
+        # max_value = np.max(self.Q_bandit)
+        # max_indices = np.where(self.Q_bandit == max_value)[0]
+        # act_bandit = np.random.choice(max_indices)
+        act_bandit = np.argmax(self.Q_bandit)
 
         P = self.env._update_P(act_bandit)
         Q_gw, V_gw, pi_gw = value_iteration(P)
@@ -110,7 +115,18 @@ class SiblingGWAgent(object):
         td_error = td_target - self.Q_gw[obs_idx][action[0]]
         self.Q_gw[obs_idx][action[0]] += self.alphas[self.episode] * td_error
 
-        self.N_bandit[action[1]] += 1
-        self.Q_bandit[action[1]] += (reward[1] - self.Q_bandit[action[1]]) / self.N_bandit[action[1]]
+        # Find all the worlds with the same expected direction and update the bandits
+        expected_direction = self.env.worlds[action[1]][action[0]]
+        similar_worlds = []
+        for i in range(24):
+            if np.array_equal(self.env.worlds[i][action[0]], expected_direction):
+                similar_worlds.append(i)
+
+        # Update the bandits
+        for w in similar_worlds:
+            self.N_bandit[w] += 1
+            self.Q_bandit[w] += (reward[1] - self.Q_bandit[w]) / self.N_bandit[w]
+        # self.N_bandit[action[1]] += 1
+        # self.Q_bandit[action[1]] += (reward[1] - self.Q_bandit[action[1]]) / self.N_bandit[action[1]]
 
         self.training_error.append(td_error)

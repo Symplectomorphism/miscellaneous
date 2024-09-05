@@ -121,7 +121,7 @@ class SiblingGridWorldEnv(gym.Env):
         # An episode is done iff the agent has reached the target
         terminated = np.array_equal(self._agent_location, self._target_location)
         # terminated = terminated and np.array_equal(self._true_world, self.worlds[self._world_belief[0]])
-        reward_gw = -1 if not terminated else 0 
+        reward_gw = -1 if not terminated else 0
 
         # Reward (penalty) for getting correct directions
         reward_bandit = 0
@@ -130,7 +130,7 @@ class SiblingGridWorldEnv(gym.Env):
         reward = np.array([reward_gw, reward_bandit])
 
         self.num_moves += 1
-        truncated = self.num_moves >= 8
+        truncated = self.num_moves > 8
 
         observation = self._get_obs()
         info = self._get_info()
