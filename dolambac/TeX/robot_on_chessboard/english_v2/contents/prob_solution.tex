@@ -87,7 +87,12 @@ in~\eqref{eq:tower1}}
 % beklenen de\u{g}er terimini ele alaca\u{g}{\i}z. Kule kural{\i}n{\i} kullanarak
 % hesaplamalar{\i}m{\i}za devam edelim. 
 First of all, we consider the first expectation term on the right-hand side of
-equation~\eqref{eq:tower1}.
+equation~\eqref{eq:tower1}. If at the first step, we found ourselves in square 
+$C4$, that means we made progress towards the goal. We can keep this greedy 
+motion for one more turn since it will get us closer to the goal. Hence, $s_2 = 
+C5$, with a cost of $r_2 = 1$. Since at step $2$, we hit the south wall, we need
+to change the button to press. We have $3$ options of equal likelihood. Choosing
+one will take us either to $D5$, back to $C4$, or to $B5$. Hence,
 %
 \begin{align}
     \begin{split}
@@ -100,7 +105,10 @@ equation~\eqref{eq:tower1}.
 \end{align}
 %
 We delve further into the computation of the two expected values in
-equation~\eqref{eq:tower2}, whose values are not immediately apparent.
+equation~\eqref{eq:tower2}, whose values are not immediately apparent. If at 
+step $3$ we found ourselves back on $C4$, we got farther from the goal, but 
+we can repeat our previous move to get back to $C5$ on step $4$. This maneuver 
+costs us $r_3 + r_4 = 2$ units. Now, we know what directions two of the keys map to. The remaining expectations are computed below.
 %
 \begin{align*}
     \begin{split}
@@ -111,7 +119,10 @@ equation~\eqref{eq:tower2}, whose values are not immediately apparent.
 \end{align*}
 %
 There is only one expected value that we have left to compute in
-equation~\eqref{eq:tower2}:
+equation~\eqref{eq:tower2}. Again, if we found ourselves on the $B5$ square at 
+step $3$, we have moved farther away from the goal, but do now know how to get 
+back to $C5$ in this case. Hence, we need to try out the final key to figure 
+out the full mapping. The expectations are computed below.
 %
 \begin{align*}
     \begin{split}
@@ -129,7 +140,10 @@ equation~\eqref{eq:tower1} using equation~\eqref{eq:tower2}:
 in~\eqref{eq:tower1}} 
 %
 We use similar techniques to compute the second expected value on the right-hand
-side of equation~\eqref{eq:tower1}.
+side of equation~\eqref{eq:tower1}. If on step $2$, we find ourselves on square 
+$B2$, then, we have identified all actions that take us farther from the goal. 
+The two remaining actions both get us closer to the goal, from which we are $8$
+steps away.
 %
 
 \begin{align}
@@ -143,7 +157,11 @@ side of equation~\eqref{eq:tower1}.
 \end{align}
 %
 Once more, we utilize the tower rule to compute the expected values in
-equation~\eqref{eq:tower3} whose values are not immediately apparent.
+equation~\eqref{eq:tower3} whose values are not immediately apparent. If at step
+$3$, we end up on square $C3$, we can keep repeating this move until we reach
+$C5$ at step $4$, incurring a cost of $r_1 + r_2 + r_3 + r_4 = 4$ units. From
+here, the only two possibilities is we get to square $D5$ or $B5$ on step $5$. 
+The remaining expectations are computed below.
 %
 \begin{align*}
     \begin{split}
@@ -154,7 +172,10 @@ equation~\eqref{eq:tower3} whose values are not immediately apparent.
 \end{align*}
 %
 There is only one expected value that we have left to compute in
-equation~\eqref{eq:tower3}:
+equation~\eqref{eq:tower3}. If we find ourselves on square $D2$ at step $2$, we 
+can repeat this direction to reach $E2$ at step $3$, incurring a cost of 
+$r_1 + r_2 + r_3 = 3$ units. From here, we can either go to $E3$ or $D2$ with 
+the remaining keys. The expectations are computed below.
 %
 \vspace{-2mm}
 \begin{align*}

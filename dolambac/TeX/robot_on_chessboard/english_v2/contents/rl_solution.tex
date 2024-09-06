@@ -15,28 +15,82 @@ belief''. Here, we define world belief as our current belief of mapping of the
 arrow keys to the actual directions.
 
 Let $\uline{N} = \{0, 1, \ldots, N-1\}$ denote the set of nonnegative integers
-ranging from $0$ to $N-1$. We define the Markov decision process (MDP) as
-follows:
+ranging from $0$ to $N-1$. We model this problem as consisting of two RL 
+subproblems: the first one is the sequential problem of finding the shortest 
+route to the goal position, given the world belief, and the second is to 
+find an appropriate world belief, which can be modeled as a $24$-armed bandit 
+problem.
 
-\begin{itemize}
-\item \textbf{State space}: The product $\mc{S} = \uline{4} \times \uline{4}
-\times \uline{24}$. The first two factors product stands for the position of the
-robot in the grid world and the third factor to the ID number of the world, of
-which there are $4! = 24$. These $24$ worlds correspond to the possible ways to
-permute the four key directions.
-\item \textbf{Action space}: The product $\mc{A} = \uline{4} \times \uline{24}$.
-The first factor corresponds to a particular direction to move the robot. The
-second factor corresponds to which of the $24$ worlds to move the current belief
-to. Of course, any direction chosen in this set would be the actual direction
-the robot would move only if there is overlap between the assumed and correct 
-directions.
-\item \textbf{Transition function}: This is a deterministic function of the true
-world. 
-\item \textbf{Reward function}: A negative reward (penalty) of $-10$ is
-incurred whenever $s \in \mc{S}$ is nonterminal. Otherwise, this reward is $0$.
-Furthermore, for each overlap between the assumed and correct directions
-the agent is rewarded $+1$.
-\end{itemize}
+We define the Markov decision processes (MDP) of the subproblems as follows:
+
+\subsubsection{State Spaces}
+%
+The first subproblem has the state space $\mc{S}_1 = \uline{4} \times
+\uline{4}$, where the first factor stands for the column in which the robot 
+is located, and the second stands for the row.
+%
+The second subproblem is a bandit problem, with a singleton state, the world 
+belief.
+%
+The full problem may be considered to have the state space $\mc{S} = \mc{S}_1 \times \{1\} \cong \uline{4} \times \uline{4}$.
+
+\subsubsection{Action Spaces}
+%
+The problem has the action space $\mc{A} = \uline{4} \times \uline{24}$. The 
+first factor corresponds to the which key to be pressed given the world belief, 
+which is an element of the second factor of the action space.
+
+\subsubsection{Transition function}
+%
+The transition function is a deterministic function of the true world. The true 
+world has a certain mapping between the keys and the directions, which is hidden
+from the agent. This key mapping is deterministic albeit hidden and the agent
+will move in the corresponding directions given the correct key mapping one
+hundred percent of the time.
+
+\subsubsection{Reward function}
+%
+This function needs to be designed judiciously in order to give the agent the
+best chance to learn the optimal strategy. What worked well in our experiments
+is to assign a reward of $-1$ each time the agent moves into a nonterminal state
+(a state that is not $G$) for the grid world subproblem. 
+
+For the bandit subproblem, we define the reward as a sum of two terms. The first
+term is the difference between the value functions of the gridworld problem,
+given that the current world belief is correct. To explain, suppose that $w \in
+\uline{24}$ is the current world belief. We perform value iteration to find the
+value function of the grid world under this assumption and we assign the first
+term of the reward for the bandit as the value function evaluated at the grid
+world position at which we land minus the value function evaluated at the
+current grid world position.
+
+It turns out that it is important to be able to distinguish between whether the 
+desired movement direction is equal to the true direction of motion. For that 
+reason, the second term that we add to the bandit reward signal $-2$ whenever
+the executed direction is different from the direction in which the agent
+expected the robot to move.
 
 Our implementation~\cite{saticiGitHub} of this MDP is carried out using 
-Gymnasium~\cite{towers2024gymnasium}, a Python library for RL.
+Gymnasium~\cite{towers2024gymnasium}, a Python library for modeling and RL.
+
+
+\subsubsection{Q-Learning}
+
+Once the MDP is defined, we apply $Q$-learning to find the optimal policy. For 
+the grid world subproblem, this is the straightforward $Q$-learning algorithm 
+that can be found in any RL textbook. For the bandit subproblem, the $Q$-function is learned by the iteration
+%
+\[
+\mathtt{
+Q_b[a] = Q_b[a] + (reward - Q_b[a]) / N[a],
+}
+\]
+%
+where $\mathtt{N[a]}$ is the number of times action $a$ has been taken for the 
+bandit problem.
+
+The way we set this problem up, allows us to use RL to learn to get to the goal
+position in one episode in the last number of moves. Of course, this is a
+stochastic process, depending on what the initial world belief is selected and
+what the true world is. We perform Monte Carlo simulations of this setup to determine the statistics, including the expectation of the minimum number of 
+moves (which was solved analytically in Section~\ref{ssec:prob_sol}).
