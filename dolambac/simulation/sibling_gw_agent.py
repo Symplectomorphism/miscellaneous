@@ -85,16 +85,9 @@ class SiblingGWAgent(object):
     def custom_action(self, state):
         state_idx = self.state_multi_to_lin(state)
 
-        # if self.Q_bandit[self.env._world_belief] > 0:
-        #     act_bandit = self.env._world_belief[0]
-        # else:
-        #     # max_value = np.max(self.Q_bandit)
-        #     # max_indices = np.where(self.Q_bandit == max_value)[0]
-        #     # act_bandit = np.random.choice(max_indices)
-        #     act_bandit = np.argmax(self.Q_bandit)
-
         max_value = np.max(self.Q_bandit)
         max_indices = np.where(self.Q_bandit == max_value)[0]
+        # act_bandit = np.random.choice(max_indices)
 
         act_bandit = np.argmax(self.Q_bandit)
         if state_idx in self.border_idx:

@@ -36,13 +36,28 @@ observe that it takes $4$ steps to solve the environment $16.\bar{6}\%$ of the t
     \label{fig:histogram}
 \end{figure}
 
-The final Figure~\ref{fig:visit_count} shows the frequency of visits of each
-state under the optimal policy deduced by $Q$-learning over $10,000$ independent
-Monte Carlo runs.
+Figure~\ref{fig:visit_count} shows the frequency of visits of each state under
+the optimal policy deduced by $Q$-learning over $10,000$ independent Monte Carlo
+runs. Notice that the ratio of the goal state being visited to the number of
+runs is $1$, meaning that all runs end at the goal state.
 %
 \begin{figure}[bth]
     \centering
-    \includegraphics[width=0.5\textwidth]{./figures/visit_count.eps}
-    \caption{Number of times a given state is visited under the optimal policy over $10,000$ independent Monte Carlo simulation runs.}
+    \includegraphics[width=0.5\textwidth]{./figures/visit_count_ratio.eps}
+    \caption{Ratio of times a given state is visited under the optimal policy over $10,000$ independent Monte Carlo simulation runs.}
     \label{fig:visit_count}
+\end{figure}
+
+Figure~\ref{fig:bandit_scores} shows the scores each world belief achieves over
+simulation steps during a single run. At the end there are four bandit
+arms(world beliefs) that have the same high score of $1$, however, two of these
+bandits arms have been identified to swap the ``down'' and ``right'' actions.
+Since this swapping does not affect the performance of the agent, their score
+matches the other two top bandit arms which have not been differentiated.
+%
+\begin{figure}[bth]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./figures/bandit_scores.eps}
+    \caption{Scores each world belief achieves over a single run sample.}
+    \label{fig:bandit_scores}
 \end{figure}
