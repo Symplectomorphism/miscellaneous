@@ -9,20 +9,20 @@ further compute a histogram of the states visited, and the rewards collected on
 average.
 
 The first result in Figure~\ref{fig:running_avg} shows the running average
-number of steps taken to reach the goal over $10,000$ independent Monte Carlo
+number of steps taken to reach the goal over $50,000$ independent Monte Carlo
 simulation runs.
 %
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.5\textwidth]{./figures/running_avg.eps}
-    \caption{Running average number of steps taken to reach the goal over $10,000$ independent Monte Carlo simulation runs.}
+    \caption{Running average number of steps taken to reach the goal over $50,000$ independent Monte Carlo simulation runs.}
     \label{fig:running_avg}
 \end{figure}
 %
 Figure~\ref{fig:running_avg} shows that the running average converges to $6.\bar{6}$ just as the theoretical computation indicated in Section~\ref{ssec:prob_sol}.
 
 Figure~\ref{fig:histogram} shows the histogram of number of steps it took to 
-solve the environment over $10,000$ independent Monte Carlo simulation runs. We 
+solve the environment over $50,000$ independent Monte Carlo simulation runs. We 
 observe that it takes $4$ steps to solve the environment $16.\bar{6}\%$ of the time, $6$ steps $33.\bar{3}\%$ of the time, and $8$ steps $50\%$ of the time, yielding an expected value of 
 %
 \[
@@ -32,19 +32,19 @@ observe that it takes $4$ steps to solve the environment $16.\bar{6}\%$ of the t
 \begin{figure}[tbh]
     \centering
     \includegraphics[width=0.5\textwidth]{./figures/steps_histogram.eps}
-    \caption{Histogram of number of steps taken to solve the environment over $10,000$ independent Monte Carlo simulation runs.}
+    \caption{Histogram of number of steps taken to solve the environment over $50,000$ independent Monte Carlo simulation runs.}
     \label{fig:histogram}
 \end{figure}
 
 Figure~\ref{fig:visit_count} shows the frequency of visits of each state under
-the optimal policy deduced by $Q$-learning over $10,000$ independent Monte Carlo
+the optimal policy deduced by $Q$-learning over $50,000$ independent Monte Carlo
 runs. Notice that the ratio of the goal state being visited to the number of
 runs is $1$, meaning that all runs end at the goal state.
 %
 \begin{figure}[bth]
     \centering
     \includegraphics[width=0.5\textwidth]{./figures/visit_count_ratio.eps}
-    \caption{Ratio of times a given state is visited under the optimal policy over $10,000$ independent Monte Carlo simulation runs.}
+    \caption{Ratio of times a given state is visited under the optimal policy over $50,000$ independent Monte Carlo simulation runs.}
     \label{fig:visit_count}
 \end{figure}
 
