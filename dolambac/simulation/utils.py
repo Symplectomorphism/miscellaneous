@@ -24,6 +24,22 @@ def moving_average(a, n=100) :
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
+def ewma(past_value, current_value, alpha):
+    return (1-alpha) * past_value + alpha * current_value
+
+def calc_ewma(values, period):
+    alpha = 2 / (period + 1)
+    result = []
+    for v in values:
+        try:
+            prev_value = result[-1]
+        except IndexError:
+            prev_value = 0
+        
+        new_value = ewma(prev_value, v, alpha)
+        result.append(new_value)
+    return np.array(result)
+
     
 def decay_schedule(init_value, min_value, decay_ratio, max_steps, log_start=-2, log_base=10):
     decay_steps = int(max_steps * decay_ratio)
