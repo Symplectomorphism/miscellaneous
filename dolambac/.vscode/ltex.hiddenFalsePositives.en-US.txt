@@ -1,0 +1,1 @@
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QThis function is computed assuming that the world belief is correct, hence, it can be computed once and used over and over again for solving the multi-armed bandit problem.\\E$"}

@@ -116,5 +116,9 @@ V_{\text{gw}} = \bmat{
 %
 where the entry index of the matrix corresponds to the position of the robot.
 This function is computed assuming that the world belief is correct, hence, it
-can be computed once and used over and over again for solving the multi-armed
-bandit problem.
+can be computed once and used over and over again while solving the multi-armed
+bandit problem. When the agent is about to choose an action from the set $\{0,
+1, 2, 3\}$, corresponding to the key to press, it acts greedily against this
+function, given the world belief. Hence, in this sibling's grid world problem, 
+the second $Q$-learning problem is solved implicitly and only once before the 
+iteration for the multi-armed bandit problem begins.
