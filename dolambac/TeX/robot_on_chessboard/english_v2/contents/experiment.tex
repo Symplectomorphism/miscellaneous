@@ -12,7 +12,7 @@ The first result in Figure~\ref{fig:running_avg} shows the running average
 number of steps taken to reach the goal over $50,000$ independent Monte Carlo
 simulation runs.
 %
-\begin{figure}[t]
+\begin{figure}[tb]
     \centering
     \includegraphics[width=0.5\textwidth]{./figures/running_avg.eps}
     \caption{Running average number of steps taken to reach the goal over $50,000$ independent Monte Carlo simulation runs.}
@@ -29,7 +29,7 @@ observe that it takes $4$ steps to solve the environment $16.\bar{6}\%$ of the t
 \frac{1}{6} \times 4 + \frac{1}{3} \times 6 + \frac{1}{2} \times 8 = \frac{20}{3} = 6.\bar{6}.
 \]
 %
-\begin{figure}[tbh]
+\begin{figure}[bt]
     \centering
     \includegraphics[width=0.48\textwidth]{./figures/steps_histogram.eps}
     \caption{Histogram of number of steps taken to solve the environment over $50,000$ independent Monte Carlo simulation runs.}
@@ -41,7 +41,7 @@ the optimal policy deduced by $Q$-learning over $50,000$ independent Monte Carlo
 runs. Notice that the ratio of the goal state being visited to the number of
 runs is $1$, meaning that all runs end at the goal state.
 %
-\begin{figure}[bth]
+\begin{figure}[tb]
     \centering
     \includegraphics[width=0.48\textwidth]{./figures/visit_count_ratio.eps}
     \caption{Ratio of times a given state is visited under the optimal policy to the number $50,000$ of independent Monte Carlo simulation runs.}
@@ -55,7 +55,7 @@ bandits arms have been identified to swap the ``down'' and ``right'' actions.
 Since this swapping does not affect the performance of the agent, their score
 matches the other two top bandit arms which have not been differentiated.
 %
-\begin{figure}[bth]
+\begin{figure}[bt]
     \centering
     \includegraphics[width=0.48\textwidth]{./figures/bandit_scores.eps}
     \caption{Smoothed scores each world belief achieves over a single run sample.}

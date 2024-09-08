@@ -57,6 +57,8 @@
             state={Idaho},
             country={USA}}
 
+\cortext[cor1]{Corresponding author}
+
 % \affiliation[label2]{organization={Mathworks Inc.},
 %             addressline={1 Lakeside Campus Drive}, 
 %             city={Natick},
@@ -65,12 +67,18 @@
 %             country={USA}}
 
 \begin{abstract}
-    This is a technical note solving an interesting question posed by a friend 
-    and colleague, G\"{o}khan At{\i}n\c{c}. The question starts out
-    exactly like the well-known Grid World problem, but it has a twist. We solve
-    the problem in two different ways: first using a direct probability
-    calculation and then using reinforcement learning on a judiciously designed
-    Markov Decision Process. The results are compared and discussed.
+    % This is a technical note solving an interesting question posed by a friend
+    % and colleague, G\"{o}khan At{\i}n\c{c}. 
+    This is a technical note that introduces a novel grid world environment and
+    an optimal control problem that is meant to be solved by a reinforcement
+    learning (RL) agent in one-shot. That is to say, the algorithm that the RL
+    agent runs is supposed to be able to solve the environment by training only
+    for a single episode. The environment is very similar to the well-known Grid
+    World problem, but with a twist. We solve the problem in two different ways:
+    first using a direct probability calculation and then using reinforcement
+    learning on a judiciously designed Markov Decision Process. The results are
+    compared and discussed. The numerical solution to the problem allows us to 
+    provide further statistics that sheds some more insight into the problem.
 \end{abstract}
 
 % %%Graphical abstract

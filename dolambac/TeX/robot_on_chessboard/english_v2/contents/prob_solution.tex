@@ -53,9 +53,10 @@ deduce the following result.
 \end{equation*}
 %
 Similar identities to the above expression hold for conditional expectations as
-well. Let us start to compute the expectation of the ``value'' of being in state $C2$ using the tower rule~\ref{thm:tower}. Of course, by ``value,'' we 
-mean the expected minimum number of times a button needs to be pressed in order 
-to reach the goal state.
+well. Let us start to compute the expectation of the ``value'' of being in state
+$C3$ using the tower rule~\ref{thm:tower}. Of course, by ``value,'' we mean the
+expected minimum number of times a button needs to be pressed in order to reach
+the goal state.
 % %
 \begin{align}
    \begin{split}
@@ -152,8 +153,11 @@ Once more, we utilize the tower rule to compute the expected values in
 equation~\eqref{eq:tower3} whose values are not immediately apparent. If at step
 $3$, we end up on square $C3$, we can keep repeating this move until we reach
 $C5$ at step $4$, incurring a cost of $r_1 + r_2 + r_3 + r_4 = 4$ units. From
-here, the only two possibilities is we get to square $D5$ or $B5$ on step $5$. 
-The remaining expectations are computed below.
+here, the only two possibilities is we get to square $D5$ or $B5$ on step $5$.
+If we reach square $D5$, then the same motion will get us to the goal, hence the
+corresponding expected value is $2$. If, on the other hand, we end up on square
+$B5$ on move $5$, we have moved farther away from the goal, but now we know
+which button to press to get to the goal, resulting in an expected value of $4$.
 %
 \begin{align*}
     \begin{split}
@@ -164,10 +168,13 @@ The remaining expectations are computed below.
 \end{align*}
 %
 There is only one expected value that we have left to compute in
-equation~\eqref{eq:tower3}. If we find ourselves on square $D2$ at step $2$, we 
-can repeat this direction to reach $E2$ at step $3$, incurring a cost of 
-$r_1 + r_2 + r_3 = 3$ units. From here, we can either go to $E3$ or $D2$ with 
-the remaining keys. The expectations are computed below.
+equation~\eqref{eq:tower3}. If we find ourselves on square $D2$ at step $2$, we
+can repeat this direction to reach $E2$ at step $3$, incurring a cost of $r_1 +
+r_2 + r_3 = 3$ units. From here, we can either go to $E3$ or $D2$ with the
+remaining keys. If we find ourselves on $E3$, we can repeat the same motion to
+reach the goal in $3$ more steps. If we find ourselves on $D2$ at step $4$, we
+need to get back to $E2$ and use the remaining key to reach the goal, incurring
+a cost of $5$ units.
 %
 \vspace{-2mm}
 \begin{align*}
@@ -182,7 +189,9 @@ We can now use equation~\eqref{eq:tower3} in order to compute the second
 expected value on the right-hand side of
 equation~\eqref{eq:tower1}:\fbox{$\mathbb{E}[C_0 \mid s_1=C2] = \frac{22}{3}$}.
 %
-We have computed every quantity that we are interested in. Now, we go back to equation~\eqref{eq:tower1}:
+We have computed every quantity that we are interested in. Now, we go back to
+equation~\eqref{eq:tower1}, and plug in the values we have computed to find the
+expected value of the minimum number of times Alice needs to press the buttons. 
 
 \begin{empheq}[box=\widefbox]{align}
     \begin{split}
