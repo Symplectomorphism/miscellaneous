@@ -20,12 +20,11 @@ the buttons in order to move the robot to the goal square $(4,4)$?
 In this setup, we assume that the agent has knowledge of the environment it is
 in; i.e., the agent knows the map of the environment. This means, in particular,
 that the agent would know that it needs to try a different key whenever it 
-reaches the wall of the chessboard by hitting a particular key (since hitting 
-this key obviously would try and move the robot into the wall, wasting a 
-key press).
+reaches the boundary of the chessboard by hitting (since hitting this key
+obviously would try and move the robot into the wall, wasting a key press).
 
 A second observation to be made is that the agent should not make any more
-mistakes than $2$ because, once $2$ mistakes are made, the remaining actions 
+than $2$ mistakes because once $2$ mistakes are made, the remaining actions 
 would make progress towards the goal and the agent has time to register the 
 fact that it is making progress. Hence, the worst-case scenario is that the 
 agent takes $8$ steps to solve the environment. Of course, it may get lucky and 
