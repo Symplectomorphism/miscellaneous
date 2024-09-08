@@ -49,6 +49,7 @@ will move in the corresponding directions given the correct key mapping one
 hundred percent of the time.
 
 \subsubsection{Reward function}
+\label{sssec:reward}
 %
 This function needs to be designed judiciously in order to give the agent the
 best chance to learn the optimal strategy. What worked well in our experiments
@@ -94,3 +95,26 @@ position in one episode in the last number of moves. Of course, this is a
 stochastic process, depending on what the initial world belief is selected and
 what the true world is. We perform Monte Carlo simulations of this setup to determine the statistics, including the expectation of the minimum number of 
 moves (which was solved analytically in Section~\ref{ssec:prob_sol}).
+
+
+\subsubsection{Grid World State-Value Function given World Belief}
+%
+The state-value function $V$ of the grid world environment is used to define the
+reward signal, as described in Section~\ref{sssec:reward}. This function can be
+found easily by solving a linear programming problem or by running value
+iteration. This value function is given by 
+%
+\[
+V_{\text{gw}} = \bmat{
+    -8 & -7 & -6 & -5 & -4 \\
+    -7 & -6 & -5 & -4 & -3 \\
+    -6 & -5 & -4 & -3 & -2 \\
+    -5 & -4 & -3 & -2 & -1 \\
+    -4 & -3 & -2 & -1 &  0    
+},
+\]
+%
+where the entry index of the matrix corresponds to the position of the robot.
+This function is computed assuming that the world belief is correct, hence, it
+can be computed once and used over and over again for solving the multi-armed
+bandit problem.
