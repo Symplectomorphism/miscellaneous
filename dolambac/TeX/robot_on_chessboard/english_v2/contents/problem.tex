@@ -16,12 +16,31 @@ the buttons in order to move the robot to the goal square $(4,4)$?
     \caption{Schematic of the problem.}
     \label{fig:problem}
 \end{figure}
+%
+In this setup, we assume that the agent has knowledge of the environment it is
+in; i.e., the agent knows the map of the environment. This means, in particular,
+that the agent would know that it needs to try a different key whenever it 
+reaches the wall of the chessboard by hitting a particular key (since hitting 
+this key obviously would try and move the robot into the wall, wasting a 
+key press).
 
-For future reference, if we linearly index the squares of the chessboard from 
-$0$ to $24$ in a row-major fashion, then the mapping from the linear index to
-the $(i, j)$ coordinates and back is given by the following bijections:
+A second observation to be made is that the agent should not make any more
+mistakes than $2$ because, once $2$ mistakes are made, the remaining actions 
+would make progress towards the goal and the agent has time to register the 
+fact that it is making progress. Hence, the worst-case scenario is that the 
+agent takes $8$ steps to solve the environment. Of course, it may get lucky and 
+stumble upon the right combination of motions (``right'' and ``down'') in the 
+first two tries, reaching the goal position in $4$ steps; however, this is not 
+guaranteed.
 
+If we linearly index the squares of the chessboard from $0$ to $24$ in a
+row-major fashion, then the mapping from the linear index to the $(i, j)$
+coordinates and back is given by the following bijections:
+%
 \begin{equation}
 5j + i = k \leftrightarrow \left(i = k - 5 \floor*{\frac{k}{5}}, j = \floor*{\frac{k}{5}}\right) 
 \label{eq:bijection}
 \end{equation}
+%
+This mapping is useful and relevant for implementing the $Q$-learning algorithm
+for the RL solution to the problem.

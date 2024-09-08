@@ -2,7 +2,12 @@
 \label{sec:solutions}
 %
 We present two solutions to the problem: a probabilistic solution and a
-reinforcement learning (RL) solution.
+reinforcement learning (RL) solution. The probabilistic solution will chase the
+robot's possible motions as it tries to reach the goal state, computing all the
+relevant expectations along the way. The RL solution will identify which MDP is
+to be solved rigorously, and will attack the problem using a $Q$-learning
+approach. It will need to keep track of two $Q$-functions as will be explained 
+in the subsection that follows the next.
 
 \input{./contents/prob_solution.tex}
 \input{./contents/rl_solution.tex}

@@ -1,5 +1,39 @@
 \section{Introduction}
 \label{sec:intro}
 %
-The question is interesting and the solutions are just as interesting. Let us 
-delve right into it.
+Grid World environments are frequently utilized to establish baselines for many
+novel reinforcement learning algorithms. These environments are simpler compared
+to other discrete environments such as chess and go; they have much smaller
+state and action spaces. Yet, they still require reasoning for a sequential,
+evaluative and sampled feedback problem. In this sense, these set of problem
+provide a good entry point to either test new algorithms or start learning basic
+concepts of reinforcement learning.
+
+In this note, we consider the ordinary instance of a stochastic grid world
+environment, in which the problem is to find the shortest path from a start
+state to a goal state. However, in this case, the task is to do this in a
+one-shot manner. That is, the agent must learn to find the optimal policy in a
+single episode. This is a challenging problem, as the agent must learn to
+explore the environment, and exploit the information it has gathered to reach
+the goal state in the fewest number of steps possible. Furthermore, the
+reinforcement learning problem we pose to solve this instance of the grid world
+problem requires learning two $Q$-functions as opposed to one; one corresponding
+to a familiar $Q$-function for a classical grid world, and the other a
+$Q$-function for a related multi-armed bandit problem. The agent must learn to
+balance the exploration of the grid world environment with the exploitation of
+the multi-armed bandit problem to solve the task optimally. We coin the term 
+``sibling's grid world'' to describe this problem.
+
+The contribution of this paper is in introducing a baseline grid world
+environment in which one-shot RL algorithms may be evaluated, providing a 
+theoretical solution to this problem, and comparing the performance of a 
+baseline $Q$-learning RL solution to the theoretical solution.
+
+We provide a thorough statement of this problem in Section~\ref{sec:problem},
+before providing a theoretical solution in the first subsection of
+Section~\ref{sec:solutions}. The subsequent subsection of the same section then
+provides our formulation of the reinforcement learning problem to solve the
+sibling's grid world in a one-shot manner. We then present the results of our RL
+formulation in Section~\ref{sec:experiment}, comparing and contrasting against 
+the theoretical solution in Section~\ref{ssec:prob_sol}. We conclude with a
+discussion of the results and potential future work in Section~\ref{sec:conclusion}.

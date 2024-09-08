@@ -1,4 +1,25 @@
 \section{Conclusions}
 \label{sec:conclusion}
 %
-Interesting problem solved.
+We have defined a novel grid world type optimal decision-making problem that is
+meant to be solved by an RL agent in a one-shot manner. After thoroughly
+defining the problem, we solved it theoretically with classical probability 
+theory and then provided its RL formulation before running $Q$-learning to solve
+it numerically.
+
+The results of the RL solution is presented in Section~\ref{sec:experiment}. 
+First observation was that the RL algorithm figures out the optimal policy in a
+single episode, which gives same expected number of steps to reach the goal as
+we find theoretically. This expected number is found by performing $50,000$
+independent Monte Carlo simulation runs. Secondly, we have extracted additional 
+statistics using these independent Monte Carlo runs. We have computed the 
+distribution of the number steps it takes to reach the goal under the optimal 
+policy, from which the expectation may be computed directly. We provided a 
+distribution of the number of times all the states of the sibling grid world 
+is visited. We also provided a plot of the scores of the bandit arms over the 
+learning process (one-shot).
+
+It is seen that one-shot RL may be performed in this simple, yet interesting
+environment by learning two $Q$-functions in parallel. In this note, we used the
+classical $Q$-learning algorithm. Other classical approaches such as double
+$Q$-learning, etc. may be attempted and compared against our results here.

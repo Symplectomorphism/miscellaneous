@@ -7,7 +7,8 @@ the problem. This theorem is called the \textit{law of total expectation} or
 literature~\cite{bertsekas2002introduction}.
 %
 In this section, we use the correspondence $\{1, 2, 3, 4, 5\} \mapsto \{0, 1, 2,
-3, 4\}$ and $\{A, B, C, D, E\} \mapsto \{0, 1, 2, 3, 4\}$ for legacy reasons.
+3, 4\}$ and $\{A, B, C, D, E\} \mapsto \{0, 1, 2, 3, 4\}$ for ease of
+exposition.
 %
 \begin{thm}[Tower rule] \label{thm:tower} Let $X$ be a random variable and
     $\{A_i\}_i^m$ be a finite partition of the sample space. Then, 
@@ -18,6 +19,7 @@ In this section, we use the correspondence $\{1, 2, 3, 4, 5\} \mapsto \{0, 1, 2,
 We denote the square on which the robot resides at the $k^{\text{th}}$ step by
 $s_k$ and the goal square by $g$. Consider the following family of random
 variables.
+%
 \begin{equation}
     C_n := \sum_{k=n+1}^\infty r_k, \qquad r_k = 
 \begin{cases}
@@ -38,7 +40,7 @@ definition~\eqref{eq:RVs}.
 % \vspace{-3mm}
 % Beklenen de\u{g}erin \"{o}zelliklerini kullanarak a\c{s}a\u{g}{\i}daki sonuca
 % varabiliriz.
-Using the properties of expectation, if $s_i \neq g$ for $m < i < n$, we can
+Using the properties of expectation, if $s_i \neq g$ for $m < i \leq n$, we can
 deduce the following result.
 % \vspace{-1mm}
 \begin{equation*} 
@@ -50,20 +52,10 @@ deduce the following result.
     % \qquad m < i < n, \;\; s_i \neq g.
 \end{equation*}
 %
-Using the properties of expectation, if $s_i \neq g$ for $m < i < n$, we can
-deduce the following result.
-%
-\begin{equation*} 
-    \mathbb{E}[C_m] = \sum_{i=m+1}^n \mathbb{E}[r_i] + \mathbb{E}[C_n] = n-m + \mathbb{E}[C_n].
-    % \begin{cases}
-    %     k + \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i \neq g \\
-    %     \mathbb{E}[C_n] & \mbox{e\u{g}er } s_i = g
-    % \end{cases}, 
-    % \qquad m < i < n, \;\; s_i \neq g.
-\end{equation*}
-%
 Similar identities to the above expression hold for conditional expectations as
-well. Using the tower rule~\ref{thm:tower}, we start to compute.
+well. Let us start to compute the expectation of the ``value'' of being in state $C2$ using the tower rule~\ref{thm:tower}. Of course, by ``value,'' we 
+mean the expected minimum number of times a button needs to be pressed in order 
+to reach the goal state.
 % %
 \begin{align}
    \begin{split}
@@ -79,7 +71,7 @@ well. Using the tower rule~\ref{thm:tower}, we start to compute.
 From now on, we will assume $s_1 = C4$ in the first term on the right-hand side
 and $s_1 = C2$ in the second. Notice that, because of the inherent symmetry of
 the problem, while the state $s_1 = D3$ is equivalent to $s_1 = C4$; $s_1 =
-B3$ is equivalent to $s_1 = C2$.
+B3$ is equivalent to $s_1 = C2$ in terms of their value.
 
 \paragraph{Computation of the first conditional expectation
 in~\eqref{eq:tower1}} 
