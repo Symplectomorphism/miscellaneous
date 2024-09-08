@@ -24,6 +24,16 @@ balance the exploration of the grid world environment with the exploitation of
 the multi-armed bandit problem to solve the task optimally. We coin the term 
 ``sibling's grid world'' to describe this problem.
 
+The algorithms we use to solve the sibling's grid world problem are very well
+studied and documented in the literature~\cite{sutton2018reinforcement}. We use
+either value iteration or its linear programming
+equivalent~\cite{luenberger2008linear} to solve the Bellman equation to find the
+optimal state- and action-value functions of the grid world, given the true
+world belief. The multi-armed bandit subproblem's $Q$-function is found 
+iteratively by updating its value iteratively by the reward received by the 
+robot each time it takes a step. The policy the agent uses is then just the greedy policy with respect to the value function under the current world belief 
+the agent holds while updating its multi-armed bandit's $Q$-function.
+
 The contribution of this paper is in introducing a baseline grid world
 environment in which one-shot RL algorithms may be evaluated, providing a 
 theoretical solution to this problem, and comparing the performance of a 
